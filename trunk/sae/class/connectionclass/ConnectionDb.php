@@ -7,9 +7,9 @@
 		{  
 			$host_db='localhost';
 			$port_db='5432';
-			$base="dbAsignaciones";
-			$usuario="postgres";
-			$password="123";
+			$base="sae_dbassignations";
+			$usuario="saeweb";
+			$password="saeweb";
 			if(!isset($this->conexion))
 			{  
 				$this->conexion = (pg_connect("host=$host_db port=$port_db dbname=$base user=$usuario password=$password")) or die(mysql_error());  
