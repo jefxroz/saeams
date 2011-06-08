@@ -9,7 +9,7 @@
 	
 	<!--css principal y libreria jquery principal--->
 	<link href=".././resources/css/main.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src=".././libraries/jquery-1.4.4.min.js"></script>
 	
 	<!--css de transform, plugin jqtransform y javascript para tranformar la apariencia--->
 	<link  href=".././libraries/jqtransform/jqtransformplugin/jqtransform.css" rel="stylesheet" type="text/css" media="all" />
