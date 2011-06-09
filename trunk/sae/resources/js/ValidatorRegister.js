@@ -1,7 +1,7 @@
 $(function() 
 	{
 		$("tr.username").show();
-		$("#username").width('200px');
+		$("#username").width('210px');
 		//$("#username").css('padding','5px');
 		var ck_username = /^[A-Za-z0-9_]{5,20}$/;
 		var ck_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i 
@@ -18,7 +18,7 @@ $(function()
 			{
 				$("#spnusername").hide();
 				$("tr").next("tr.password").show();
-				$("#password").width('200px');
+				$("#password").width('210px');
 				//$("#password").css('padding','5px');
 		
 		
@@ -36,7 +36,7 @@ $(function()
 			{
 				$("#spnpassword").hide();
 				$("tr").next("tr.email").show();
-				$("#email").width('200px');
+				$("#email").width('210px');
 				//$("#email").css('padding','5px');
 		
 		
@@ -53,7 +53,7 @@ $(function()
 			{
 				$("#spnemail").hide();
 				$("tr").next("tr.phone").show();
-				$("#phone").width('200px');
+				$("#phone").width('210px');
 				//$("#phone").css('padding','5px');
 		
 		
