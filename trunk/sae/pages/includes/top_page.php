@@ -18,40 +18,6 @@
 	<script type="text/javascript" src=".././libraries/jquery-1.6.1.min.js"></script>
 	<script type="text/javascript" src=".././libraries/locale/easyui-lang-es.js"></script>
 	<script language="javascript">
-$(document).ready(function(){
-$.ajaxSetup ({
-	cache: false
-});
-var ajax_load = "<img src='.././resources/images/load.gif' alt='loading...' />";
-$(".ajaxmenu").live("click", function(){
-	myUrl= $(this).attr('href');
-	if (myUrl.match('#')) {
-		  var myAnchor = myUrl.split('#')[1];
-		  /*Ahora arreglamos el URL - para evitar problemas en ie6*/
-		  var loadUrl = myUrl.split('#')[0];
-	}else{
-		var loadUrl = $(this).attr('href');
-	}
-	$("#colTwo").html(ajax_load).load(loadUrl,function(){
- 		if (myUrl.match('#')) {
-		/*Calculamos la distancia entre el anchor y la pagina y animamos*/
-		  var targetOffset = $("a[name='"+myAnchor+"']").offset().top; 
-		  $('html').animate({scrollTop: targetOffset}, 400); 
-		}
-		$.getScript(".././resources/js/ValidatorRegister.js", function(){
-			
-		});
-		$.getScript(".././resources/js/Transform.js", function(){
-			
-		});
-		$(".jqtransform").hide();
-		
-	 }
-	);
-	
-	return false;		
-});
-});
 </script>
 </head>
 
