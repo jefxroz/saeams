@@ -15,8 +15,8 @@
 	<!--Librería de Jquery Easy UI --->
 	<link rel="stylesheet" type="text/css" href=".././libraries/themes/default/easyui.css">
 	<script type="text/javascript" src=".././libraries/jquery.easyui.min.js"></script>
-	<script src=".././libraries/plugins/jquery.validate.js" type="text/javascript"></script>
-	
+	<script type="text/javascript" src=".././libraries/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src=".././libraries/locale/easyui-lang-es.js"></script>
 	<script language="javascript">
 $(document).ready(function(){
 $.ajaxSetup ({
