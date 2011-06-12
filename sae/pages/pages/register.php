@@ -1,5 +1,4 @@
 <div name="pg_registrer" style="display:none;">
-<div id="form">
 	<h2>Registrar un nuevo usuario</h2>
 	<form method="post" id="form-elements" action="">
 	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos de acceso</div>
@@ -17,7 +16,7 @@
 		<br/><label for="txt_gender">Genero: </label><br/>
 		<br/><input type="text" name="txt_gender" id="id_gender" />
 		<br/><label for="txt_birthdate">Fecha de nacimiento: </label><br/>
-		<br/><input type="text" name="txt_birthdate" id="id_datebrith" />
+		<br/><input type="text" name="txt_birthdate" id="id_birthdate" />
 	
 	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos Personales</div>
 		<br/><label for="txt_carne">Carnet: </label><br/>
@@ -30,5 +29,4 @@
 		<br/><input type="text" name="txt_career" id="id_career" />
 		
 	</form>
-</div>
 </div>
