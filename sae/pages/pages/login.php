@@ -1,31 +1,19 @@
 <script type="text/javascript">
 $().ready(function() {
-	
-	// validate signup form on keyup and submit
-	$("#signupForm").validate({
-		rules: {
-			username: {
-				required: true,
-				minlength: 2
-			},
-			txt_password: {
-				required: true,
-				minlength: 5
-			}
-		},
-		messages: {
-			username: {
-				required: "Ingrese su usuario",
-				minlength: "Su usuario debe contener almenos 2 caracteres"
-			},
-			txt_password: {
-				required: "Ingrese su password",
-				minlength: "Su password debe contener almenos 5 caracteres"
-			}
-		}
+	 $.extend($.fn.validatebox.defaults.rules, {
+	        txt_validator: {
+	            validator: function(value, param) {
+	            	var ck_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;	
+	                if (value != null) {     
+							if(param[0] =='mail' &&ck_email.test(value)) return true;
+							else return false;
+	                }else return false;       
+	            },
+	            message: 'Debe ingresar un correo electronico valido'
+	        }
+
+	    });
 	});
-	
-});
 
 </script>
 
@@ -39,9 +27,9 @@ $().ready(function() {
 				<form  id="signupForm" action="" method="post">	
 					<label for="username"> Acceder </label>
 							<br/><label for="username">Usuario: </label> 
-							<br/><input id="username" name="username" />
+							<br/><input class="easyui-validatebox" id="username" name="username" required="true"  validType="txt_validator['mail']">							
 							<br/><label for="txt_password">Constrase&ntilde;a:</label>
-							<br/><input name="txt_password" type="password" id="txt_password" />
+							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" required="true">
 												
 									<table> 
 									<tr>
