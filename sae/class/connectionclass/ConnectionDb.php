@@ -15,22 +15,28 @@
 				$this->conexion = (pg_connect("host=$host_db port=$port_db dbname=$base user=$usuario password=$password")) or die(mysql_error());  
 				//pg_select_db("dbAsignaciones",$this->conexion) or die(mysql_error());  
 			}  
+			
 		}  
-		public function ejecuteQuery($consulta)
+		public function ejecuteQuery($p_query)
 		{  
 			$this->total_querys++;  
-			$result = pg_Exec($this->conexion,$consulta);  
-			if(!$result)
-			{  
-				echo 'PgError ' . pg_error();  
-				exit;
-			}
-			return $result;
+			$l_result = pg_Exec($this->conexion,$p_query);  
+			return getValidateResult($l_result);
 		}  
-		public function ejecuteStatement($query,$parameters)
+		public function ejecuteQuery($p_query,$p_parameters){
+			$this->total_querys++;  
+			$l_result = pg_prepare($this->conexion, "my_query", $p_query);
+			$l_result = pg_execute($this->conexion, "my_query", $p_parameters); 
+			return getValidateResult($l_result);
+		}
+		public function ejecuteStatement($p_query,$p_parameters)
 		{
-			$result = pg_prepare($dbconn, "my_query", $query);
-			$result = pg_execute($dbconn, "my_query", $parameters);
+			$l_result = pg_prepare($dbconn, "my_query", $p_query);
+			$l_result = pg_execute($dbconn, "my_query", $p_parameters);
+			return getValidateResult($l_result);
+		}
+		
+		private function getValidateResult($result){
 			if(!$result)
 			{  
 				echo 'PgError ' . pg_error();  
@@ -39,20 +45,21 @@
 			return $result;
 		}
 		
-		public function getResult($query)
+		public function getResult($p_objquery)
 		{   
-			return pg_Fetch_Array($query);  
+			return pg_Fetch_Array($p_objquery);  
 		}  
-		public function getRow($query,$index)
+		public function getRow($p_objquery,$p_index)
 		{
-			return pg_Fetch_Array ($query, $index);
+			return pg_Fetch_Array ($p_objquery, $p_index);
 		}
-		public function getNumRows($query)
+		public function getNumRows($p_query)
 		{   
-			return pg_num_rows($query);  
+			return pg_num_rows($p_query);  
 		}  
 		public function getTotalQuerys()
 		{  
 			return $this->total_querys;  
-		}  
+		}
+		  
 }?>
