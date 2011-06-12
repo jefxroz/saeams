@@ -1,6 +1,9 @@
-﻿
-<?php include("includes/top_page.php"); ?>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<?php include("includes/top_page.php"); ?>
+<body>
 	<div id="wrapper">	
 		<div id="header"> 
 			<?php include("includes/header.php"); ?>
@@ -54,5 +57,6 @@
 			<?php include("includes/footer.php"); ?>
 		</div>
 	</div>
-<? include("includes/bottom_page.php"); ?>
+	</body>
+</html>
 		
