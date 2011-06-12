@@ -9,7 +9,9 @@
 		<div id="content">
 				<?php include("pages/login.php"); ?>
 			<div id="colTwo">
-				<?php include("includes/pages.php"); ?>        
+				<?php include("pages/homepage.php"); ?>
+				<?php include("pages/registrar.php"); ?>
+				<?php include("pages/recuperar.php"); ?>        
 				<br style="clear:both;" />
 			</div>
 		</div>

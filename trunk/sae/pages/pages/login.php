@@ -1,3 +1,33 @@
+<script type="text/javascript">
+	function Registrer(){
+		var vz=document.getElementsByName('pg_homepage');
+	  	  for(i=0; i<vz.length;i++)
+		    	  vz[i].style.display='none';
+			var vz=document.getElementsByName('pg_registrer');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='';
+		  	var vz=document.getElementsByName('pg_recover');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='none';
+		  	var vz=document.getElementsByName('pg_login');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='none';
+	}
+	function RecoverPassword(){
+		var vz=document.getElementsByName('pg_homepage');
+  	  for(i=0; i<vz.length;i++)
+	    	  vz[i].style.display='none';
+		var vz=document.getElementsByName('pg_registrer');
+	  	  for(i=0; i<vz.length;i++)
+		    	  vz[i].style.display='none';
+	  	var vz=document.getElementsByName('pg_recover');
+	  	  for(i=0; i<vz.length;i++)
+		    	  vz[i].style.display='';
+	  	var vz=document.getElementsByName('pg_login');
+	  	  for(i=0; i<vz.length;i++)
+		    	  vz[i].style.display='none';  
+	}
+</script>
 		<div id="colOne">
 				<div id="logo">
 					<h1><a href="#">SAE-SAP</a></h1>
@@ -5,7 +35,8 @@
 				</div>
 				<div class="box">
 				<div class="bottom">
-				<form  id="signupForm" action="" method="post">	
+		<div name ="pg_login" >
+				<form  action="" method="post">	
 					<label for="username"> Acceder </label>
 							<br/><label for="username">Usuario: </label> 
 							<br/><input class="easyui-validatebox" id="username" name="username" required="true"  validType="email">							
@@ -13,14 +44,15 @@
 							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" type="password" required="true">												
 									<table> 
 									<tr>
-										<td> <a href="pages/recuperar.php" class="ajaxmenu">Recuperar Contrase&ntilde;a</a> </td> 
-										<td> <a href="pages/registrar.php" class="ajaxmenu">Regitrarse</a> </td>
+										<td> <a href="#" onclick="RecoverPassword()">Recuperar Contrase&ntilde;a</a> </td> 
+										<td> <a href="#" onclick="Registrer()">Regitrarse</a> </td>
 									</tr> 
 									</table>
 							
 							<br/><input name="btnAcces" type="submit" id="btnAcces" value="Accesar" /> 
 													
-				</form> 
+				</form>
+		</div> 
 				</div>
 				</div>
 			</div>
