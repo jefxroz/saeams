@@ -1,56 +1,29 @@
 <div id="form">
-	<h2>Jquery registration form</h2>
-	<form method="post" id="form-elements" >
-	<TABLE>
-		<tr id="fila" class="username">
-		<td>
-			<label>Username: </label><br/> 
-		</td>
-		<td>
-			<input type="text" name="name" id="username" />
-		</td>
-		<td>
-			<span class="error" id="spnusername"></span>
-		</td>
-		</tr>
-		<tr id="fila" class="password">
-		<td>
-			<label>Password: </label><br/> 
-		</td>
-		<td>
-			<input type="password" name="password" id="password" />
-		</td>
-		<td>
-			<span class="error" id="spnpassword" ></span>
-		</td>
-		</tr>
-		<tr id="fila" class="email">
-		<td>
-			<label>Email: </label><br/> 
-		</td>
-		<td>
-			<input type="text" name="email" id="email" />
-		</td>	
-		<td>
-			<span class="error" id="spnemail" ></span>
-		</td>
-		</tr>	
-		<tr id="fila" class="phone">
-		<td>
-			<label>Phone No: </label><br/>
-		</td>
-		<td>
-			<input type="text" name="phone" id="phone" />
-		</td>
-		<td>
-			<span class="error" id="spnphone" ></span>
-		</td>
-		</tr>
-		<tr id="fila" class="submit">
-		<td>
-			<input type="submit" value=" Register " id='submit'/>
-		</td>
-		</tr>
-	</TABLE>
+	<h2>Registrar un nuevo usuario</h2>
+	<form method="post" id="form-elements" action="">
+	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos de acceso</div>
+		<br/><label forname="txt_user">Usuario: </label>
+		<br/><input type="text" name="txt_user" id="id_username" />
+		<br/><label forname="txt_passoword">Contrase&ntilde;: </label>
+		<br/><input type="password" name="txt_password" id="id_password" />
+	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos Personales</div>	
+		<br/><label forname="txt_id">DPI / Cedula: </label><br/>
+		<br/><input type="text" name="txt_id" id="id_id" />
+		<br/><label forname="txt_name">Nombre: </label><br/> 
+		<br/><input type="text" name="txt_name" id="id_name" />
+		<br/><label forname="txt_address">Direccion: </label><br/>
+		<br/><input type="text" name="txt_address" id="id_address" />
+		<br/><label forname="txt_gender">Genero: </label><br/>
+		<br/><input type="text" name="txt_gender" id="id_gender" />
+		<br/><label forname="txt_birthdate">Fecha de nacimiento: </label><br/>
+		<br/><input type="text" name="txt_birthdate" id="id_datebrith" />
+	
+	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos Personales</div>
+		<br/><label forname="txt_carne">Carnet: </label><br/>
+		<br/><input type="text" name="txt_carne" id="id_carne" />
+		<br/><label forname="txt_datebirth">Fecha de nacimiento: </label><br/>
+		<br/><input type="text" name="txt_datebirth" id="id_datebrith" />
+		<br/><input type="submit" value=" Register " id='submit'/>
+		
 	</form>
 </div>
