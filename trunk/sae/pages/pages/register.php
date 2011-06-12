@@ -1,3 +1,4 @@
+<div name="pg_registrer" style="display:none;">
 <div id="form">
 	<h2>Registrar un nuevo usuario</h2>
 	<form method="post" id="form-elements" action="">
@@ -26,4 +27,5 @@
 		<br/><input type="submit" value=" Register " id='submit'/>
 		
 	</form>
+</div>
 </div>
