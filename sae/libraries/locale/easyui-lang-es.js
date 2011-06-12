@@ -12,7 +12,7 @@ if ($.messager){
 }
 if ($.fn.validatebox){
 	$.fn.validatebox.defaults.missingMessage = 'Este campo es requerido.';
-	$.fn.validatebox.defaults.rules.email.message = 'Por favor escriba una direcci&oacute;n valida.';
+	$.fn.validatebox.defaults.rules.email.message = 'Por favor escriba un Correo electr&oacute;nico valido.';
 	$.fn.validatebox.defaults.rules.url.message = 'Por favor escriba una URL valida.';
 	$.fn.validatebox.defaults.rules.length.message = 'Por favor escriba un valor entre {0} y {1}.';
 	$.fn.validatebox.defaults.rules.remote.message = 'Por favor arregle este campo.';

@@ -10,8 +10,8 @@
 				<?php include("pages/login.php"); ?>
 			<div id="colTwo">
 				<?php include("pages/homepage.php"); ?>
-				<?php include("pages/registrar.php"); ?>
-				<?php include("pages/recuperar.php"); ?>        
+				<?php include("pages/register.php"); ?>
+				<?php include("pages/recover.php"); ?>        
 				<br style="clear:both;" />
 			</div>
 		</div>
