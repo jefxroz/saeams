@@ -5,14 +5,14 @@
 	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos de acceso</div>
 		<br/><label for="txt_user">Usuario: </label>
 		<br/><input type="text" name="txt_user" id="id_username" />
-		<br/><label for="txt_passoword">Contrase&ntilde;: </label>
+		<br/><label for="txt_passoword">Contrase&ntilde;a: </label>
 		<br/><input type="password" name="txt_password" id="id_password" />
 	<div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos Personales</div>	
 		<br/><label for="txt_id">DPI / Cedula: </label><br/>
 		<br/><input type="text" name="txt_id" id="id_id" />
 		<br/><label for="txt_name">Nombre: </label><br/> 
 		<br/><input type="text" name="txt_name" id="id_name" />
-		<br/><label for="txt_address">Direccion: </label><br/>
+		<br/><label for="txt_address">Direcci&oacute;n: </label><br/>
 		<br/><input type="text" name="txt_address" id="id_address" />
 		<br/><label for="txt_gender">Genero: </label><br/>
 		<br/><input type="text" name="txt_gender" id="id_gender" />
@@ -24,7 +24,7 @@
 		<br/><input type="text" name="txt_carne" id="id_carne" />
 		<br/><label for="txt_unity">Unidad: </label><br/>
 		<br/><input type="text" name="txt_unity" id="id_unity" />
-		<br/><label for="txt_extenxion">Extension: </label><br/>
+		<br/><label for="txt_extenxion">Extensi&oacute;n: </label><br/>
 		<br/><input type="text" name="txt_extension" id="id_extension" />
 		<br/><label for="txt_career">Carrera: </label><br/>
 		<br/><input type="text" name="txt_career" id="id_career" />
