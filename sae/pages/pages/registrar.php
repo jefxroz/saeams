@@ -1,4 +1,5 @@
-<div id="form">
+<div name="pg_registrer" style="display:none;">
+<div id="form"  >
 	<h2>Jquery registration form</h2>
 	<form method="post" id="form-elements" >
 	<TABLE>
@@ -53,4 +54,5 @@
 		</tr>
 	</TABLE>
 	</form>
+</div>
 </div>
