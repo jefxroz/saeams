@@ -1,2 +1,2 @@
-<h2>Recuperar contraseña </h2>
+<h2>Recuperar contrase&ntilde;a </h2>
 				
