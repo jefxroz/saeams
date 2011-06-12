@@ -39,9 +39,9 @@
 				<form  action="" method="post">	
 					<label for="username"> Acceder </label>
 							<br/><label for="username">Usuario: </label> 
-							<br/><input class="easyui-validatebox" id="username" name="username" required="true"  validType="email">							
+							<br/><input class="easyui-validatebox" id="username" name="username" required="true"  validType="email" size="30">							
 							<br/><label for="txt_password">Constrase&ntilde;a:</label>
-							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" type="password" required="true">												
+							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" type="password" required="true" size="30">												
 									<table> 
 									<tr>
 										<td> <a href="#" onclick="RecoverPassword()">Recuperar Contrase&ntilde;a</a> </td> 
