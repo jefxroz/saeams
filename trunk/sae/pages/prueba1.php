@@ -4,9 +4,8 @@
 	$query = $db->ejecutequery("SELECT * FROM tbrol");  
 	$total=$db->getNumRows($query);
 	if($total>0)
-	{  	
-		
-		$r=$db->ejecuteStatement("INSERT INTO tbrol values(6,'a6')");
+	{  		
+		//$r=$db->ejecuteStatement("INSERT INTO tbrol values(6,'a6')");
 		if (!$r) 
 		{
 			$error.="pg_last_error($connection)<li>";
