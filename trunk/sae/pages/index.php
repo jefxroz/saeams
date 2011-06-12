@@ -29,14 +29,10 @@
 							<div class="rowElem">
 									<table>
 										<tr>
-											<td>  
-												<div ><a href="pages/recuperar.php" class="ajaxmenu">Recuperar Contraseña</a>  </div >  
-											</TD> 
-											<TD>  
-												<div ><a href="pages/registrar.php" class="ajaxmenu">Regitrarse</a>  </div >  
-											</TD>
-										</TR>
-									</TABLE>
+											<td> <a href="pages/recuperar.php" class="ajaxmenu">Recuperar Contraseña</a> </td> 
+											<td> <a href="pages/registrar.php" class="ajaxmenu">Regitrarse</a> </td>
+										</tr>
+									</table>
 							</div> 
 							<div class="rowElem">
 									<input name="btnAcces" type="submit" id="btnAcces" value="Accesar" /> 
