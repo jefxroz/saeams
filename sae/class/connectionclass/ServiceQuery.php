@@ -10,15 +10,9 @@
 		}  
 		public function insertUser($user)
 		{
-			$obj_conn->ejecuteStatement("INSERT INTO tbrol VALUES(NEXTVAL('tbuser_iduser_seq'),$2,$3,$4,$5)",$user->getData());					
+			$obj_conn->preparedStatement("INSERT_USER","INSERT INTO tbrol VALUES(NEXTVAL('tbuser_iduser_seq'),$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)");	
+			$obj_conn->ejecuteStatement("INSERT_USER",$user->get());				
 		}
-		public function updateUsert($user)
-		{
-			
-		}
-		public function deleteUser($user)
-		{
-			
-		}
+		
 	}
 ?>

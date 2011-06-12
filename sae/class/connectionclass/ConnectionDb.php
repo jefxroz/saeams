@@ -3,6 +3,7 @@
 	{  
 		private $conexion;  
 		private $total_querys;  
+		private $name;
 		public function ConnectionDb()
 		{  
 			$host_db='localhost';
@@ -17,26 +18,14 @@
 			}  
 			
 		}  
-		public function ejecuteQuery($p_query)
-		{  
-			$this->total_querys++;  
-			$l_result = pg_Exec($this->conexion,$p_query);  
-			return getValidateResult($l_result);
-		}  
-		public function ejecuteQuery($p_query,$p_parameters){
-			$this->total_querys++;  
-			$l_result = pg_prepare($this->conexion, "my_query", $p_query);
-			$l_result = pg_execute($this->conexion, "my_query", $p_parameters); 
-			return getValidateResult($l_result);
-		}
-		public function ejecuteStatement($p_query,$p_parameters)
+		
+		public function preparedStatement($name,$p_statement)
 		{
-			$l_result = pg_prepare($dbconn, "my_query", $p_query);
-			$l_result = pg_execute($dbconn, "my_query", $p_parameters);
-			return getValidateResult($l_result);
+			$l_result = pg_prepare($this->conexion, $name, $p_statement);
+			$this->name=$name;
 		}
 		
-		private function getValidateResult($result){
+		private function validateResult($result){
 			if(!$result)
 			{  
 				echo 'PgError ' . pg_error();  
@@ -44,6 +33,45 @@
 			}
 			return $result;
 		}
+		private function validateParameters($p_parameters)
+		{
+			for($i=0;$i<count($p_parameters);$i++)
+			{
+				$p_parameters[i]=pg_escape_string($p_parameters[$i]);
+				
+			}
+			return p_parameters;
+		}
+		public function ejecuteStatement($p_name,$p_parameters){
+			if(p_name==$this->name)
+			{
+				if (validateParameters(p_parameters))
+				{
+					$l_result = pg_execute($this->conexion, $this->name, $p_parameters);
+				}
+			}
+			else 
+			{
+				echo "La consulta preparada y la ejecutada no coinciden!!";	
+			}
+			return validateResult($l_result);
+		}
+		
+		public function ejecuteQuery($p_query)
+		{  
+			$this->total_querys++;  
+			$l_result = pg_Exec($this->conexion,$p_query);  
+			return validateResult($l_result);
+		}  
+		
+		public function ejecuteQuery($p_query,$p_parameters)
+		{
+			$this->total_querys++;  
+			$l_namequery=preparedQuery($p_query);
+			$l_result = pg_execute($this->conexion, $l_namequery, $p_parameters); 
+			return validateResult($l_result);
+		}
+		
 		
 		public function getResult($p_objquery)
 		{   
