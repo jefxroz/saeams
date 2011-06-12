@@ -16,8 +16,8 @@
 				</div>
 				<div class="box">
 				<div class="bottom">
-				<form class="jqtransform" action="post.php" method="POST">	
-					<label for="user">Acceder </label>
+				<form class="jqtransform" action="post.php" method="post">	
+					<label for="user"> Acceder </label>
 							<div class="rowElem">
 									<label for="user">Usuario: </label>
 									<input name="txtUser" type="text" id="txtUser" />
@@ -27,9 +27,9 @@
 									<input name="txtPassword" type="password" id="txtPassword" />
 							</div> 
 							<div class="rowElem">
-									<TABLE >
-										<TR>
-											<TD>  
+									<table>
+										<tr>
+											<td>  
 												<div ><a href="pages/recuperar.php" class="ajaxmenu">Recuperar Contraseña</a>  </div >  
 											</TD> 
 											<TD>  
