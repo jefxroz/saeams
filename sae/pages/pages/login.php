@@ -12,7 +12,7 @@
 									<input name="txtUser" type="text" id="txtUser" />
 							</div>
 							<div class="rowElem">
-									<label for="password">Constraseña: </label> 
+									<label for="password">Constrase&ntilde;a: </label> 
 									<input name="txtPassword" type="password" id="txtPassword" />
 							</div> 
 							<div class="rowElem">
