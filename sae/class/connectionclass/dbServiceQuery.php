@@ -1,9 +1,9 @@
 <?php  
-	class ServiceQueryDb
+	class dbServiceQueryDb
 	{  
 		private $obj_conn;    
 		private $obj_user;
-		public function ServiceQueryDb()
+		public function dbServiceQueryDb()
 		{  
 			$obj_conn = new ConnectionDb();
 			$this->$obj_user=$user; 

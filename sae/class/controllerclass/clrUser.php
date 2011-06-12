@@ -1,12 +1,12 @@
 <?php  
 
-	class ControllerUser
+	class clrUser extends ClrView
 	{  
 		private $objservice; 
   		//private $
-		public function ControllerUser()
+		public function clrUser()
 		{  
-			$objservice=new ServiceQueryDb();
+			$objservice=new dbServiceQuery();
 			  
 		}  
 		public function register($user)
@@ -15,4 +15,4 @@
 		}  
 		 
 	}
-		
+?>
