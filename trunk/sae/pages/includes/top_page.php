@@ -1,24 +1,21 @@
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Pagina inicial de SAE-SAP</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="Keywords" content="" />
 	<meta name="Description" content="" />
 	
 	<!--css principal y libreria jquery principal--->
 	<link href=".././resources/css/main.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src=".././libraries/jquery-1.4.4.min.js"></script>
-	
-	<!--css de transform, plugin jqtransform y javascript para tranformar la apariencia--->
-	<link  href=".././libraries/jqtransform/jqtransformplugin/jqtransform.css" rel="stylesheet" type="text/css" media="all" />
-	<script type="text/javascript" src=".././libraries/jqtransform/jqtransformplugin/jquery.jqtransform.js" ></script>
-	<script type="text/javascript" src=".././resources/js/transform.js"></script>
-	
+		
 	<!--css para registrar y javascript para validar el registro--->
 	
 	<link href=".././resources/css/register.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src=".././resources/js/ValidatorRegister.js"></script>
 	
-
+	<!--Librería de Jquery Easy UI --->
+	<link rel="stylesheet" type="text/css" href=".././libraries/themes/default/easyui.css">
+	<script type="text/javascript" src=".././libraries/jquery.easyui.min.js"></script>
+	<script src=".././libraries/plugins/jquery.validate.js" type="text/javascript"></script>
 	
 	<script language="javascript">
 $(document).ready(function(){
