@@ -3,16 +3,35 @@
 	class clrUser extends ClrView
 	{  
 		private $objservice; 
-  		//private $
-		public function clrUser()
+		private $user;
+		private $password;
+		private $id;
+		private $name;
+		private $address;
+		private $gender;
+		private $birthdate;
+		private $carne;
+		private $unity;
+		private $extension;
+		private $career;
+		private $service;
+  
+		public function clrUser($user,$password,$id,$name,$address,$gender,$birthdate,$carne,$unity,$extension,$career,$service)
 		{  
-			$objservice=new dbServiceQuery();
-			  
+			$this->service=$service;
+			$this->objservice=new dbServiceQuery();
+			$this->tbuser=new TbUser($user,$password,$id,$name,$address,$gender,$birthdate,$carne,$unity,$extension,$career);
 		}  
-		public function register($user)
+		public function ejecute()
 		{  
-			$objservice->insertUser($user);
+			if ($service==1){
+				register();
+			}	
+			
 		}  
+		private function register(){
+			$objservice->insertUser($this->$tbuser);
+		}
 		 
 	}
 ?>
