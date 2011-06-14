@@ -12,13 +12,14 @@
 		{
 			$obj_conn->prepared("SELECT_ROL","select * from rol where name='$1'",array($name));	
 			$l_result=$obj_conn->ejecuteQueryOne("SELECT_ROL",$user->get());
+			$ojbRol=new Tbrol();
 			if(!$l_result)
 			{
 				$row=$obj_conn->getow($l_result,0);	
-				$ojbRol=new TbRol();
 				$objRol->setIdRol($row['idrol']);
 				$objRol->setName($row['name']);
 			}
+			return objRol;
 		}
 		public function insertUser($user)
 		{
