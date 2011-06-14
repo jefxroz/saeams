@@ -80,12 +80,12 @@
 			}
 			else if($total>1)
 			{
-				echo "Error se encuentra mas de un registro ";
+				//log echo "Error se encuentra mas de un registro ";
 				return $l_result;
 			}
 			else 
 			{
-				echo "Error no existe regisro ";
+				//log echo "Error no existe regisro ";
 				return $l_result;
 			}
 		}

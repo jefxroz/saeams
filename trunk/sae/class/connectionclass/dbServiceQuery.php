@@ -15,7 +15,7 @@
 			$ojbRol=new Tbrol();
 			if(!$l_result)
 			{
-				$row=$obj_conn->getow($l_result,0);	
+				$row=$obj_conn->getRow($l_result,0);	
 				$objRol->setIdRol($row['idrol']);
 				$objRol->setName($row['name']);
 			}
