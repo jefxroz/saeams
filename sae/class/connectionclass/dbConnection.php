@@ -16,10 +16,9 @@
 				$this->conexion = (pg_connect("host=$host_db port=$port_db dbname=$base user=$usuario password=$password")) or die(mysql_error());  
 				//pg_select_db("dbAsignaciones",$this->conexion) or die(mysql_error());  
 			}  
-			
 		}  
 		
-		public function preparedStatement($name,$p_statement)
+		public function prepared($name,$p_statement)
 		{
 			$l_result = pg_prepare($this->conexion, $name, $p_statement);
 			$this->name=$name;
@@ -70,6 +69,25 @@
 			$l_namequery=preparedQuery($p_query);
 			$l_result = pg_execute($this->conexion, $l_namequery, $p_parameters); 
 			return validateResult($l_result);
+		}
+		
+		public function ejecuteQueryOne($p_query,$p_parameters){
+			$l_result=ejecuteQuery();
+			$total=$db->getNumRows($l_result);
+			if($total==1)
+			{
+				return $l_result;
+			}
+			else if($total>1)
+			{
+				echo "Error se encuentra mas de un registro ";
+				return $l_result;
+			}
+			else 
+			{
+				echo "Error no existe regisro ";
+				return $l_result;
+			}
 		}
 		
 		
