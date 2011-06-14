@@ -1,17 +1,19 @@
+
+
 <div name="pg_registrer" style="display:none;">
 	<h2>Registrar un nuevo usuario</h2>
-	<form method="post" id="form-elements" action="">
+	<form method="post" id="fm_register" action="">
 	<table>
 		<tr>
-			<td><br/><div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos de acceso</div></td>
+			<td><br/><div stwyle="padding:3px 2px;border-bottom:1px solid #ccc">Datos de acceso</div></td>
 		</tr>
 		<tr>
 		<td><label for="txt_user">Usuario: </label></td>
 		<td><input type="text" name="txt_user" id="id_user" class="easyui-validatebox"  required="true"  validType="email"/></td>
 		</tr>
 		<tr>
-		<td><label for="txt_passoword">Contrase&ntilde;a: </label></td>
-		<td><input type="password" name="txt_password" id="id_password" class="easyui-validatebox" required="true" /></td>
+		<td><label for="pwd_passoword">Contrase&ntilde;a: </label></td>
+		<td><input type="password" name="pwd_password" id="id_password" class="easyui-validatebox" required="true" /></td>
 		</tr>
 		<tr>
 			<td><br/><div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos Personales</div></td>	
@@ -38,8 +40,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td><label for="dt_birthdate">Fecha de Nacimiento: </label></td>
-			<td><input id="id_birthdate" name="dt_birthdate" style="width:150px;" class="easyui-datebox" required="true" size="50"></input></td>
+			<td><label for="dt_birthdate">Fecha de Nacimiento: </label><P></td>
+			<td><input id="id_birthdate" name="dt_birthdate" style="width:150px;" class="easyui-datebox" required="true" size="50"></input><P></td>
 		</tr>
 		<tr>
 			<td><div style="padding:3px 2px;border-bottom:1px solid #ccc">Datos de la Instituci&oacute;n</div></td>
@@ -57,12 +59,12 @@
 			<td><input type="text" name="txt_extension" id="id_extension" /></td>
 		</tr>
 		<tr>
-			<td><label for="txt_career">Carrera: </label></td>
-			<td><input type="text" name="txt_career" id="id_career" /></td>
+			<td><label for="txt_career">Carrera: </label><P></td>
+			<td><input type="text" name="txt_career" id="id_career" /><P></td>
 		</tr>
 		<tr style="padding:3px 2px;">
 			<td><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Registar</a></td>  
-    		<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="saveUser()">Cancelar</a></td>  
+    		<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancel()">Cancelar</a></td>  
 		</tr>
 	</table>
 	</form>
