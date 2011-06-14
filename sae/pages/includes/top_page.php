@@ -18,6 +18,26 @@
 	<script type="text/javascript" src=".././libraries/jquery-1.6.1.min.js"></script>
 	<script type="text/javascript" src=".././libraries/locale/easyui-lang-es.js"></script>
 	<script language="javascript">
-</script>
+	</script>
+	<script type="text/javascript">
+	var url='.././class/controllerview/vwUser.php';
+	function cancel(){
+		var vz=document.getElementsByName('pg_homepage');
+	  	  for(i=0; i<vz.length;i++)
+		    	  vz[i].style.display='none';
+			var vz=document.getElementsByName('pg_registrer');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='none';
+		  	var vz=document.getElementsByName('pg_recover');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='none';
+		  	var vz=document.getElementsByName('pg_login');
+		  	  for(i=0; i<vz.length;i++)
+			    	  vz[i].style.display='';
+		  	document.getElementById("lb_page").value="0";
+	}
+	
+
+	</script>
 </head>
 

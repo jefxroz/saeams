@@ -12,6 +12,8 @@
 		  	var vz=document.getElementsByName('pg_login');
 		  	  for(i=0; i<vz.length;i++)
 			    	  vz[i].style.display='none';
+		  	$('#fm_register').form('clear');
+			document.getElementById("lb_page").value="1";
 	}
 	function RecoverPassword(){
 		var vz=document.getElementsByName('pg_homepage');
@@ -26,6 +28,8 @@
 	  	var vz=document.getElementsByName('pg_login');
 	  	  for(i=0; i<vz.length;i++)
 		    	  vz[i].style.display='none';  
+	  	$('#fm_recover').form('clear');
+		document.getElementById("lb_page").value="2";
 	}
 </script>
 		<div id="colOne">
