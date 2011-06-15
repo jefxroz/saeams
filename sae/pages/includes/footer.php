@@ -4,4 +4,5 @@
 			<p>Ciudad Universitaria Zona 12, Guatemala C.A.</p>
 			<p>Correo Electr&oacute;nico: sae-sap@ing-usac.edu.gt</p>
 			<p>Tel&eacute;fono (502) 2418-9113</p>
-			<input type="text" id="lb_page" name="lb_page" style="display:none;" value="0" />
+			
+			
