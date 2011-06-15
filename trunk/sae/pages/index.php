@@ -7,11 +7,11 @@
 	<div id="wrapper">	
 				<?php include("includes/header.php"); ?>
 		<div id="content">
-				<?php include("pages/login.php"); ?>
+				<?php include("main/login.php"); ?>
 			<div id="colTwo">
-				<?php include("pages/homepage.php"); ?>
-				<?php include("pages/register.php"); ?>
-				<?php include("pages/recover.php"); ?>        
+				<?php include("main/homepage.php"); ?>
+				<?php include("main/register.php"); ?>
+				<?php include("main/recover.php"); ?>        
 				<br style="clear:both;" />
 			</div>
 		</div>
