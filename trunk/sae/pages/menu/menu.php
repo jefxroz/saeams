@@ -3,8 +3,8 @@
 			<h1><a href="#">SAE-SAP</a></h1>
 			<h2> <a href="http://ingenieria-usac.edu.gt/">Facultad de Ingenier&iacute;a</a></h2>
 	</div>	
-	<div id="aa" class="easyui-accordion" style="width:200px;">
-		<div title="Administraci&oacute;n" iconCls="icon-reload" style="padding:10px;">
+	<div id="menu_acc" class="easyui-accordion" style="width:200px;">
+		<div id="menu_pn1" title='Administrar' iconCls="icon-reload" style="padding:10px;">
 			<div id="menu2">
 			<ul class="menu2">
 				<li><a href="User.php" > <img src="../.././resources/images/setting1_24.png" /> Modificar Perfil</a></li>
@@ -17,7 +17,7 @@
 			</ul>
 			</div>
 		</div>
-		<div title="Asignaci&oacute;n" selected="true" iconCls="icon-reload" style="padding:10px;">
+		<div id="menu_pn2" title='Asignar' selected="true" iconCls="icon-reload" style="padding:10px;">
 			<div id="menu2">
 			<ul class="menu2">
 				<li><a href="Course.php" > <img src="../.././resources/images/lcourse_24.png" /> Informaci&oacute;n de cursos</a></li>
@@ -27,4 +27,5 @@
 			</ul>
 			</div>
 		</div>
-	</div>		
+	</div>
+				
