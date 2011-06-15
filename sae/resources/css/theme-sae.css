@@ -166,7 +166,6 @@
 		margin: 0;
 		padding: 0;
 		text-decoration: none;
-		text-transform: lowercase;
 		text-align: center;
 		color: #FFFFFF;
 	}
@@ -206,9 +205,34 @@
   	border: 2px solid  ;
   	border-color:#003366;
 	}
+	.boxedInd {
+	padding:4px;
+  	border: 2px solid  ;
+  	border-color:#3399FF;
+	}
 	.label-prin {
 	padding:3px 2px 3px 3px; 
 	border-bottom:2px solid #999;
 	color: #909090;
 	font-size:15px;
+	}
+
+	div#menu2 ul {
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+	    float: left;
+	}
+	
+	div#menu2 li {
+	    height:35px;
+	    width: 180px;
+   		background:url(.././images/menu_prin1.png) repeat-x;
+   	 	_background:url(.././images/menu_prin1.gif) repeat-x;
+	    position: relative;
+	    z-index: 9;
+	    margin: 0;
+	    padding: 0;
+	    display: block;
+	    float: left;
 	}
