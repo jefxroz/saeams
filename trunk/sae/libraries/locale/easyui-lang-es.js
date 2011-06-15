@@ -1,6 +1,6 @@
 if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = 'Pagina';
-	$.fn.pagination.defaults.afterPageText = 'of {paginas}';
+	$.fn.pagination.defaults.afterPageText = 'of {pages}';
 	$.fn.pagination.defaults.displayMsg = 'Mostrar {from} a {to} of {total} items';
 }
 if ($.fn.datagrid){
