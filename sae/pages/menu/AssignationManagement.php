@@ -11,6 +11,11 @@
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
+				<script>
+					$(function(){
+						$('#menu_acc').accordion('select','Asignar'); 		
+					});
+				</script>			
 			</div>
 			<div id="colTwo">
 			       
