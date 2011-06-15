@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<title>Informaci&oacute;n de cursos - SAE-SAP</title>
+<title>Gestionar Horario - SAE-SAP</title>
 <?php include("top_page.php"); ?>
 </head>
 <body>
@@ -18,13 +18,13 @@
 
 		<table>
 			<tr>
-				<td><img src="../.././resources/images/lcourse_48.png" ></td>
-				<td><h2>Informaci&oacute;n de cursos</h2></td>
+				<td><img src="../.././resources/images/schedule_48.png" ></td>
+				<td><h2>Gestionar Horario</h2></td>
 			</tr>
 		</table>
 		<br/>
 
-			       
+			       			       
 				<br style="clear:both;" />
 			</div>
 		</div>
