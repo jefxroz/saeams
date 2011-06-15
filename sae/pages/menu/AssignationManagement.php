@@ -9,13 +9,7 @@
 	<div id="wrapper">	
 		<div id="content">
 			<div id="colOne">
-				
-				<?php include("menu.php"); ?>
-				<script>
-					$(function(){
-						$('#menu_acc').accordion('select','Asignar'); 		
-					});
-				</script>			
+				<?php include("menu2.php"); ?>			
 			</div>
 			<div id="colTwo">
 			       
