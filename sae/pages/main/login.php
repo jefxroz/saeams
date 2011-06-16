@@ -41,7 +41,7 @@
 				<div class="bottom">
 		<div name ="pg_login" >
 		<br/>
-			<div class="boxedInd">
+			<div id="p" class="easyui-panel" title="SAE-SAP"  style="background:#fafafa;">
 				<form  action="" method="post">	
 				
 				<h3 align="center"> INGRESO </h3>
