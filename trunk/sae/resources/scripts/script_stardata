@@ -1,0 +1,5 @@
+--Datos en Rol
+
+insert into tbrol values(1,'ADMINISTRADOR');
+insert into tbrol values(2,'PROFESOR');
+insert into tbrol values(3,'ESTUDIANTE');
