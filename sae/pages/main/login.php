@@ -1,37 +1,4 @@
-<script type="text/javascript">
-	function Registrer(){
-		var vz=document.getElementsByName('pg_homepage');
-	  	  for(i=0; i<vz.length;i++)
-		    	  vz[i].style.display='none';
-			var vz=document.getElementsByName('pg_registrer');
-		  	  for(i=0; i<vz.length;i++)
-			    	  vz[i].style.display='';
-		  	var vz=document.getElementsByName('pg_recover');
-		  	  for(i=0; i<vz.length;i++)
-			    	  vz[i].style.display='none';
-		  	var vz=document.getElementsByName('pg_login');
-		  	  for(i=0; i<vz.length;i++)
-			    	  vz[i].style.display='none';
-		  	$('#fm_register').form('clear');
-			document.getElementById("id_page").value="1";
-	}
-	function RecoverPassword(){
-		var vz=document.getElementsByName('pg_homepage');
-  	  for(i=0; i<vz.length;i++)
-	    	  vz[i].style.display='none';
-		var vz=document.getElementsByName('pg_registrer');
-	  	  for(i=0; i<vz.length;i++)
-		    	  vz[i].style.display='none';
-	  	var vz=document.getElementsByName('pg_recover');
-	  	  for(i=0; i<vz.length;i++)
-		    	  vz[i].style.display='';
-	  	var vz=document.getElementsByName('pg_login');
-	  	  for(i=0; i<vz.length;i++)
-		    	  vz[i].style.display='none';  
-	  	$('#fm_recover').form('clear');
-		document.getElementById("id_page").value="2";
-	}
-</script>
+
 		<div id="colOne">
 				<div id="logo">
 					<h1><a href="#">SAE-SAP</a></h1>

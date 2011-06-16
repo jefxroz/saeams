@@ -77,8 +77,7 @@
 						<td><h2>Gestionar Cursos</h2></td>
 					</tr>
 				</table>
-				<br/>			          
-									
+				<br/>			          									
 					<div align="center">					
 				 			<input type="text" id="id_search" name="id_search"  size="26">
 				 			&nbsp;&nbsp;
