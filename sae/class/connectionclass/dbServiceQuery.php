@@ -31,10 +31,10 @@
 			}
 			return objRol;
 		}
-		public function insertUserStudent($user)
+		public function insertUserStudent($objuser)
 		{
-			$this->objconn->prepared("INSERT_USER","INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(NEXTVAL('tbuser_iduser_seq'),$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,NULL);");	
-			$obj->objconn->ejecuteStatement("INSERT_USER",$this->objuser->get());
+			$this->objconn->prepared("INSERT_USER","INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(DEFAULT,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);");	
+			$this->objconn->ejecuteStatement("INSERT_USER",$objuser->get());
 		}		
 	}
 ?>

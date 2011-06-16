@@ -31,6 +31,7 @@
 		
 		public function prepared($name,$p_statement)
 		{
+			//echo " ".$p_statement." ".$name;
 			$l_result = pg_prepare($this->conexion, $name, $p_statement);
 			$this->name=$name;
 		}
@@ -54,9 +55,9 @@
 			return p_parameters;
 		}
 		public function ejecuteStatement($p_name,$p_parameters){
-			if(p_name==$this->name)
+			if($p_name==$this->name)
 			{
-				if (validateParameters(p_parameters))
+				if ($this->validateParameters($p_parameters))
 				{
 					$l_result = pg_execute($this->conexion, $this->name, $p_parameters);
 				}
@@ -65,7 +66,7 @@
 			{
 				echo "La consulta preparada y la ejecutada no coinciden!!";	
 			}
-			return validateResult($l_result);
+			return $this->validateResult($l_result);
 		}
 		
 		public function ejecuteQuery($p_query)
@@ -80,7 +81,7 @@
 			$this->total_querys++;  
 			$l_namequery=preparedQuery($p_query);
 			$l_result = pg_execute($this->conexion, $l_namequery, $p_parameters); 
-			return validateResult($l_result);
+			return $this->validateResult($l_result);
 		}
 		
 		public function ejecuteQueryOne($p_query,$p_parameters){
