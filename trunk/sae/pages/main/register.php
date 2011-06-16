@@ -52,11 +52,11 @@ $().ready(function() {
 					<td width="65%" ><input type="text" name="id_mail" id="id_mail" class="easyui-validatebox"  required="true"  validType="email" size="30"/></td>
 				</tr>
 				<tr>
-					<td width="35%" align="left"><label for="id_passoword">* Elige una contrase&ntilde;a: </label></td>
+					<td width="35%" align="left"><label for="id_password">* Elige una contrase&ntilde;a: </label></td>
 					<td width="65%" ><input type="password" name="id_password" id="id_password" class="easyui-validatebox" required="true" size="30"  validType="minLength[5]" /></td>
 				</tr>
 				<tr>
-					<td width="35%" align="left"><label for="pwd_pass_comp">* Vuelve a introducir la contrase&ntilde;a: </label></td>
+					<td width="35%" align="left"><label for="id_pass_comp">* Vuelve a introducir la contrase&ntilde;a: </label></td>
 					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox" required="true" size="30"  validType="txt_valid_pass" /></td>
 				</tr>
 		</table>
@@ -73,8 +73,8 @@ $().ready(function() {
 					<td width="65%"><input type="text" name="id_name" id="id_name" class="easyui-validatebox" required="true" size="50" /></td>
 				</tr>
 				<tr>
-					<td width="35%"  align="left"><label for="id_secondname">* Apellido: </label></td>
-					<td width="65%"><input type="text" name="id_secondname" id="id_secondname" class="easyui-validatebox" required="true" size="50" /></td>
+					<td width="35%"  align="left"><label for="id_surname">* Apellido: </label></td>
+					<td width="65%"><input type="text" name="id_surname" id="id_surname" class="easyui-validatebox" required="true" size="50" /></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_address">* Direcci&oacute;n: </label></td>
@@ -84,13 +84,13 @@ $().ready(function() {
 					<td width="35%"   align="left"><label for="id_gender">* Genero: </label><br/></td>
 					<td width="65%">
 						<select id="id_gender"  name="id_gender" style="width:150px;" class="easyui-combobox" required="true" editable="false" panelheight="50">
-							<option value="M">Masculino</option>
-							<option value="F">Femenino</option>
+							<option value="0">Masculino</option>
+							<option value="1">Femenino</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td width="35%"  align="left"><label for="dt_birthdate">* Fecha de Nacimiento: </label><P></td>
+					<td width="35%"  align="left"><label for="id_birthdate">* Fecha de Nacimiento: </label><P></td>
 					<td width="65%"><input id="id_birthdate" name="id_birthdate" style="width:150px;" class="easyui-datebox" required="true" size="50" editable="false"></input><P></td>
 				</tr>
 	</table>
@@ -101,20 +101,24 @@ $().ready(function() {
 	
 	<table width="100%" border="0" cellspacing="3" cellpadding="3" >
 		<tr>
-			<td width="35%"  align="left"><label for="txt_carne">Carnet: </label><br/></td>
-			<td width="65%"><input  name="txt_carne" id="id_carne"  class="easyui-numberbox" type="text" precision="0"  /></td>
+			<td width="35%"  align="left"><label for="id_carnet">Carnet: </label><br/></td>
+			<td width="65%"><input  name="id_carnet" id="id_carnet"  class="easyui-numberbox" type="text" precision="0"  /></td>
 		</tr>
 		<tr>
-			<td width="35%"  align="left"><label for="txt_unity">Unidad: </label></td>
-			<td width="65%"><input type="text" name="txt_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
+			<td width="35%"  align="left"><label for="id_unity">Unidad: </label></td>
+			<td width="65%"><input type="text" name="id_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
 		</tr>
 		<tr>
-			<td width="35%"  align="left"><label for="txt_extenxion">Extensi&oacute;n: </label></td>
-			<td width="65%"><input type="text" name="txt_extension" id="id_extension" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
+			<td width="35%"  align="left"><label for="id_extention">Extensi&oacute;n: </label></td>
+			<td width="65%"><input type="text" name="id_extention" id="id_extention" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
 		</tr>
 		<tr>
-			<td width="35%"  align="left"><label for="txt_career">Carrera: </label><P></td>
-			<td width="65%"><input type="text" name="txt_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  /><P></td>
+			<td width="35%"  align="left"><label for="id_career">Carrera: </label><P></td>
+			<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  /><P></td>
+		</tr>
+		<tr>
+			<td width="35%"  align="left"><label for="id_page"></label><P></td>
+			<td width="65%"><input type="hidden" name="id_page" id="id_page" size="10"   /><P></td>
 		</tr>
 	</table>
 	
