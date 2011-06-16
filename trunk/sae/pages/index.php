@@ -11,14 +11,15 @@
 			<div id="colTwo">
 				<?php include("main/homepage.php"); ?>
 				<?php include("main/register.php"); ?>
-				<?php include("main/recover.php"); ?>        
+				<?php include("main/recover.php"); ?>
+				<?php include("main/js_main.php"); ?>        
 				<br style="clear:both;" />
 			</div>
 		</div>
 		<div id="footer">  
 				<?php include("includes/footer.php"); ?>
 		</div>
-	</div>
+	</div>	
+	
 	</body>
 </html>
-		
