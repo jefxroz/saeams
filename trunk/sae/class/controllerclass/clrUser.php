@@ -1,36 +1,50 @@
 <?php  
-	class clrUser extends ClrView
+	require_once("clrView.php");
+	require_once("../connectionclass/dbServiceQuery.php");
+	require_once("../mapping/Tbuser.php");
+	class clrUser extends clrView
 	{  
 		private $objservice; 
 		private $objuser;
 		private $service;
   
-		public function clrUser($user,$password,$id,$name,$address,$gender,$birthdate,$carne,$unity,$extension,$career,$service)
+		public function clrUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
 		{  
+			echo "Vamos en user";
 			$this->service=$service;
+			echo "".$this->service;
 			$this->objservice=new dbServiceQuery();
-			$this->objuser=new Tbuser($user,$password,$id,$name,$address,$gender,$birthdate,$carne,$unity,$extension,$career);
+			
+			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
+			/*echo "User Mail ".$this->objuser->getMail();
+			echo "User Password ".$this->objuser->getPassword();
+			echo "User Id ".$this->objuser->getId();
+			echo "User Name ".$this->objuser->getName();
+			echo "User Surname ".$this->objuser->getSurName();
+			echo "User Address ".$this->objuser->getAddress();
+			echo "User Gender ".$this->objuser->getGender();
+			echo "User Birthdate ".$this->objuser->getBirthdate();
+			echo "User Carnet ".$this->objuser->getCarnet();
+			echo "User Unity ".$this->objuser->getUnity();
+			echo "User Extention ".$this->objuser->getExtention();
+			echo "User Career ".$this->objuser->getCareer();
+			echo "User IdTypeTrainer ".$this->objuser->getIdTypeTrainer();*/
 		}  
+		
 		public function ejecute()
 		{  
-			if ($service==1)
+			echo "service ".$this->service;
+			if ($this->service==1)
 			{
-				register();
+				
+				$this->registerStudent();
+				return "Registrar ";
+				
 			}	
 		}  
-		private function register()
+	private function registerStudent()
 		{
-			$tbrol=$objservice->getRol("ESTUDIANTE");
-			if($tbrol -> getName() != '')
-			{
-				$this->objuser->setRol(tbrol);
-				$objservice->insertUser($this->$objuser);
-				echo json_encode(array('success'=>true));
-			}
-			else
-			{
-				echo json_encode(array('msg'=>'Some errors occured.'));
-			}
+			$this->objservice->insertUserStudent($this->objuser);
 		}
 	}
 ?>

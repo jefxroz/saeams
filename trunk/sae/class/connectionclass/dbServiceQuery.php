@@ -1,17 +1,27 @@
 <?php  
-	class dbServiceQueryDb
+	require_once("dbConnection.php");
+
+	class dbServiceQuery
 	{  
-		private $obj_conn;    
-		private $obj_user;
-		public function dbServiceQueryDb()
+		private $objuser;    
+		private $objconn;
+		public function dbServiceQuery()
 		{  
-			$obj_conn = new ConnectionDb();
-			$this->$obj_user=$user; 
+			echo "vamos en serviq ";
+			$this->objconn = new dbConnection(); 
 		}  
+		public function setUser(&$user)
+		{
+				$this->$objuser=$objuser; 
+		}
+		public function getUser()
+		{
+			return $this->objuser;
+		}
 		public function getRol($name)
 		{
-			$obj_conn->prepared("SELECT_ROL","select * from rol where name='$1'",array($name));	
-			$l_result=$obj_conn->ejecuteQueryOne("SELECT_ROL",$user->get());
+			$this->objconn->prepared("SELECT_ROL","select * from rol where name='$1'",array($name));	
+			$l_result=$this->$objconn->ejecuteQueryOne("SELECT_ROL",$user->get());
 			$ojbRol=new Tbrol();
 			if(!$l_result)
 			{
@@ -21,10 +31,10 @@
 			}
 			return objRol;
 		}
-		public function insertUser($user)
+		public function insertUserStudent($user)
 		{
-			$obj_conn->prepared("INSERT_USER","INSERT INTO tbrol VALUES(NEXTVAL('tbuser_iduser_seq'),$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)");	
-			$obj_conn->ejecuteStatement("INSERT_USER",$user->get());
+			$this->objconn->prepared("INSERT_USER","INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(NEXTVAL('tbuser_iduser_seq'),$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,NULL);");	
+			$obj->objconn->ejecuteStatement("INSERT_USER",$this->objuser->get());
 		}		
 	}
 ?>

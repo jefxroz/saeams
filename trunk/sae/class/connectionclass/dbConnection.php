@@ -1,21 +1,32 @@
 <?php  
-	class ConnectionDb
+	class dbConnection
 	{  
 		private $conexion;  
 		private $total_querys;  
 		private $name;
-		public function ConnectionDb()
+		public function dbConnection()
 		{  
 			$host_db='localhost';
 			$port_db='5432';
 			$base="sae_dbassignations";
 			$usuario="saeweb";
 			$password="saeweb";
+			echo "vamos en connection ";
 			if(!isset($this->conexion))
 			{  
-				$this->conexion = (pg_connect("host=$host_db port=$port_db dbname=$base user=$usuario password=$password")) or die(mysql_error());  
-				//pg_select_db("dbAsignaciones",$this->conexion) or die(mysql_error());  
+				
+				$this->conexion = (pg_connect("host=$host_db port=$port_db dbname=$base user=$usuario password=$password")) or die("No se ha podido conectar");  
+				$stat = pg_connection_status($this->conexion);
+				if ($stat === PGSQL_CONNECTION_OK)
+				{
+      				echo 'Estado de la conexión ok';
+  				} 
+  				else 
+  				{
+      				echo 'No se ha podido conectar';
+  				}   
 			}  
+			echo "Termino el dbConnection constructor ";
 		}  
 		
 		public function prepared($name,$p_statement)
@@ -37,6 +48,7 @@
 			for($i=0;$i<count($p_parameters);$i++)
 			{
 				$p_parameters[i]=pg_escape_string($p_parameters[$i]);
+				echo "".$p_parameters[i];
 				
 			}
 			return p_parameters;
@@ -63,7 +75,7 @@
 			return validateResult($l_result);
 		}  
 		
-		public function ejecuteQuery($p_query,$p_parameters)
+		public function ejecuteQueryParameters($p_query,$p_parameters)
 		{
 			$this->total_querys++;  
 			$l_namequery=preparedQuery($p_query);
