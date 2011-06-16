@@ -10,9 +10,9 @@
   
 		public function clrUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
 		{  
-			echo "Vamos en user";
+			//echo "Vamos en user";
 			$this->service=$service;
-			echo "".$this->service;
+			//echo "".$this->service;
 			$this->objservice=new dbServiceQuery();
 			
 			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer);

@@ -16,7 +16,7 @@ $career=$_REQUEST['id_career'];
 $service=$_REQUEST['id_page'];
 
 //echo " ".$user."  ".$password." ".$id." ".$name." ".$surname." ".$address." ".$gender." ".$birthdate." ".$carne." ".$unity." ".$extention." ".$career." ".$service;
-echo "Hola            ";
+//echo "Hola            ";
 $objcontroler=new clrUser($user,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,1,null,$service);
 echo $objcontroler->ejecute();
 
