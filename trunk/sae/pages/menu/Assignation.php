@@ -9,7 +9,6 @@
 	<div id="wrapper">	
 		<div id="content">
 			<div id="colOne">
-				
 				<?php include("menu2.php"); ?>			
 			</div>
 			<div id="colTwo">
@@ -17,14 +16,13 @@
 
 
 
-
-		<table>
-			<tr>
-				<td><img src="../.././resources/images/assign_48.png" ></td>
-				<td><h2>Asignarse cursos</h2></td>
-			</tr>
-		</table>
-	<br/>
+				<table>
+					<tr>
+						<td><img src="../.././resources/images/assign_48.png" ></td>
+						<td><h2>Asignarse cursos</h2></td>
+					</tr>
+				</table>
+				<br/>
 
 
 

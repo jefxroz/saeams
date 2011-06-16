@@ -1,6 +1,23 @@
 	<script type="text/javascript">
-	var id_page=0;
+	var id_page="0";
+	var url='.././class/controllerview/vwUser.php';
 	$().ready(function() {
+
+		id_page="0";
+		$('div[name|="pg_registrer"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_recover"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_homepage"]').each(function(index) {
+	           $(this).show();  
+	     });
+		$('div[name|="pg_login"]').each(function(index) {
+	           $(this).show();  
+	     });
+
+		
 		$.extend($.fn.validatebox.defaults.rules, {
 			minLength: {
 				validator: function(value, param){
@@ -20,16 +37,56 @@
 	             message: 'Debe ingresar la misma contrase&ntilde;a'
 				
 				}
+
 		});
 		
 	});
-	
-	var url='.././class/controllerview/vwUser.php';
 	function cancel(){
-		
-		var vz=document.getElementsByName('pg_homepage');
-		id_page=1;
-		  	
+		id_page="0";
+		$('div[name|="pg_registrer"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_recover"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_homepage"]').each(function(index) {
+	           $(this).show();  
+	     });
+		$('div[name|="pg_login"]').each(function(index) {
+	           $(this).show();  
+	     });
+	}
+	function Registrer(){
+		 $('#fm_register').form('clear');
+		id_page="1";
+		$('div[name|="pg_registrer"]').each(function(index) {
+	           $(this).show();  
+	     });
+		$('div[name|="pg_recover"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_homepage"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_login"]').each(function(index) {
+	           $(this).hide();  
+	     });
+	}
+	function RecoverPassword(){
+	  	$('#fm_recover').form('clear');
+	  	id_page="2";
+	  	$('div[name|="pg_registrer"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_recover"]').each(function(index) {
+	           $(this).show();  
+	     });
+		$('div[name|="pg_homepage"]').each(function(index) {
+	           $(this).hide();  
+	     });
+		$('div[name|="pg_login"]').each(function(index) {
+	           $(this).hide();  
+	     });
 	}
 
 	function saveUser()
@@ -56,21 +113,4 @@
 			}
 		});
 	}
-
-	function Registrer(){
-		
-		$('div[name|="pg_registrer"]').each(function(index) {
-	           $(this).hide();
-	          
-	     });
-	}
-	function RecoverPassword(){
-		$('div[name|="pg_registrer"]').each(function(index) {
-	           $(this).show();
-	          
-	     });
-	  	id_page=2;
-	}
-
-
 	</script>
