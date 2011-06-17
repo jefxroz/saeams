@@ -1,0 +1,54 @@
+CREATE OR REPLACE FUNCTION f_insertUserRol(varchar,varchar) RETURNS text AS $$
+DECLARE
+	p_namerol ALIAS FOR $1;
+	p_mailuser ALIAS FOR $2;
+	v_result text='OK';
+	v_idrol integer;
+	v_iduser integer;
+	
+	BEGIN
+
+		BEGIN
+
+			SELECT idrol
+			INTO   v_idrol
+			FROM   tbrol r
+			WHERE  r.name=p_namerol;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Rol % no encontrado', p_namerol;
+				RAISE LOG 'Rol % no encontrado', p_namerol;
+			END;
+		END;
+
+		BEGIN
+
+			SELECT iduser
+			INTO   v_iduser
+			FROM   tbuser u
+			WHERE  u.mail=p_mailuser;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Usuario % no encontrado', p_mailuser;
+				RAISE LOG 'Usuario % no encontrado', p_mailuser;
+			END;
+		END;
+		
+		
+		BEGIN
+			INSERT INTO tbuserrol(idrol,iduser) VALUES(v_idrol,v_iduser);
+			v_result='OK';
+			RAISE NOTICE 'Inserccion de usuario con los parametros (%,%)',v_idrol,v_iduser;
+			RAISE LOG 'Inserccion del rol para el usuario (%,%)',v_idrol,v_iduser;
+		EXCEPTION WHEN unique_violation THEN
+			BEGIN
+				v_result='Error no se puede realizar la accion de un usuario';
+				RAISE EXCEPTION 'Vioacion unique Error en la inserccion de tbuserrol con los parametros (%,%)',p_namerol,p_mailuser;
+				RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%)',p_mail,p_password;
+			END;
+		END;
+	RETURN v_result;
+	END;
+$$ LANGUAGE plpgsql;
