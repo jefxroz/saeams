@@ -1,0 +1,44 @@
+--Ejemplo: Ejecutar el procedimiento
+--SELECT f_insertStudent('darn1986@gmail.com','12345','A-11190288','Darwin Daniel','Hernandez Galan','6ta calle 11-70 Zona 7 Colonia Quinta Samayoa Guatemala,Guatemala',1,'04/26/1986',200511916,00,08,09,1,NULL);
+
+CREATE OR REPLACE FUNCTION f_insertstudent(character varying, character varying, character varying, character varying, character varying, character varying, integer, timestamp without time zone, integer, integer, integer, integer, integer, integer)
+  RETURNS text AS
+$BODY$
+DECLARE
+	p_mail ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	p_id ALIAS FOR $3;
+	p_name ALIAS FOR $4;  	
+  	p_surname ALIAS FOR $5;
+	p_address ALIAS FOR $6;
+	p_gender ALIAS FOR $7;
+  	p_birthdate ALIAS FOR $8;
+  	p_carnet ALIAS FOR $9;
+	p_unity ALIAS FOR $10;
+  	p_extention ALIAS FOR $11;
+  	p_career ALIAS FOR $12;
+	p_state ALIAS FOR $13;
+  	p_idtypetrainer ALIAS FOR $14;
+	v_result text;
+	BEGIN
+		BEGIN
+			INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(DEFAULT,p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer);
+			v_result='OK';
+			RAISE NOTICE 'Inserccion de usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+
+			v_result:=f_insertUserRol('ESTUDIANTE',p_mail);
+			
+		EXCEPTION WHEN unique_violation THEN
+			BEGIN
+				v_result='Error no se puede realizar la accion de un usuario';
+				RAISE EXCEPTION 'Vioacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+				RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+				rollback;
+			END;
+		END;
+
+		
+	RETURN v_result;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE;
