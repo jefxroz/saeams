@@ -1,6 +1,6 @@
 <div name="pg_registrer" >
 	
-	<table>
+	<table align="center">
 	<tr>
 	<td><img src=".././resources/images/user_48.png" alt="Usuarios"></td>
 	<td><h2>Registrarse</h2></td>

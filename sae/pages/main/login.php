@@ -25,6 +25,7 @@
 							<br/><a href="#" onclick="RecoverPassword()">&iquest;Olvid&oacute; su contrase&ntilde;a&#63;</a>						
 							<br/> <a href="#" onclick="Registrer()">Regitrarse</a> 
 							<br/> <a href="#" >Ayuda para registrarse</a>
+							<p>
 							<br/>
 							</div> 
 				</form>
