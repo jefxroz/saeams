@@ -1,36 +1,48 @@
 	/* Elements */
 	body {
 		margin: 20px 0px; /* 20 px (20 pocisiones para abajo apartir del top) */
-		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
 		font-size: 14px;
-		color: #A1A1A1;
+		color: #093C67;
+		background-color:#ABBBCB;
+		/*background: url(images/pfondo.jpg) repeat-x;*/
 	}
 	
 	h3, h4, h5, h6 {
-		color: #2582A4;
+		color: #093C67;
 	}
 	
+	h1{
+		color: #FFFFFF;
+		font-size: 20px;
+		font-weight: bold;
+		font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
+		text-align: center;
+	}
+	
+	
+	
 	p, ol{
-		text-align: justify;
+		/*text-align: justify;*/
 	}
 	
 	strong {
 		font-weight: bold;
-		color: #808080;
+		color: #093C67;
 	}
 	
 	a {
-		color: #808080;
+		color: #093C67;
 	}
 	label
 	{
 		font-size:14px;
 		font-weight:bold;
-		color: #C0C0C0;
+		color: #093C67;
 	}
 	input[type="submit"]
 	{
-		background-color: #078EA0;
+		background-color: #093C67;
 		border: 1px solid #0094A7;
 		color: #FFFFFF;
 		font-size: 14px;
@@ -38,20 +50,21 @@
 	
 	a:hover {
 		text-decoration: none;
-		color: #2582A4;
+		color: #B5C5D2;
 	}
 	
 	.box {
 		margin-bottom: 0;
 		padding-bottom: 0;
-		background: url(images/img07.gif) repeat-x right bottom;
 	}
 	
 	.bottom {
 		display: block;
 		margin-bottom: 0;
 		padding-bottom: 10px;
-		background: url(images/img08.gif) no-repeat left bottom;
+		/*background: url(.././images/img08.gif) no-repeat left bottom;*/
+		/*background: url(.././images/pfondo.jpg);*/
+		
 	}
 	
 	.image {
@@ -84,7 +97,8 @@
 		margin: 0;
 		padding: 0 0 0 10px;
 		list-style: none;
-		background: url(.././images/img02new1.bmp) no-repeat;
+		/*background: url(.././images/img02new1.bmp) no-repeat;*/
+		background: url(.././images/pfondo.jpg);no-repeat;
 	}
 	
 	#menu li {
@@ -96,7 +110,7 @@
 		float: left;
 		height: 27px;
 		padding: 10px 15px 0px 15px;
-		text-transform: lowercase;
+		/*text-transform: lowercase;*/
 		text-decoration: none;
 		font-size: 12px;
 		font-weight: bold;
@@ -104,7 +118,7 @@
 	}
 	
 	#menu a:hover {
-		background: #A4B74C url(.././images/img01new1.bmp) repeat-x;
+		background: #B5C5D2 url(.././images/img01new1.bmp) repeat-x;
 	}
 	
 	
@@ -118,15 +132,15 @@
 	#colOne {
 		float: left;
 		width: 238px;
-		height: 553px;
-		background: url(.././images/img05.gif) repeat-x;
+		height: 500px;
+		background: url(.././images/pfondo.jpg) repeat-x;
 	}
 	
 	#colTwo {
 		float: left;
 		width: 790px;
-		padding: 30px 40px 0 30px;
-		background:  url(.././images/img09.gif) repeat-x;
+		padding: 0px 40px 0 30px;
+		/*background:  url(.././images/img09.gif) repeat-x;*/
 	}
 	
 	#colTwo h2 {
@@ -159,7 +173,7 @@
 	
 	#logo {
 		height: 150px;
-		background: url(.././images/img06.gif) no-repeat;
+		background: url(.././images/pfondo.jpg) no-repeat;
 	}
 	
 	#logo h1, #logo h2, #logo a {
@@ -184,10 +198,13 @@
 	
 	#footer {
 		clear: both;
-		width: 1280px;
+		width: 100%;
 		margin: 0 auto;
-		padding-top: 40px;
-		background: url(.././images/img11new.bmp) repeat-x;
+		padding-bottom: 20px;
+		padding-top: 20px;
+		background: url(.././images/pfondo.jpg) repeat-x;
+		color:#FFFFFF;
+		
 	}
 	
 	#footer p {
@@ -212,8 +229,8 @@
 	div#menu2 li {
 	    height:35px;
 	    width: 180px;
-   		background:url(.././images/menu_prin1.png) repeat-x;
-   	 	_background:url(.././images/menu_prin1.gif) repeat-x;
+   		background:url(.././images/menu_prin11.jpg) repeat-x;
+   	 	_background:url(.././images/menu_prin11.jpg) repeat-x;
 	    position: relative;
 	    z-index: 9;
 	    margin: 0;

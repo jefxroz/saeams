@@ -4,10 +4,7 @@
 <strong>Sae</strong> Es una instituci&oacute;n que se dedica al fortalecimiento de la educaci&oacute;n.
 <table>
 <tr>
-	<td>
-				<img src=".././resources/images/logoSae.jpg" alt="" width="109" height="109" class="image" />
-				<img src=".././resources/images/usac.png" alt="" width="109" height="109" class="image" />
-	</td>
+	
 	<td class="indent">
 
 <h3>MISI&Oacute;N:</h3>
@@ -24,6 +21,4 @@ Ofrecer nuestros servicios en forma auto sostenible con la convicci&oacute;n que
 </tr>
 </table>		
 <h3>Noticias:</h3>
-
-
 </div>
