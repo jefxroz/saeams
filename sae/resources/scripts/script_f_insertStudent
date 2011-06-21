@@ -1,4 +1,4 @@
---Ejemplo: Ejecutar el procedimiento
+﻿--Ejemplo: Ejecutar el procedimiento
 --SELECT f_insertStudent('darn1986@gmail.com','12345','A-11190288','Darwin Daniel','Hernandez Galan','6ta calle 11-70 Zona 7 Colonia Quinta Samayoa Guatemala,Guatemala',1,'04/26/1986',200511916,00,08,09,1,NULL);
 
 CREATE OR REPLACE FUNCTION f_insertstudent(character varying, character varying, character varying, character varying, character varying, character varying, integer, timestamp without time zone, integer, integer, integer, integer, integer, integer)
@@ -31,7 +31,7 @@ DECLARE
 		EXCEPTION WHEN unique_violation THEN
 			BEGIN
 				v_result='Error no se puede realizar la accion de un usuario';
-				RAISE EXCEPTION 'Vioacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+				--RAISE EXCEPTION 'Vioacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
 				RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
 				rollback;
 			END;
