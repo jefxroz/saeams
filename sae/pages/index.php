@@ -16,6 +16,8 @@
 				<br style="clear:both;" />
 			</div>
 		</div>
+		<div id="dividir">
+		</div>
 		<div id="footer">  
 				<?php include("includes/footer.php"); ?>
 		</div>

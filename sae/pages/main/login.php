@@ -1,13 +1,18 @@
 
 		<div id="colOne">
+		
 				<div id="logo">
-					<h1><a href="#">SAE-SAP</a></h1>
-					<h2> <a href="http://ingenieria-usac.edu.gt/">Facultad de Ingenier&iacute;a</a></h2>
+				<div align=center >
+				<br>
+				<img src=".././resources/images/SAEv2.png" alt="" width="80" height="80" /></div>
+					<br>
+					<h2> <a href="http://ingenieria-usac.edu.gt/">FACULTAD DE INGENIER&Iacute;A</a></h2>
+					
 				</div>
 				<div class="box">
 				<div class="bottom">
 		<div name ="pg_login" >
-		<br/>
+		
 			<div id="p" class="easyui-panel" title="SAE-SAP"  style="background:#fafafa;">
 				<form  action="" method="post">	
 				
