@@ -1,17 +1,18 @@
-<table width=85% align="center" BACKGROUND=".././resources/images/pfondo.jpg">
+<table id="headr" width=100% align="center" BACKGROUND=".././resources/images/pfondo.jpg">
 <tr>
 	<td width="10%" >
-				<img src=".././resources/images/SAEv2.png" alt="" width="109" height="109" class="image" />
+	
+				<img src=".././resources/images/FACING.png" alt="" width="80" height="80" class="image" />
 	</td>
 	<td width="80%">
 	<h1>
-				Campus Virtual SAE/SAP
-				<p>
+				Campus Virtual SAE-SAP
+				<br>
 				Facultad de Ingenieria
 	</h1>
 	</td>
 	<td width="10%">
-				<img src=".././resources/images/usac.png" alt="" width="109" height="109" class="image" />
+				<img src=".././resources/images/usac.png" alt="" width="80" height="80" class="image" />
 	</td>
 </tr>
 </table>

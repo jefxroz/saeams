@@ -1,7 +1,7 @@
 <div name="pg_homepage" >
-<h2>BIENVENIDOS(AS) A SAE</h2>
+<h2>BIENVENIDOS(AS)</h2>
 
-<strong>Sae</strong> Es una instituci&oacute;n que se dedica al fortalecimiento de la educaci&oacute;n.
+<strong>SAE-SAP</strong> Es una instituci&oacute;n que se dedica al fortalecimiento de la educaci&oacute;n.
 <table>
 <tr>
 	
@@ -15,7 +15,7 @@ Debemos responder a las demandas de nuestros usuarios en las &aacute;reas de uso
 				
 <h3 align="justify">VISI&Oacute;N:</h3> 
 <p>Lucharemos por ser la mejor opci&oacute;n de trabajo en equipo. 
-Ofrecer nuestros servicios en forma auto sostenible con la convicci&oacute;n que de ello depende el futuro del SAE/SAP y la posibilidad de brindar nuestros servicios en forma competitiva. 
+Ofrecer nuestros servicios en forma auto sostenible con la convicci&oacute;n que de ello depende el futuro del SAE-SAP y la posibilidad de brindar nuestros servicios en forma competitiva. 
 </p>	
 	</td>
 </tr>

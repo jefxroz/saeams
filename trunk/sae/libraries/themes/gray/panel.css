@@ -8,7 +8,7 @@
 	color:#093C67;
 	font-weight:bold;
 	font-size:12px;
-	/*background:url('images/panel_title.gif') repeat-x;*/
+	background:url('images/panel_title.gif') repeat-x;
 	position:relative;
 	border:1px solid #D3D3D3;
 }
