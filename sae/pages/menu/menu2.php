@@ -1,9 +1,12 @@
 
 	<div id="logo">
-			<h1><a href="#">SAE-SAP</a></h1>
-			<h2> <a href="http://ingenieria-usac.edu.gt/">Facultad de Ingenier&iacute;a</a></h2>
+			<div align="center">
+				<img src="../.././resources/images/SAEv2.png" alt="" width="80" height="80" />
+			</div>
+			<br>
+			<h2> <a href="http://ingenieria-usac.edu.gt/">FACULTAD DE INGENIER&Iacute;a</a></h2>
 	</div>	
-	<div id="menu_acc" class="easyui-accordion" style="width:200px;">
+	<div id="menu_acc" class="easyui-accordion" style="width:238px;">
 		<div id="menu_pn1"   title='Administraci&oacute;n' iconCls="icon-reload" style="padding:10px;">
 			<div id="menu2">
 			<ul class="menu2">

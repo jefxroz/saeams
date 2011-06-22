@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Asignarse cursos - SAE-SAP</title>
+
 <?php include("top_page.php"); ?>
 </head>
 <body>
