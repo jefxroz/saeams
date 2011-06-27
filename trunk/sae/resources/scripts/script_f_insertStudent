@@ -1,7 +1,18 @@
-﻿--Ejemplo: Ejecutar el procedimiento
---SELECT f_insertStudent('darn1986@gmail.com','12345','A-11190288','Darwin Daniel','Hernandez Galan','6ta calle 11-70 Zona 7 Colonia Quinta Samayoa Guatemala,Guatemala',1,'04/26/1986',200511916,00,08,09,1,NULL);
+--Ejemplo: Ejecutar el procedimiento
+--SELECT f_insertStudent('darn1986@gmail.com','12345','A-11190288','Darwin Daniel','Hernandez Galan','6ta calle 11-70 Zona 7 Colonia Quinta Samayoa Guatemala,Guatemala',1,1,'04/26/1986',200511916,,,00,08,09,1,NULL);
 
-CREATE OR REPLACE FUNCTION f_insertstudent(character varying, character varying, character varying, character varying, character varying, character varying, integer, timestamp without time zone, integer, integer, integer, integer, integer, integer)
+
+CREATE OR REPLACE FUNCTION f_insertstudent(character varying, character varying, character varying, character varying, character varying, character varying, integer,integer,timestamp without time zone, integer, integer, integer, integer, integer, integer,integer,integer)
+  RETURNS text AS
+$BODY$
+DECLARE
+	p_mail ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	p_id ALIAS FOR $3;
+	p_name ALIAS FOR $4;  	
+SELECT f_insertStudent('prueba1@gmail.com','12345','A-11190288','Darwin Daniel','Hernandez Galan','6ta calle 11-70 Zona 7 Colonia Quinta Samayoa Guatemala,Guatemala',1,1,'04/26/1986',200511916,24840667,24840667,00,08,09,1,NULL);
+
+CREATE OR REPLACE FUNCTION f_insertstudent(character varying, character varying, character varying, character varying, character varying, character varying, integer,integer,timestamp without time zone, integer, integer, integer, integer, integer, integer,integer,integer)
   RETURNS text AS
 $BODY$
 DECLARE
@@ -12,33 +23,55 @@ DECLARE
   	p_surname ALIAS FOR $5;
 	p_address ALIAS FOR $6;
 	p_gender ALIAS FOR $7;
-  	p_birthdate ALIAS FOR $8;
-  	p_carnet ALIAS FOR $9;
-	p_unity ALIAS FOR $10;
-  	p_extention ALIAS FOR $11;
-  	p_career ALIAS FOR $12;
-	p_state ALIAS FOR $13;
-  	p_idtypetrainer ALIAS FOR $14;
+	p_idtypeschool ALIAS FOR $8;
+  	p_birthdate ALIAS FOR $9;
+  	p_phone ALIAS FOR $10;
+  	p_celular ALIAS FOR $11;
+  	p_carnet ALIAS FOR $12;
+	p_unity ALIAS FOR $13;
+  	p_extention ALIAS FOR $14;
+  	p_career ALIAS FOR $15;
+	p_state ALIAS FOR $16;
+  	p_idtypetrainer ALIAS FOR $17;
 	v_result text;
+	v_countuser int;
 	BEGIN
-		BEGIN
-			INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(DEFAULT,p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer);
-			v_result='OK';
-			RAISE NOTICE 'Inserccion de usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
 
-			v_result:=f_insertUserRol('ESTUDIANTE',p_mail);
-			
-		EXCEPTION WHEN unique_violation THEN
+		BEGIN
+
+			SELECT count(iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.mail=p_mail
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
 			BEGIN
-				v_result='Error no se puede realizar la accion de un usuario';
-				--RAISE EXCEPTION 'Vioacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
-				RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
-				rollback;
+				v_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
 			END;
 		END;
 
+		IF v_countuser=0 THEN
+			BEGIN
+				INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool) VALUES(DEFAULT,p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_phone,p_celular,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer,p_idtypeschool);
+				v_result='OK';
+				RAISE NOTICE 'Inserccion de usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+				v_result:=f_insertUserRol('ESTUDIANTE',p_mail);
+			
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					v_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			v_result='El usuario con email: '||'"'||p_mail||'"'||' ya existe';
+		END IF;
 		
 	RETURN v_result;
 	END;
 $BODY$
   LANGUAGE plpgsql VOLATILE;
+
+  
