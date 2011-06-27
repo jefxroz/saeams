@@ -8,43 +8,45 @@
 		private $objuser;
 		private $service;
   
-		public function clrUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
+		public function clrUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
 		{  
-			//echo "Vamos en user";
 			$this->service=$service;
-			//echo "".$this->service;
 			$this->objservice=new dbServiceQuery();
 			
-			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
-			/*echo "User Mail ".$this->objuser->getMail();
-			echo "User Password ".$this->objuser->getPassword();
-			echo "User Id ".$this->objuser->getId();
-			echo "User Name ".$this->objuser->getName();
-			echo "User Surname ".$this->objuser->getSurName();
-			echo "User Address ".$this->objuser->getAddress();
-			echo "User Gender ".$this->objuser->getGender();
-			echo "User Birthdate ".$this->objuser->getBirthdate();
-			echo "User Carnet ".$this->objuser->getCarnet();
-			echo "User Unity ".$this->objuser->getUnity();
-			echo "User Extention ".$this->objuser->getExtention();
-			echo "User Career ".$this->objuser->getCareer();
-			echo "User IdTypeTrainer ".$this->objuser->getIdTypeTrainer();*/
-		}  
+			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
 		
+		}
+		  
 		public function ejecute()
 		{  
-			echo "service ".$this->service;
+			$result='OK';
 			if ($this->service==1)
 			{
-				
-				$this->registerStudent();
-				return "Registrar ";
-				
+				$result= $this->registerStudent();	
 			}	
+			else
+			{
+				echo json_encode(array('msg'=>'No se realizo la accion solicitada'));
+			}
+			$this->getResult($result);
 		}  
-	private function registerStudent()
+		
+		private function getResult($result)
 		{
-			$this->objservice->insertUserStudent($this->objuser);
+			if ($result=='OK')
+			{
+				echo json_encode(array('success'=>true));
+			} 
+			else 
+			{
+				echo json_encode(array('msg'=>$result));
+			}
+		}
+		
+		
+		private function registerStudent()
+		{
+			return $this->objservice->insertUserStudent($this->objuser);
 		}
 	}
 ?>

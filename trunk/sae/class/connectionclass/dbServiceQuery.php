@@ -1,5 +1,6 @@
 <?php  
 	require_once("dbConnection.php");
+	require_once(".././mapping/TbTypeSchool.php");
 
 	class dbServiceQuery
 	{  
@@ -7,7 +8,6 @@
 		private $objconn;
 		public function dbServiceQuery()
 		{  
-			echo "vamos en serviq ";
 			$this->objconn = new dbConnection(); 
 		}  
 		public function setUser(&$user)
@@ -18,23 +18,25 @@
 		{
 			return $this->objuser;
 		}
-		public function getRol($name)
+		public function getTypeSchool()
 		{
-			$this->objconn->prepared("SELECT_ROL","select * from rol where name='$1'",array($name));	
-			$l_result=$this->$objconn->ejecuteQueryOne("SELECT_ROL",$user->get());
-			$ojbRol=new Tbrol();
-			if(!$l_result)
-			{
-				$row=$obj_conn->getRow($l_result,0);	
-				$objRol->setIdRol($row['idrol']);
-				$objRol->setName($row['name']);
-			}
-			return objRol;
+				$result=$this->objconn->ejecuteQuery("SELECT idtypeschool,name from tbtypeschool;");
+				while($row = $this->objconn->getResult($result))
+				{ 
+					$typeschool=new TbTypeSchool($row['idtypeschool'],$row['name']); 
+					$school[]=$typeschool->getObjects();
+				}
+			
+			return $school;
 		}
 		public function insertUserStudent($objuser)
 		{
-			$this->objconn->prepared("INSERT_USER","INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,carnet,unity,extention,career,state,idtypetrainer) VALUES(DEFAULT,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);");	
-			$this->objconn->ejecuteStatement("INSERT_USER",$objuser->get());
+			if($this->objconn->prepared("INSERT_USER","SELECT f_insertStudent($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17);"))
+			{	
+				$result=$this->objconn->ejecuteStatement("INSERT_USER",$objuser->get());
+				$row = $this->objconn->getRow($result,0 );
+				return $row[0];
+			}
 		}		
 	}
 ?>

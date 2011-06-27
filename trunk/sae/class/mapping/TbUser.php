@@ -17,9 +17,15 @@ class TbUser {
   	private $address;
   
   	private $gender;
-  
+
+  	private $idtypeschool;
+  	
   	private $birthdate;
   
+  	private $phone;
+  	
+  	private $celular;
+  	
   	private $carnet;
   
   	private $unity;
@@ -31,8 +37,9 @@ class TbUser {
  	private $state;
   
   	private $idtypetrainer;
+  	
   
-	public function TbUser($mail,$password,$id,$name,$surname,$address,$gender,$birthdate,$carnet,$unity,$extension,$career,$state,$idtypetrainer)
+	public function TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer)
 	{
 		$this->mail=$mail;
 		$this->password=$password;
@@ -41,10 +48,13 @@ class TbUser {
 		$this->surname=$surname;
 		$this->address=$address;
 		$this->gender=$gender;
+		$this->idtypeschool=$idtypeschool;
 		$this->birthdate=$birthdate;
+		$this->phone=$phone;
+		$this->celular=$celular;
 		$this->carnet=$carnet;
 		$this->unity=$unity;
-		$this->extention=$extension;
+		$this->extention=$extention;
 		$this->career=$career;
 		$this->state=$state;
 		$this->idtypetrainer=$idtypetrainer;
@@ -123,10 +133,30 @@ class TbUser {
   	{
     	return $this->birthdate;
   	}
-  
+  	  	
   	public function setBirthdate(&$birthdate) 
   	{
     	$this->birthdate = $birthdate;
+  	}
+  	
+	public function &getPhone() 
+  	{
+    	return $this->phone;
+  	}
+  
+  	public function setPhone(&$phone) 
+  	{
+    	$this->phone = $phone;
+  	}
+  	
+	public function &getCelular() 
+  	{
+    	return $this->celular;
+  	}
+  
+  	public function setCelular(&$celular) 
+  	{
+    	$this->celular = $celular;
   	}
   
   	public function &getUnity() 
@@ -193,18 +223,28 @@ class TbUser {
   
  	public function &getIdTypeTrainer() 
  	{
-    	return $this->idTypeTrainer;
+    	return $this->idtypetrainer;
   	}
   
-  	public function setIdTypeTrainer(&$idTypeTrainer) 
+  	public function setIdTypeTrainer(&$idtypetrainer) 
   	{
-    	$this->idTypeTrainer = $idTypeTrainer;
+    	$this->idtypetrainer = $idtypetrainer;
   	}
+  	
+	public function &getIdTypeSchool() 
+ 	{
+    	return $this->idtypeschool;
+  	}
+  
+  	public function setIdTypeSchool(&$idtypeschool) 
+  	{
+    	$this->idtypeschool = $idtypeschool;
+  	}
+  	
   
   	public function get() 
   	{	
-  		$parameters=array($this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->birthdate,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer);
-  		echo json_encode($parameters);
+  		$parameters=array($this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->idtypeschool,$this->birthdate,$this->phone,$this->celular,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer);
   		return $parameters;
   	}
 }

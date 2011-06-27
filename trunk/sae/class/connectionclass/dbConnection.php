@@ -11,7 +11,6 @@
 			$base="sae_dbassignations";
 			$usuario="saeweb";
 			$password="saeweb";
-			echo "vamos en connection ";
 			if(!isset($this->conexion))
 			{  
 				
@@ -19,27 +18,27 @@
 				$stat = pg_connection_status($this->conexion);
 				if ($stat === PGSQL_CONNECTION_OK)
 				{
-      				echo 'Estado de la conexión ok';
+      				//echo 'Estado de la conexión ok';
   				} 
   				else 
   				{
       				echo 'No se ha podido conectar';
   				}   
 			}  
-			echo "Termino el dbConnection constructor ";
+			
 		}  
 		
 		public function prepared($name,$p_statement)
 		{
-			//echo " ".$p_statement." ".$name;
 			$l_result = pg_prepare($this->conexion, $name, $p_statement);
 			$this->name=$name;
+			return $l_result;
 		}
 		
 		private function validateResult($result){
 			if(!$result)
 			{  
-				echo 'PgError ' . pg_error();  
+				echo 'PgError ' . pg_last_error();  
 				exit;
 			}
 			return $result;
@@ -48,32 +47,39 @@
 		{
 			for($i=0;$i<count($p_parameters);$i++)
 			{
-				$p_parameters[i]=pg_escape_string($p_parameters[$i]);
-				echo "".$p_parameters[i];
+				$p_parameters[$i]=pg_escape_string($p_parameters[$i]);
+				//echo "".$p_parameters[i];
 				
 			}
-			return p_parameters;
+			return $p_parameters;
 		}
 		public function ejecuteStatement($p_name,$p_parameters){
 			if($p_name==$this->name)
 			{
 				if ($this->validateParameters($p_parameters))
 				{
-					$l_result = pg_execute($this->conexion, $this->name, $p_parameters);
+					try 
+					{
+						$v_result = pg_execute($this->conexion, $this->name, $p_parameters) or die("Error en el registro");
+					}
+					catch (Exception $e)				
+					{
+						$v_result=null;
+					}
 				}
 			}
 			else 
 			{
 				echo "La consulta preparada y la ejecutada no coinciden!!";	
 			}
-			return $this->validateResult($l_result);
+			return $this->validateResult($v_result);
 		}
 		
 		public function ejecuteQuery($p_query)
 		{  
 			$this->total_querys++;  
-			$l_result = pg_Exec($this->conexion,$p_query);  
-			return validateResult($l_result);
+			$v_result = pg_Exec($this->conexion,$p_query);  
+			return $this->validateResult($v_result);
 		}  
 		
 		public function ejecuteQueryParameters($p_query,$p_parameters)
