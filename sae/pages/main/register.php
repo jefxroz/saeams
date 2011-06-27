@@ -1,5 +1,5 @@
-<div name="pg_registrer" >
-	
+<div name="pg_registrer"  >
+
 	<table align="center">
 	<tr>
 	<td><img src=".././resources/images/user_48.png" alt="Usuarios"></td>
@@ -23,6 +23,18 @@
 				<tr>
 					<td width="35%" align="left"><label for="id_pass_comp">* Vuelve a introducir la contrase&ntilde;a: </label></td>
 					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox" required="true" size="30"  validType="txt_valid_pass" /></td>
+				</tr>
+				<tr>
+					<td width="35%" align="left"><label for="id_captcha"> Verificaci&oacute;n de seguridad: </label></td>
+					<td width="65%" align="left"><img name="id_img_captcha" src="" width="100" height="30" vspace="3"><br></td>
+				</tr>
+				<tr>
+					<td width="35%" align="left">Ingrese el codigo de  Verificaci&oacute;n que esta arriba:</td>	
+		  			<td width="65%" ><input type="text" name="id_captcha" id="id_captcha"  size="30"><br></td>
+				</tr>
+				<tr>
+					<td width="35%" align="left"></td>	
+		  			<td width="65%" ><input type="hidden" name="id_hid_captcha" id="id_hid_captcha"  size="30"><br></td>
 				</tr>
 		</table>
 	</div>	
@@ -57,8 +69,20 @@
 					</td>
 				</tr>
 				<tr>
+					<td width="35%"  align="left"><label for="id_school">* Escolaridad: </label><P></td>
+					<td width="65%"><input id="id_school" name="id_school" style="width:150px" required="true" url=".././class/controllerview/vwService.php?service=getschool"  valueField="id" textField="text"   panelheight="130px"></input></td>
+				</tr>
+				<tr>
 					<td width="35%"  align="left"><label for="id_birthdate">* Fecha de Nacimiento: </label><P></td>
 					<td width="65%"><input id="id_birthdate" name="id_birthdate" style="width:150px;" class="easyui-datebox" required="true" size="50" editable="false"></input><P></td>
+				</tr>
+				<tr>
+					<td width="35%"  align="left"><label for="id_phone">Telefono: </label></td>
+					<td width="65%"><input type="text" name="id_phone" id="id_phone" size="10" type="text"  class="easyui-validatebox"  validType="minLength[8]" /></td>
+				</tr>
+				<tr>
+					<td width="35%"  align="left"><label for="id_celular">Celular: </label><P></td>
+					<td width="65%"><input type="text" name="id_celular" id="id_celular" size="10"  type="text" class="easyui-validatebox"  validType="minLength[8]"  /><P></td>
 				</tr>
 	</table>
 	</div>
@@ -85,14 +109,17 @@
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_page"></label><P></td>
-					<td width="65%"><input type="hidden" name="id_page" id="id_page" size="10"   /><P></td>
+					<td width="65%"><input type="text" name="id_page" id="id_page" size="10"   /><P></td>
 				</tr>
+				
 	</table>
 	</div>
-		<table align="center"><tr>
-			<td><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Registar</a></td>  
-    		<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancel()">Cancelar</a></td>  
-		</tr></table>
+		<table align="center">
+			<tr>
+				<td><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Registar</a></td>  
+    			<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancel()">Cancelar</a></td>  
+			</tr>
+		</table>
 	
 	</form>
 </div>
