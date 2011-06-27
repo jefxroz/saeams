@@ -3,3 +3,22 @@
 insert into tbrol values(1,'ADMINISTRADOR');
 insert into tbrol values(2,'PROFESOR');
 insert into tbrol values(3,'ESTUDIANTE');
+
+--Datos de desarrollador
+
+insert into tbdeveloper values(1,1);
+
+--Datos de paginas
+
+insert into tbpage values(1,'REGISTRO DE USUARIO',1);
+
+--Datos de Escolaridad
+
+insert into tbtypeschool values(1,'PRIMARIA');
+insert into tbtypeschool values(2,'BASICOS');
+insert into tbtypeschool values(3,'DIVERSIFICADO');
+insert into tbtypeschool values(4,'UNIVERSITARIO');
+insert into tbtypeschool values(5,'MAESTRIA');
+insert into tbtypeschool values(6,'DOCTORADO');
+
+

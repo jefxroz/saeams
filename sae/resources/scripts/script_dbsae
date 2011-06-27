@@ -80,24 +80,28 @@ CREATE TABLE TbHistoryShedule (
   iduserdeveloper  int4 NOT NULL, 
   PRIMARY KEY (idhistoryshedule));
 CREATE TABLE TbHistoryUser (
-  idhistoryuser    SERIAL NOT NULL, 
-  iduser          int4, 
-  name            varchar(100), 
-  carnet          int4, 
-  id              int4 NOT NULL, 
-  mail            varchar(100), 
-  password        varchar(100), 
-  gender          int4, 
-  birthdate       timestamp(6), 
-  unit            int4, 
-  extension       int4, 
-  career          int4, 
-  address         varchar(200), 
-  operation       varchar(200), 
-  historydate     timestamp(6), 
-  state           int4 NOT NULL, 
-  idpage          int4 NOT NULL, 
-  iduserdeveloper int4 NOT NULL, 
+  idhistoryuser  SERIAL NOT NULL, 
+  iduser        int4, 
+  mail          varchar(100), 
+  password      varchar(100), 
+  id            int4 NOT NULL, 
+  name          varchar(200), 
+  surname       varchar(200), 
+  address       varchar(200), 
+  gender        int4, 
+  birthdate     timestamp(6), 
+  phone         int4, 
+  celular       int4, 
+  carnet        int4, 
+  unity         int4, 
+  extention     int4, 
+  career        int4, 
+  state         int4 NOT NULL, 
+  idtypetrainer int4, 
+  idtypeschool  int4, 
+  historydate   timestamp(6), 
+  operation     varchar(200), 
+  idpage        int4 NOT NULL, 
   PRIMARY KEY (idhistoryuser));
 CREATE TABLE TbShedule (
   idshedule    SERIAL NOT NULL, 
@@ -134,12 +138,15 @@ CREATE TABLE TbUser (
   address       varchar(200) NOT NULL, 
   gender        int4 NOT NULL, 
   birthdate     timestamp(6) NOT NULL, 
+  phone         int4, 
+  celular       int4, 
   carnet        int4, 
   unity         int4, 
   extention     int4, 
   career        int4, 
   state         int4 NOT NULL, 
   idtypetrainer int4, 
+  idtypeschool  int4, 
   PRIMARY KEY (iduser));
 CREATE TABLE TbTypeTrainer (
   idtypetrainer  SERIAL NOT NULL, 
@@ -171,13 +178,13 @@ CREATE TABLE TbPage (
   version varchar(10), 
   PRIMARY KEY (idpage));
 CREATE TABLE TbHistoryPage (
-  idhistorypage    SERIAL NOT NULL, 
-  name            varchar(100) NOT NULL, 
-  version         varchar(10), 
-  iduserdeveloper varchar(100) NOT NULL, 
-  idpage          int4 NOT NULL, 
-  historydate     timestamp(6) NOT NULL, 
-  operation       varchar(100) NOT NULL, 
+  idhistorypage  SERIAL NOT NULL, 
+  name          varchar(100) NOT NULL, 
+  version       varchar(10), 
+  idpage        int4 NOT NULL, 
+  historydate   timestamp(6) NOT NULL, 
+  operation     varchar(100) NOT NULL, 
+  iddeveloper   int4 NOT NULL, 
   PRIMARY KEY (idhistorypage));
 CREATE TABLE TbClassRoom (
   idclassroom  SERIAL NOT NULL, 
@@ -195,6 +202,14 @@ CREATE TABLE TbHistoryUserRol (
   historydate      timestamp(6), 
   operation        varchar(100), 
   PRIMARY KEY (idhistoryuserrol));
+CREATE TABLE tbTypeSchool (
+  idtypeschool  SERIAL NOT NULL, 
+  name         varchar(100) NOT NULL UNIQUE, 
+  PRIMARY KEY (idtypeschool));
+CREATE TABLE TbDeveloper (
+  iddeveloper  SERIAL NOT NULL, 
+  name        int4, 
+  PRIMARY KEY (iddeveloper));
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkUserHisotryShedule FOREIGN KEY (idusertrainer) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryInstitucion ADD CONSTRAINT fkInstitucionHistoryInstitution FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbDetailAssignation ADD CONSTRAINT fkUserDetailAssignation FOREIGN KEY (idassignation) REFERENCES TbAssignation (idassignation) ON UPDATE Cascade ON DELETE Cascade;
@@ -231,10 +246,11 @@ ALTER TABLE TbHistoryUserRol ADD CONSTRAINT fkPageHistoryUserRol FOREIGN KEY (id
 ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkUserHIstoryAssignation FOREIGN KEY (iduser) REFERENCES TbUser (iduser);
 ALTER TABLE TbHistoryCourse ADD CONSTRAINT fkUserHistoryCourse FOREIGN KEY (iduser) REFERENCES TbUser (iduser);
 ALTER TABLE TbHistoryCourse ADD CONSTRAINT fkCourseHistoryCourse FOREIGN KEY (idcourse) REFERENCES TbCourse (idcourse);
-ALTER TABLE TbHistoryUser ADD CONSTRAINT fkUserHistoryUserDev FOREIGN KEY (iduserdeveloper) REFERENCES TbUser (iduser);
 ALTER TABLE TbHistoryCourse ADD CONSTRAINT fkInstitutionHistoryCourse FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution);
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkUserHistoryShedule FOREIGN KEY (iduserdeveloper) REFERENCES TbUser (iduser);
 ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkUserHistoryAssignationDev FOREIGN KEY (iduserdeveloper) REFERENCES TbUser (iduser);
+ALTER TABLE TbUser ADD CONSTRAINT fkTypeSchoolUser FOREIGN KEY (idtypeschool) REFERENCES tbTypeSchool (idtypeschool);
+ALTER TABLE TbHistoryPage ADD CONSTRAINT FKTbHistoryP663056 FOREIGN KEY (iddeveloper) REFERENCES TbDeveloper (iddeveloper);
 CREATE INDEX tbHistoryDetailAssignation_date_key 
   ON TbHistoryDetailAssignation (startdate);
 CREATE INDEX tbHistoryDetailAssignation_dateupdate_key 
