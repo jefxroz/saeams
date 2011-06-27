@@ -6,11 +6,13 @@ insert into tbrol values(3,'ESTUDIANTE');
 
 --Datos de desarrollador
 
-insert into tbdeveloper values(1,1);
+insert into tbdeveloper values(1,'DDHERNAN');
 
 --Datos de paginas
 
-insert into tbpage values(1,'REGISTRO DE USUARIO',1);
+insert into tbpage values(1,'VALIDAR USUARIO','1.0',1);
+insert into tbpage values(2,'REGISTRAR DE USUARIO','1.0',1);
+insert into tbpage values(3,'RECUPERAR CONTRASEÑA','1.0',1);
 
 --Datos de Escolaridad
 
