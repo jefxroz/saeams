@@ -1,3 +1,4 @@
+	
 	<script type="text/javascript">
 	var id_page="0";
 	var url='.././class/controllerview/vwUser.php';
@@ -56,11 +57,29 @@
 	           $(this).show();  
 	     });
 	}
-	function Registrer(){
+	function Registrer()
+	{
 		 $('#fm_register').form('clear');
 		id_page="1";
+		$.ajax({
+			 url: '.././class/controllerview/vwService.php',
+			 dataType: 'json',
+			 data: {service:'getcaptcha'},
+			 type: 'post',
+			 success: function(data){
+				 alert(data.uno);
+			     document.id_img_captcha.src="main/captcha.php?texto="+data.uno;
+			     document.getElementById("id_hid_captcha").value=data.dos;
+			 }
+			});
+
+		$('#id_school').combobox({
+			//panelHeight:100
+		});
+		
 		$('div[name|="pg_registrer"]').each(function(index) {
-	           $(this).show();  
+	           $(this).show(); 
+	           
 	     });
 		$('div[name|="pg_recover"]').each(function(index) {
 	           $(this).hide();  
@@ -71,10 +90,12 @@
 		$('div[name|="pg_login"]').each(function(index) {
 	           $(this).hide();  
 	     });
+	     
 	}
 	function RecoverPassword(){
 	  	$('#fm_recover').form('clear');
 	  	id_page="2";
+	  	document.id_captcharecov.src="main/captcha.php";
 	  	$('div[name|="pg_registrer"]').each(function(index) {
 	           $(this).hide();  
 	     });
@@ -93,23 +114,26 @@
 	{
 		document.getElementById("id_page").value=id_page;
 		$('#fm_register').form('submit',{
-			url: '.././class/controllerview/vwUser.php',
+			url: url,
 			onSubmit: function(){
 				return $(this).form('validate');
 			},
 			success: function(result){
-				 $.messager.alert('Info', result, 'info'); 
-				  
-				/*var result = eval('('+result+')');
+				var result = eval('('+result+')');
+				
 				if (result.success){
-					$('#dlg').dialog('close');		// close the dialog
-					$('#dg').datagrid('reload');	// reload the user data
+					$.messager.show({
+						title: 'Registro Exitoso',
+						msg: 'Registro Realizado sin Problemas!!!'
+					});
+					cancel();		// close the dialog
+					
 				} else {
 					$.messager.show({
 						title: 'Error',
 						msg: result.msg
 					});
-				}*/
+				}
 			}
 		});
 	}

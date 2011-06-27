@@ -9,6 +9,14 @@
 		<td width="35%" align="right" ><label for="txt_user">Usuario: </label><P> </td>
 		<td width="65%"><input type="text" name="txt_user" id="id_user" class="easyui-validatebox"  required="true"  validType="email"  size="30" /><P> </td>
 		</tr>
+		<tr>
+			<td width="35%" align="left"><label for="id_captcha">* Verificaci&oacute;n de seguridad: </label></td>
+			<td width="65%" align="left"><img name="id_captcharecov" src="" width="100" height="30" vspace="3"><br></td>
+		</tr>
+		<tr>
+			<td width="35%" align="left"></td>	
+		  	<td width="65%" ><input type="text" name="id_captcharecov" id="id_captcha"  size="30"><br></td>
+		</tr>
 	</table>
 	<table align="center">
 		<tr >

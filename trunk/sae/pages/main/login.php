@@ -23,8 +23,6 @@
 							<br/>
 							<br/><label for="txt_password">Constrase&ntilde;a</label>
 							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" type="password" required="true" size="26">												
-							<br/>
-
 							<br/><input name="btnAcces" type="submit" id="btnAcces" value="Ingresar" />
 							<br/>
 							<br/><a href="#" onclick="RecoverPassword()">&iquest;Olvid&oacute; su contrase&ntilde;a&#63;</a>						
