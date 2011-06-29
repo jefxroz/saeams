@@ -1,7 +1,7 @@
 <?php
 	
-	require_once("../controllerclass/clrService.php");
+	require_once("../controller/ControlService.php");
 	
-	$objservice=new clrService($service);
+	$objservice=new ControlService($service);
 	echo $objservice->getService();	
 ?>
