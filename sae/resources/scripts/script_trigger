@@ -1,0 +1,26 @@
+CREATE OR REPLACE FUNCTION ft_tbUser() RETURNS TRIGGER AS $trigger_tbuser$
+DECLARE
+v_idpage int;
+BEGIN
+
+  IF NEW.idtypetrainer IS NULL AND TG_OP = 'INSERT' THEN
+	BEGIN
+		SELECT idpage
+		into   v_idpage
+		FROM tbpage
+		where name='REGISTRAR DE USUARIO';
+	END;
+  END IF;
+  
+  BEGIN
+       INSERT INTO tbhistoryuser(idhistoryuser,iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,historydate,operation,idpage) VALUES(DEFAULT,NEW.iduser,NEW.mail,NEW.password,NEW.id,NEW.name,NEW.surname,NEW.address,NEW.gender,NEW.birthdate,NEW.phone,NEW.celular,NEW.carnet,NEW.unity,NEW.extention,NEW.career,NEW.state,NEW.idtypetrainer,NEW.idtypeschool,current_date,TG_OP,v_idpage);
+       RETURN NULL;
+  END;
+  
+END;
+$trigger_tbuser$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trigger_tbuser
+AFTER INSERT OR UPDATE ON tbuser
+    FOR EACH ROW EXECUTE PROCEDURE ft_tbUser();
