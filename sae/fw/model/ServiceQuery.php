@@ -8,7 +8,7 @@
 		private $objconn;
 		public function ServiceQuery()
 		{  
-			$this->objconn = new dbConnection(); 
+			$this->objconn = new Connection(); 
 		}  
 		public function setUser(&$user)
 		{
