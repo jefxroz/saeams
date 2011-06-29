@@ -1,26 +1,29 @@
 <?php  
-	class ValidatorCaptcha
+	require_once("Validator.php");
+	
+	class ValidatorCaptcha extends Validator
 	{  
-		private $namefield;
-		private $field;
 		private $hidfield;
 		
-		public function ValidatorCaptcha($namefield,$field,$hidfield)
+		public function ValidatorCaptcha($namefield,$field,$hidfield,$required)
 		{  
-			$this->namefield=$namefield;
-			$this->field=$field;
+			$this->setNameField($namefield);
+			$this->setField($field);
+			$this->setRequired($required);
 			$this->hidfield=$hidfield;
 		}
 		
-		public function setField($field)
-		{
-			$this->field=field;
+		public function setHidField($hidfield)
+		{  
+			$this->hiedfield=$hidfield;
 		}
-		public function getField()
-		{
-			return $this->field;	
+		
+		public function getHidField()
+		{  
+			return $this->hidfield;
 		}
-		public function validate()
+		
+		public function verify()
 		{
 			if ($this->hidfield == md5('getcaptcha('.$this->field.')')) 
 			{
