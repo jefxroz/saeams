@@ -1,11 +1,11 @@
 <?php
 	
-	require_once("../connectionclass/dbServiceQuery.php");
+	require_once("../model/ServiceQuery.php");
 	
-	class clrService
+	class ControlService
 	{      
 		private $service;
-		public function clrService($service)
+		public function ControlService($service)
 		{  
 			$this->service = $service;
 		}
@@ -35,7 +35,7 @@
 			}
 			else if($this->service=='getschool')
 			{
-				$objservice=new dbServiceQuery();
+				$objservice=new ServiceQuery();
 				return json_encode($objservice->getTypeSchool());
 			}
 		}
