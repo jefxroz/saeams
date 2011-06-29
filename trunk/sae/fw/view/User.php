@@ -1,7 +1,7 @@
 <?php  
-require_once("../controllerclass/clrUser.php");
-require_once("../validator/Validator.php");
-require_once("../validator/ValidatorCaptcha.php");
+require_once("../controller/ControlUser.php");
+require_once("validator/Validator.php");
+require_once("validator/ValidatorCaptcha.php");
 
 $mail = $_REQUEST['id_mail'];
 $valmail=new Validator('Correo',$mail,true);
@@ -81,7 +81,7 @@ if(
    	$valunity->validate() and $valextention->validate() and $valcareer->validate() and $valcaptcha->validate()
   )
 {
-	$objcontroler=new clrUser($valmail->getField(), md5($valpassword->getField()),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null,$service);
+	$objcontroler=new ControUser($valmail->getField(), md5($valpassword->getField()),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null,$service);
 	$objcontroler->ejecute();	
 }
 else
