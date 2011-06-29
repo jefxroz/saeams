@@ -1,10 +1,10 @@
 <?php  
-	class dbConnection
+	class Connection
 	{  
 		private $conexion;  
 		private $total_querys;  
 		private $name;
-		public function dbConnection()
+		public function Connection()
 		{  
 			$host_db='localhost';
 			$port_db='5432';

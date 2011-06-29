@@ -1,12 +1,12 @@
 <?php  
-	require_once("dbConnection.php");
-	require_once(".././mapping/TbTypeSchool.php");
+	require_once("Connection.php");
+	require_once("mapping/TbTypeSchool.php");
 
-	class dbServiceQuery
+	class ServiceQuery
 	{  
 		private $objuser;    
 		private $objconn;
-		public function dbServiceQuery()
+		public function ServiceQuery()
 		{  
 			$this->objconn = new dbConnection(); 
 		}  
