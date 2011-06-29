@@ -1,7 +1,7 @@
 <?php
-class clrView
+class Control
 	{  
-		public function clrView()
+		public function Control()
 		{  
 			  
 		}  

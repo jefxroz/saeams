@@ -1,19 +1,19 @@
 <?php  
-	require_once("clrView.php");
-	require_once("clrService.php");
-	require_once("../connectionclass/dbServiceQuery.php");
-	require_once("../mapping/Tbuser.php");
-	class clrUser extends clrView
+	require_once("Control.php");
+	require_once("ControlService.php");
+	require_once("../model/ServiceQuery.php");
+	require_once("../model/mapping/Tbuser.php");
+	class ControlUser extends Control
 	{  
 		private $objservice; 
 		private $objuser;
 		private $service;
   
-		public function clrUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
+		public function ControlUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
 		{  
 			$this->service=$service;
-			$this->objservice=new dbServiceQuery();
-			$link=clrService::generateRandom(25);
+			$this->objservice=new ServiceQuery();
+			$link=ControlService::generateRandom(25);
 	
 			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$link);
 		
