@@ -39,11 +39,13 @@ class TbUser {
   	private $idtypetrainer;
   	
   	private $activatelink;
-  
-	public function TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$activatelink)
+  	
+  	private $passw;
+  	
+	public function TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer)
 	{
 		$this->mail=$mail;
-		$this->password=$password;
+		$this->password=md5($password);
 		$this->id=$id;
 		$this->name=$name;
 		$this->surname=$surname;
@@ -59,8 +61,17 @@ class TbUser {
 		$this->career=$career;
 		$this->state=$state;
 		$this->idtypetrainer=$idtypetrainer;
-		$this->activatelink=$activatelink;
+		$this->passw=$password;
+	}
+	public function &getPassw()
+	{
+		return $this->passw;
 	} 
+	public function setPassw($passw)
+	{
+		$this->passw=$passw;
+	}
+	
   	public function &getIdUser() 
   	{
     	return $this->idUser;
@@ -78,7 +89,7 @@ class TbUser {
 
   	public function setName(&$name) 
   	{
-    	$this->surname = $surname;
+    	$this->name = $name;
   	}
   	
   	public function &getSurName() 
@@ -86,9 +97,9 @@ class TbUser {
     	return $this->surname;
   	}
 
-  	public function setSurName(&$name) 
+  	public function setSurName(&$surname) 
   	{
-    	$this->name = $name;
+    	$this->surname = $surname;
   	}
   
   	public function &getCarnet() 
@@ -248,7 +259,7 @@ class TbUser {
     	return $this->activatelink;
   	}
   
-  	public function setIdTypeSchool(&$activatelink) 
+  	public function setActivateLink($activatelink) 
   	{
     	$this->activatelink = $activatelink;
   	}
@@ -256,6 +267,11 @@ class TbUser {
   	public function get() 
   	{	
   		$parameters=array($this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->idtypeschool,$this->birthdate,$this->phone,$this->celular,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer,$this->activatelink);
+  		return $parameters;
+  	}
+  	public function getRecov()
+  	{
+  		$parameters=array($this->mail,$this->activatelink);
   		return $parameters;
   	}
 }

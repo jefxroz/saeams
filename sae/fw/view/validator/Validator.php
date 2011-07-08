@@ -21,7 +21,7 @@
 		}
 		
 		
-		public function setNameField($field)
+		public function setNameField($namefield)
 		{
 			$this->namefield=$namefield;
 		}
@@ -39,7 +39,10 @@
 		{
 			return $this->field;	
 		}
-		
+		public function addMessage($message)
+		{
+			$this->message.=$message;
+		}
 		public function setMessage($message)
 		{
 			$this->message=$message;
@@ -93,7 +96,12 @@
 			}
 			else
 			{
-				if(!$this->field){ $this->field=null; $emtpy=true; return true;}
+				if(!$this->field)
+				{ 
+					$this->field=null; 
+					$this->empty=true; 
+					return true;
+				}
 			}
 			
 			if($this->min and strlen($this->field)<$this->min)

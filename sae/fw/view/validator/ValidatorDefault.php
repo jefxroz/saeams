@@ -12,7 +12,7 @@
 		
 		public function verify()
 		{
-			if($this->validate())
+			if(!$this->validate())
 			{
 				return false;
 			}
