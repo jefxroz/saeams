@@ -8,6 +8,7 @@ CREATE TABLE TbHistoryDetailAssignation (
   iddetailassignation        int4 NOT NULL, 
   idpage                     int4 NOT NULL, 
   IdShedule                  int4 NOT NULL, 
+  note                       int4, 
   PRIMARY KEY (idhistorydetailassignation));
 CREATE TABLE TbHistoryPrivilegeRol (
   idhistoryprivilege  SERIAL NOT NULL, 
@@ -80,11 +81,11 @@ CREATE TABLE TbHistoryShedule (
   iduserdeveloper  int4 NOT NULL, 
   PRIMARY KEY (idhistoryshedule));
 CREATE TABLE TbHistoryUser (
-  idhistoryuser int4 NOT NULL, 
+  idhistoryuser  SERIAL NOT NULL, 
   iduser        int4, 
   mail          varchar(100), 
   password      varchar(100), 
-  id            int4 NOT NULL, 
+  id            varchar(100), 
   name          varchar(200), 
   surname       varchar(200), 
   address       varchar(200), 
@@ -101,7 +102,8 @@ CREATE TABLE TbHistoryUser (
   idtypeschool  int4, 
   historydate   timestamp(6), 
   operation     varchar(200), 
-  idpage        int4 NOT NULL, 
+  idpage        int4, 
+  comment       varchar(750), 
   PRIMARY KEY (idhistoryuser));
 CREATE TABLE TbShedule (
   Idshedule    SERIAL NOT NULL, 
@@ -114,6 +116,7 @@ CREATE TABLE TbShedule (
   state       int4 NOT NULL, 
   price       numeric(11, 5), 
   idclassroom int4 NOT NULL, 
+  quota       int4, 
   PRIMARY KEY (Idshedule));
 CREATE TABLE TbCourse (
   idcourse       SERIAL NOT NULL, 
@@ -147,7 +150,7 @@ CREATE TABLE TbUser (
   state         int4 NOT NULL, 
   idtypetrainer int4, 
   idtypeschool  int4, 
-  actuallylink  int4, 
+  actuallylink  varchar(255), 
   PRIMARY KEY (iduser));
 CREATE TABLE TbTypeTrainer (
   Idtypetrainer  SERIAL NOT NULL, 
@@ -264,7 +267,6 @@ ALTER TABLE TbUser ADD CONSTRAINT fkTypeSchoolUser FOREIGN KEY (idtypeschool) RE
 ALTER TABLE TbHistoryPage ADD CONSTRAINT fkDeveloperHistoryPage FOREIGN KEY (iddeveloper) REFERENCES TbDeveloper (iddeveloper);
 ALTER TABLE TbHIstoryUserMail ADD CONSTRAINT fkUserHistoryUserMail FOREIGN KEY (Iduser) REFERENCES TbUser (iduser);
 ALTER TABLE TbHIstoryUserMail ADD CONSTRAINT fkPageHistoryUserMail FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
-ALTER TABLE TbHistoryUser ADD CONSTRAINT fkUserHistoryHistoryUser FOREIGN KEY (idhistoryuser) REFERENCES TbUser (iduser);
 CREATE INDEX tbHistoryDetailAssignation_date_key 
   ON TbHistoryDetailAssignation (startdate);
 CREATE INDEX tbHistoryDetailAssignation_dateupdate_key 
@@ -311,5 +313,4 @@ CREATE INDEX dbClassRom_name_key
   ON TbClassRoom (name);
 CREATE INDEX dbClassRom_state_key 
   ON TbClassRoom (state);
-
 

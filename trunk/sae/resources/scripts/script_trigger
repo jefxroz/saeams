@@ -1,8 +1,9 @@
 CREATE OR REPLACE FUNCTION ft_tbUser() RETURNS TRIGGER AS $trigger_tbuser$
 DECLARE
 v_idpage int;
+v_comment varchar(750);
 BEGIN
-
+  
   IF NEW.idtypetrainer IS NULL AND TG_OP = 'INSERT' THEN
 	BEGIN
 		SELECT idpage
@@ -11,12 +12,76 @@ BEGIN
 		where name='REGISTRAR DE USUARIO';
 	END;
   END IF;
+  v_comment='';
+  IF TG_OP ='UPDATE' THEN
+		IF OLD.state=2 AND NEW.state=1 AND OLD.actuallylink != NEW.actuallylink AND NEW.actuallylink ='' THEN
+			v_comment=v_comment||'ACTIVACION DE CUENTA:ESTADO:ACTUALLYLINK';
+		ELSEIF OLD.password != NEW.password AND OLD.actuallylink != NEW.actuallylink AND NEW.actuallylink is null THEN
+			v_comment=v_comment||'RECUPERACION DE CONTRASEÑA:PASSWORD:ACTUALLYLINK';
+		ELSE
+			IF OLD.mail != NEW.mail THEN
+			v_comment=v_comment||':EMAIL';
+			END IF;
+			IF OLD.password != NEW.password THEN
+				v_comment=v_comment||':PASSWORD';
+			END IF;
+			IF OLD.id != NEW.id THEN
+				v_comment=v_comment||':DPI O CEDULA';
+			END IF;
+			IF OLD.name != NEW.name THEN
+				v_comment=v_comment||':NOMBRE';
+			END IF;
+			IF OLD.surname != NEW.surname THEN
+				v_comment=v_comment||':APELLIDO';
+			END IF;
+			IF OLD.address != NEW.address THEN
+				v_comment=v_comment||':DIRECCION';
+			END IF;
+			IF OLD.gender != NEW.gender THEN
+				v_comment=v_comment||':GENERO';
+			END IF;
+			IF OLD.birthdate != NEW.birthdate THEN
+				v_comment=v_comment||':FECHA DE NACIMIENTO';
+			END IF;
+			IF OLD.phone != NEW.phone THEN
+				v_comment=v_comment||':TELEFONO';
+			END IF;
+			IF OLD.celular != NEW.celular THEN
+				v_comment=v_comment||':CELULAR';
+			END IF;
+			IF OLD.carnet != NEW.carnet THEN
+				v_comment=v_comment||':CARNET';
+			END IF;
+			IF OLD.unity != NEW.unity THEN
+				v_comment=v_comment||':UNIDAD';
+			END IF;
+			IF OLD.extention != NEW.extention THEN
+				v_comment=v_comment||':EXTENSION';
+			END IF;
+			IF OLD.career != NEW.career THEN
+				v_comment=v_comment||':CARRERA';
+			END IF;
+			IF OLD.state != NEW.state THEN
+				v_comment=v_comment||':ESTADO';
+			END IF;
+			IF OLD.idtypetrainer !=NEW.idtypetrainer THEN
+				v_comment=v_comment||':TIPO DE TRAINER';
+			END IF;
+			IF OLD.idtypeschool != NEW.idtypeschool THEN
+				v_comment=v_comment||':ESCOLARIDAD';
+			END IF;		
+			v_comment='MODIFICADO:'||v_comment;	
+		END IF;		
+  END IF;
   
   BEGIN
-       INSERT INTO tbhistoryuser(idhistoryuser,iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,historydate,operation,idpage) VALUES(DEFAULT,NEW.iduser,NEW.mail,NEW.password,NEW.id,NEW.name,NEW.surname,NEW.address,NEW.gender,NEW.birthdate,NEW.phone,NEW.celular,NEW.carnet,NEW.unity,NEW.extention,NEW.career,NEW.state,NEW.idtypetrainer,NEW.idtypeschool,current_date,TG_OP,v_idpage);
+       INSERT INTO tbhistoryuser(idhistoryuser,iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,historydate,operation,idpage,comment) VALUES(DEFAULT,NEW.iduser,NEW.mail,NEW.password,NEW.id,NEW.name,NEW.surname,NEW.address,NEW.gender,NEW.birthdate,NEW.phone,NEW.celular,NEW.carnet,NEW.unity,NEW.extention,NEW.career,NEW.state,NEW.idtypetrainer,NEW.idtypeschool,current_date,TG_OP,v_idpage,v_comment);
+	IF NEW.actuallylink !='' THEN
+		INSERT INTO tbhistoryUserMail(idhistoryusermail,activatelink,iduser,historydate,operation,idpage) VALUES(DEFAULT,NEW.actuallylink,NEW.iduser,current_date,TG_OP,v_idpage);
+	END IF;
        RETURN NULL;
   END;
-  
+
 END;
 $trigger_tbuser$ LANGUAGE plpgsql;
 
