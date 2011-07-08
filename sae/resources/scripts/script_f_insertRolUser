@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION f_insertUserRol(varchar,varchar) RETURNS text AS $$
+CREATE OR REPLACE FUNCTION f_insertuserrol(character varying, character varying)
+  RETURNS text AS
+$BODY$
 DECLARE
 	p_namerol ALIAS FOR $1;
 	p_mailuser ALIAS FOR $2;
@@ -51,4 +53,6 @@ DECLARE
 		END;
 	RETURN v_result;
 	END;
-$$ LANGUAGE plpgsql;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

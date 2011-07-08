@@ -1,0 +1,67 @@
+CREATE OR REPLACE FUNCTION f_recover(IN character varying, IN character varying, OUT p_result character varying, OUT p_iduser integer,OUT p_name character varying,OUT p_surname character varying )
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_mail ALIAS FOR $1;
+	p_activelink  ALIAS FOR $2;
+	v_state int;
+	v_countuser int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.mail=p_mail
+			AND    u.state=1
+			LIMIT  1;
+			
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser>0 THEN
+			BEGIN
+				BEGIN
+					SELECT iduser,name,surname,state
+					INTO   p_iduser,p_name,p_surname,v_state
+					FROM  tbuser u
+					WHERE u.mail=p_mail
+					AND   u.state=1
+					LIMIT 1; 
+				EXCEPTION WHEN NO_DATA_FOUND THEN
+					BEGIN
+						p_result='No existen datos para el usuario seleccionado';
+						RAISE LOG 'Usuario no existe con email % estado %',p_mail,p_state;
+					END;
+				END;
+				
+				
+				UPDATE tbuser 
+				SET    actuallylink=p_activelink
+				WHERE mail=p_mail
+				AND   state=1;
+				p_result='OK';
+				RAISE NOTICE 'Actualizacion de usuario para recuperar password (%,%,%)',p_mail,p_name,p_surname;
+				
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la inserccion de tbuser con los parametros (%,%,%)',p_mail,p_name,p_surname;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='El usuario con email: '||'"'||p_mail||'"'||'  no esta en uso o esta desactivado';
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;

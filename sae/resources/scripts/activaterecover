@@ -1,0 +1,51 @@
+CREATE OR REPLACE FUNCTION f_activaterecover(IN integer, IN character varying,IN character varying, OUT p_result character varying)
+  RETURNS character varying AS
+$BODY$ 
+DECLARE
+	p_iduser ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	p_actuallylink ALIAS FOR $3;
+	v_countuser int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(u.iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.iduser=p_iduser
+			AND    u.actuallylink=p_actuallylink
+			AND    u.state=1
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser>0 THEN
+			BEGIN
+				UPDATE  tbuser 
+				SET    password=p_password,
+				actuallylink=''
+				WHERE  iduser=p_iduser
+				AND    actuallylink=p_actuallylink
+				AND    state=1;
+				p_result='OK';
+				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallylink;
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallylink;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='No se ha activado la contraseña con  exito';
+		END IF;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

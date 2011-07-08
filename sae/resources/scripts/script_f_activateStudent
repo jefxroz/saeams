@@ -1,0 +1,52 @@
+-- select * from f_activate(22,'asd3kiovmsw');
+
+CREATE OR REPLACE FUNCTION f_activatestudent(IN integer, IN character varying, OUT p_result character varying)
+  RETURNS character varying AS
+$BODY$ 
+DECLARE
+	p_iduser ALIAS FOR $1;
+	p_actuallylink ALIAS FOR $2;
+	v_countuser int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(u.iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.iduser=p_iduser
+			AND    u.actuallylink=p_actuallylink
+			AND    u.state=2
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser>0 THEN
+			BEGIN
+				UPDATE  tbuser 
+				SET    state=1,
+				       actuallylink=''
+				WHERE  iduser=p_iduser
+				AND    actuallylink=p_actuallylink
+				AND    state=2;
+				p_result='OK';
+				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallylink;
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallylink;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='La activacion no ha podido ser realizada con exito';
+		END IF;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
