@@ -14,7 +14,7 @@
 		<table width="100%" border="0" cellspacing="3" cellpadding="3" >		
 				<tr>
 					<td width="35%"  align="left"><label for="id_mail" >* Correo Electr&oacute;nico: </label></td>
-					<td width="65%" ><input type="text" name="id_mail" id="id_mail" class="easyui-validatebox"  required="true"  validType="email" size="30"/></td>
+					<td width="65%" ><input type="text" name="id_mail" id="id_mail" class="easyui-validatebox"  required="true"  validType="email" size="30" /></td>
 				</tr>
 				<tr>
 					<td width="35%" align="left"><label for="id_password">* Elige una contrase&ntilde;a: </label></td>
@@ -70,7 +70,7 @@
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_school">* Escolaridad: </label><P></td>
-					<td width="65%"><input id="id_school" name="id_school" style="width:150px" required="true" url=".././class/controllerview/vwService.php?service=getschool"  valueField="id" textField="text"   panelheight="130px"></input></td>
+					<td width="65%"><input id="id_school" name="id_school" style="width:150px" required="true" url=".././fw/view/Service.php?service=getschool"  valueField="id" textField="text"   panelheight="130px"></input></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_birthdate">* Fecha de Nacimiento: </label><P></td>
