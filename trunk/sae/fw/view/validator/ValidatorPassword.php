@@ -13,7 +13,7 @@
 		
 		public function verify($passcomp)
 		{
-			if($this->validate())
+			if(!$this->validate())
 			{
 				return false;
 			}
@@ -24,14 +24,14 @@
 			
 			if(!$passcomp)
 			{
-				$this->message=$this->message.'\n El campo de repetir contraseña es requerido';
+				$this->addMessage('\n El campo de repetir contraseña es requerido');
 				return false;	
 			}
 			
-			if($this->field!=$passcomp)
+			if($this->getField()!=$passcomp)
 			{
-    				$this->message=$this->message.'\n Debe ingresar la misma constraseña';
-					return false;
+				$this->addMessage('\n Debe ingresar la misma constraseña');
+				return false;
 			}	
 			return true;
 		}   

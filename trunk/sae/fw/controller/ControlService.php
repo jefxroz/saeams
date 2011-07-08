@@ -23,22 +23,50 @@
 		public static function generateRandom($length)
 		{  
     		$exp_reg="[^A-Z0-9]";  
-    		return substr(eregi_replace($exp_reg, "", md5(rand())).eregi_replace($exp_reg, "", md5(rand())) .eregi_replace($exp_reg, "", md5(rand())),0, $lenght);
+    		return substr(eregi_replace($exp_reg, "", md5(rand())).eregi_replace($exp_reg, "", md5(rand())) .eregi_replace($exp_reg, "", md5(rand())),0, $length);
 		}
 		
-		public function getService()
+		public function getCaptcha()
 		{
-			if($this->service=='getcaptcha')
+			$var=$this->randomText(8);
+			return json_encode(array('uno'=>$var,'dos'=>md5('getcaptcha('.$var.')')));
+		}
+		public function getSchool()
+		{
+			$objservice=new ServiceQuery();
+			return json_encode($objservice->getTypeSchool());
+		}
+		public function Activate($code,$activatekey)
+		{
+			$objservice=new ServiceQuery();
+			$array=array($code,$activatekey);
+			$response=$objservice->activateUserStudent($array);
+			if($response=='OK')
 			{
-				$var=$this->randomText(8);
-				return json_encode(array('uno'=>$var,'dos'=>md5('getcaptcha('.$var.')')));
+				return "Activacion de cuenta realizada correctamente";
 			}
-			else if($this->service=='getschool')
+			else
 			{
-				$objservice=new ServiceQuery();
-				return json_encode($objservice->getTypeSchool());
+				return "No se realizo la activacion de cuenta correctamente";
 			}
 		}
+		
+		public function ActivateRecover($code,$activatekey,$password)
+		{
+			$objservice=new ServiceQuery();
+			$array=array($code,$password,$activatekey);
+			$response=$objservice->activateRecover($array);
+			if($response=='OK')
+			{
+				return "Su contraseña ha sido cambiada con exito";
+			}
+			else
+			{
+				return "No se realizo la activacion de cuenta correctamente";
+			}
+		}
+		
+		
 		 
 		
 	}

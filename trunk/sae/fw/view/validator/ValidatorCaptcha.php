@@ -25,7 +25,7 @@
 		
 		public function verify()
 		{
-			if ($this->hidfield == md5('getcaptcha('.$this->field.')')) 
+			if ($this->hidfield == md5('getcaptcha('.$this->getField().')')) 
 			{
 				return true;
 			} 

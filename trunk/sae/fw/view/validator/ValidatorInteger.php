@@ -12,7 +12,7 @@
 		
 		public function verify()
 		{
-			if($this->validate())
+			if(!$this->validate())
 			{
 				return false;
 			}
@@ -21,10 +21,10 @@
 				if($this->isEmpty()) return true;
 			}
 			
-			if (!preg_match('/^[0-9]+$/',$this->field)) 
+			if (!preg_match('/^[0-9]+$/',$this->getField())) 
 			{
-    			$this->message=$this->message.'\n Porfavor escriba un numero valido';
-				return false;
+				$this->addMessage('\n Porfavor escriba un numero valido');
+    			return false;
 			}
 			return true;
 		}   

@@ -3,35 +3,20 @@
 	require_once("ControlService.php");
 	require_once("../model/ServiceQuery.php");
 	require_once("../model/mapping/Tbuser.php");
+	require_once("Mail.php");
+	
 	class ControlUser extends Control
 	{  
 		private $objservice; 
 		private $objuser;
-		private $service;
-  
-		public function ControlUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$service)
-		{  
-			$this->service=$service;
-			$this->objservice=new ServiceQuery();
-			$link=ControlService::generateRandom(25);
-	
-			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer,$link);
 		
+		public function ControlUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer)
+		{  
+			$this->objservice=new ServiceQuery();
+			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
 		}
 		  
-		public function ejecute()
-		{  
-			$result='OK';
-			if ($this->service==1)
-			{
-				$result= $this->registerStudent();	
-			}	
-			else
-			{
-				echo json_encode(array('msg'=>'No se realizo la accion solicitada'));
-			}
-			$this->getResult($result);
-		}  
+		
 		
 		private function getResult($result)
 		{
@@ -46,9 +31,35 @@
 		}
 		
 		
-		private function registerStudent()
+		public function registerStudent()
 		{
-			return $this->objservice->insertUserStudent($this->objuser);
+			$result='OK';
+			$key=ControlService::generateRandom(10);
+			$this->objuser->setActivateLink(md5('getPassword('.$key.')'));
+			$result=$this->objservice->insertUserStudent($this->objuser);
+			if($result=='OK')
+			{
+				$objmail=new Mail($this->objuser);
+				$objmail->send();
+			}
+			$this->getResult($result);
+		}
+		public function recover()
+		{
+			$result='OK';
+			$password=ControlService::generateRandom(10);
+			$this->objuser->setPassw($password);
+			$passhid=md5($password);
+			$this->objuser->setPassword($passhid);
+			$linkhid=md5('getPassword('.$password.')');
+			$this->objuser->setActivateLink($linkhid);
+			$result=$this->objservice->recover($this->objuser);
+			if($result=='OK')
+			{
+				$objmail=new Mail($this->objuser);
+				$objmail->sendRecover();
+			}
+			$this->getResult($result);
 		}
 	}
 ?>
