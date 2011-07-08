@@ -1,7 +1,7 @@
 	
 	<script type="text/javascript">
 	var id_page="0";
-	var url='.././class/controllerview/vwUser.php';
+	var url='.././fw/view/User.php?service=1';
 	$().ready(function() {
 
 		id_page="0";
@@ -62,7 +62,7 @@
 		 $('#fm_register').form('clear');
 		id_page="1";
 		$.ajax({
-			 url: '.././class/controllerview/vwService.php',
+			 url: '.././fw/view/Service.php',
 			 dataType: 'json',
 			 data: {service:'getcaptcha'},
 			 type: 'post',
@@ -70,12 +70,22 @@
 				 alert(data.uno);
 			     document.id_img_captcha.src="main/captcha.php?texto="+data.uno;
 			     document.getElementById("id_hid_captcha").value=data.dos;
+			     document.getElementById("id_captcha").value=data.uno;
 			 }
 			});
 
 		$('#id_school').combobox({
 			//panelHeight:100
 		});
+
+		document.getElementById('id_mail').value="cuenta.oscio@gmail.com";
+		document.getElementById('id_password').value="12345";
+		document.getElementById("id_pass_comp").value="12345";
+		document.getElementById('id_name').value="Cuenta";
+		document.getElementById('id_surname').value="Oscio";
+		document.getElementById('id_address').value="Nueva direccion";
+		document.getElementById('id_school').value="1";
+		document.getElementById('id_birthdate').value="04/26/1986";
 		
 		$('div[name|="pg_registrer"]').each(function(index) {
 	           $(this).show(); 
@@ -94,8 +104,21 @@
 	}
 	function RecoverPassword(){
 	  	$('#fm_recover').form('clear');
+	  	
 	  	id_page="2";
-	  	document.id_captcharecov.src="main/captcha.php";
+	  	$.ajax({
+			 url: '.././fw/view/Service.php',
+			 dataType: 'json',
+			 data: {service:'getcaptcha'},
+			 type: 'post',
+			 success: function(data){
+				 alert(data.uno);
+			     document.id_img_captcharecov.src="main/captcha.php?texto="+data.uno;
+			     document.getElementById("id_hid_captcharecov").value=data.dos;
+			     document.getElementById("id_captcharecov").value=data.uno;
+			 }
+			});
+
 	  	$('div[name|="pg_registrer"]').each(function(index) {
 	           $(this).hide();  
 	     });
@@ -108,6 +131,7 @@
 		$('div[name|="pg_login"]').each(function(index) {
 	           $(this).hide();  
 	     });
+	     alert(id_page);
 	}
 
 	function saveUser()
@@ -125,6 +149,38 @@
 					$.messager.show({
 						title: 'Registro Exitoso',
 						msg: 'Registro Realizado sin Problemas!!!'
+					});
+					cancel();		// close the dialog
+					
+				} else {
+					$.messager.show({
+						title: 'Error',
+						msg: result.msg
+					});
+				}
+			}
+		});
+	}
+	function recover()
+	{
+		//document.getElementById("id_page").value=id_page;
+		//for (var i = 0, total = document.getElementById("id_page"); i < total.length; i ++)
+			//  total[i].value = id_page;
+			
+		alert(document.getElementById("id_page").value);
+		
+		$('#fm_recover').form('submit',{
+			url: '.././fw/view/User.php?service=2',
+			onSubmit: function(){
+				return $(this).form('validate');
+			},
+			success: function(result){
+				var result = eval('('+result+')');
+				
+				if (result.success){
+					$.messager.show({
+						title: 'Registro Exitoso',
+						msg: 'Registro realizado sin problemas!!!'
 					});
 					cancel();		// close the dialog
 					
