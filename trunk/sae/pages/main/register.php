@@ -107,10 +107,7 @@
 					<td width="35%"  align="left"><label for="id_career">Carrera: </label><P></td>
 					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  /><P></td>
 				</tr>
-				<tr>
-					<td width="35%"  align="left"><label for="id_page"></label><P></td>
-					<td width="65%"><input type="text" name="id_page" id="id_page" size="10"   /><P></td>
-				</tr>
+				
 				
 	</table>
 	</div>
