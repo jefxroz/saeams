@@ -25,7 +25,7 @@
 	</table>
 	<table align="center">
 		<tr >
-			<td ><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="recover()" >Registar</a></td>  
+			<td ><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="recover()" >Enviar</a></td>  
     		<td ><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancel()">Cancelar</a></td>  
 		</tr>
 	</table>
