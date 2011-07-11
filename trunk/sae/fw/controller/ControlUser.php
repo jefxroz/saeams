@@ -3,7 +3,8 @@
 	require_once("ControlService.php");
 	require_once("../model/ServiceQuery.php");
 	require_once("../model/mapping/Tbuser.php");
-	require_once("Mail.php");
+	require_once("mailer/Mailer.php");
+	require_once("mailer/MailerRecover.php");
 	
 	class ControlUser extends Control
 	{  
@@ -16,20 +17,17 @@
 			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
 		}
 		  
-		
-		
-		private function getResult($result)
+		private function getResult($result,$resultmail)
 		{
 			if ($result=='OK')
 			{
-				echo json_encode(array('success'=>true));
+				echo json_encode(array('success'=>true,'uno'=>$resultmail));
 			} 
 			else 
 			{
 				echo json_encode(array('msg'=>$result));
 			}
 		}
-		
 		
 		public function registerStudent()
 		{
@@ -39,11 +37,12 @@
 			$result=$this->objservice->insertUserStudent($this->objuser);
 			if($result=='OK')
 			{
-				$objmail=new Mail($this->objuser);
-				$objmail->send();
+				$objmail=new Mailer($this->objuser);
+				$resultmail=$objmail->sender();
 			}
-			$this->getResult($result);
+			$this->getResult($result,$resultmail);
 		}
+		
 		public function recover()
 		{
 			$result='OK';
@@ -56,10 +55,10 @@
 			$result=$this->objservice->recover($this->objuser);
 			if($result=='OK')
 			{
-				$objmail=new Mail($this->objuser);
-				$objmail->sendRecover();
+				$objmail=new MailerRecover($this->objuser);
+				$resultmail=$objmail->sender();
 			}
-			$this->getResult($result);
+			$this->getResult($result,$resultmail);
 		}
 	}
 ?>

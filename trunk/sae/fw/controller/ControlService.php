@@ -54,7 +54,8 @@
 		public function ActivateRecover($code,$activatekey,$password)
 		{
 			$objservice=new ServiceQuery();
-			$array=array($code,$password,$activatekey);
+			$passw=md5($password);
+			$array=array($code,$passw,$activatekey);
 			$response=$objservice->activateRecover($array);
 			if($response=='OK')
 			{
