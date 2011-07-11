@@ -67,7 +67,6 @@
 			 data: {service:'getcaptcha'},
 			 type: 'post',
 			 success: function(data){
-				 alert(data.uno);
 			     document.id_img_captcha.src="main/captcha.php?texto="+data.uno;
 			     document.getElementById("id_hid_captcha").value=data.dos;
 			     document.getElementById("id_captcha").value=data.uno;
@@ -136,7 +135,6 @@
 
 	function saveUser()
 	{
-		document.getElementById("id_page").value=id_page;
 		$('#fm_register').form('submit',{
 			url: url,
 			onSubmit: function(){
@@ -162,13 +160,7 @@
 		});
 	}
 	function recover()
-	{
-		//document.getElementById("id_page").value=id_page;
-		//for (var i = 0, total = document.getElementById("id_page"); i < total.length; i ++)
-			//  total[i].value = id_page;
-			
-		alert(document.getElementById("id_page").value);
-		
+	{	
 		$('#fm_recover').form('submit',{
 			url: '.././fw/view/User.php?service=2',
 			onSubmit: function(){
@@ -179,8 +171,8 @@
 				
 				if (result.success){
 					$.messager.show({
-						title: 'Registro Exitoso',
-						msg: 'Registro realizado sin problemas!!!'
+						title: 'Envio de recuperacion exitoso',
+						msg: 'Se ha enviado un correo a la direccion proporcionada con sus nuevos datos para acceder!!!'
 					});
 					cancel();		// close the dialog
 					
