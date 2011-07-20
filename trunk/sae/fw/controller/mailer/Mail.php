@@ -22,7 +22,7 @@
 			$this->mail->FromName = "Equipo SAESAP";
 		}
 					
-		public function send($mail,$name,$surname,$subject,$message,$messagetxt)
+		public function send($mail,$name,$surname,$subject,$message,$messagetxt,&$result)
 		{
 			if($subject and $message)
 			{
@@ -34,16 +34,20 @@
 				
 				if(!$this->mail->Send()) 
 				{
+					$result="Error: " . $this->mail->ErrorInfo;
   					return "Error: " . $this->mail->ErrorInfo;
 				} 
 				else 
 				{
-  					return "Mensaje enviado correctamente";
+					$result='OK';
+  					return "Se ha enviado un correo, a la direccion proporcionada para verficiacion";
 				}	
 			}
 			else
 			{
-				return "Error: No se tienen todos los campos obligatorios  del correo";;
+				
+				$result="Error: No se tienen todos los campos obligatorios  del correo";
+				return "Error: No se tienen todos los campos obligatorios  del correo";
 			}
 		}
 	}
