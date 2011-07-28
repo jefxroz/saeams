@@ -14,15 +14,15 @@
 		<div name ="pg_login" >
 		
 			<div id="p" class="easyui-panel" title="SAE-SAP"  style="background:#fafafa;">
-				<form  action="" method="post">	
+				<form  action="http://localhost/Proyectos/sae/fw/view/User.php?service=3" method="post">	
 				
 				<h3 align="center"> INGRESO </h3>
 							<div align="center">					
 							<label for="username">Usuario </label> 
-							<br/><input class="easyui-validatebox" id="username" name="username" required="true"  validType="email" size="26">							
+							<br/><input class="easyui-validatebox" id="id_mail_log" name="id_mail_log" required="true"  validType="email" size="26">							
 							<br/>
 							<br/><label for="txt_password">Constrase&ntilde;a</label>
-							<br/><input class="easyui-validatebox" id="txt_password" name="txt_password" type="password" required="true" size="26">												
+							<br/><input class="easyui-validatebox" id="id_password_log" name="id_password_log" type="password" required="true" size="26">												
 							<br/><input name="btnAcces" type="submit" id="btnAcces" value="Ingresar" />
 							<br/>
 							<br/><a href="#" onclick="RecoverPassword()">&iquest;Olvid&oacute; su contrase&ntilde;a&#63;</a>						
