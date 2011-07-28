@@ -1,9 +1,23 @@
+<?php 
+	require_once("../.././fw/model/mapping/TbUser.php");
+	require_once("../.././fw/model/mapping/TbPrivilege.php");
+	session_start();
+
+	//echo 'Hola';
+	$objuser = unserialize($_SESSION['usuario']);	
+	if($objuser)
+	{
+		$privileges=$objuser->getPrivileges();	
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//ES" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 <title>Modificar Perfil - SAE-SAP</title>
-<?php include("top_page.php"); ?>
+<?php 
+include("top_page.php"); 
+?>
 <script type="text/javascript" >
 $().ready(function() {
 	$.extend($.fn.validatebox.defaults.rules, {
@@ -38,6 +52,7 @@ $().ready(function() {
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
+				
 		</div>
 		<div id="colTwo">
 
@@ -164,4 +179,13 @@ $().ready(function() {
 	</div>
 	</body>
 </html>
+<?php
+
+		}
+		else
+		{
+			header("Location: http://localhost/Proyectos/sae/pages/index.php");
+		}
 		
+		
+?>	
