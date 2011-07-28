@@ -99,26 +99,16 @@ SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER INFORMACION');
 SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER ASIGNAR');
 SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER CONSULTAR NOTAS');
 
-SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR PERFIL');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER HORARIOS');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR HORARIO');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','AGREGAR HORARIO CURSO');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR HORARIO CURSO');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','ELIMINAR HORARIO CURSO');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER ASIGNACIONES');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER ASIGNACIONES ESTUDIANTE');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','ASIGNACION');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','DESASIGNACION');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER NOTAS');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER NOTAS CURSO');
-SELECT * FROM f_insertprivilegerol('SECREATARIA','VER INFORMACION');
-
-
-
-
-
-
-
-
-
-
+SELECT * FROM f_insertprivilegerol('SECRETARIA','MODIFICAR PERFIL');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER HORARIOS');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','MODIFICAR HORARIO');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','AGREGAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','MODIFICAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','ELIMINAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER ASIGNACIONES');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER ASIGNACIONES ESTUDIANTE');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','ASIGNACION');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','DESASIGNACION');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER NOTAS');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER NOTAS CURSO');
+SELECT * FROM f_insertprivilegerol('SECRETARIA','VER INFORMACION');
