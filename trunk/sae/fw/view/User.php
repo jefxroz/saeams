@@ -8,7 +8,7 @@ require_once("validator/ValidatorDate.php");
 require_once("validator/ValidatorDefault.php");
 require_once("validator/ValidatorPassword.php");
 
-	
+
 //$service=$_REQUEST['id_page'];
 	
 if($service==1)
@@ -105,10 +105,34 @@ else if($service==2)
 			$objcontroller->recover();
 		}
 }
-
-
-
-
-
+else if($service==3)
+{
+		$mail=$_REQUEST['id_mail_log'];
+		$valmail=new ValidatorMail('Correo',$mail,true);
+		$password = $_REQUEST['id_password_log'];
+		$valpassword=new ValidatorDefault('Password',$password,true);
+		if($valmail->verify()&&$valpassword->verify())
+		{
+			$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+			if($objcontroller->validate())
+			{
+				//redirigir
+				session_start();
+				$_SESSION['usuario'] = serialize($objcontroller->getUser());
+				header("Location: http://localhost/Proyectos/sae/pages/menu/User.php");
+				exit;
+			}
+			else
+			{
+				header("Location: http://localhost/Proyectos/sae/pages/index.php");
+				exit;
+				//error
+			}
+		}
+		else
+		{
+			echo json_encode(array('uno'=>$valmail->getMessage(),'dos'=>$valpassword->getMessage()));
+		}
+}
 
 ?>
