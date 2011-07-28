@@ -98,5 +98,5 @@
 			return $this->send($this->objuser->getMail(),$this->objuser->getName(),$this->objuser->getSurName(),$this->getSubject(),$this->getMessage(),$this->getMessageTxt(),$result);
 		}	
 		
-	}
+	} 
 ?>
