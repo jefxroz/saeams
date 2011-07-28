@@ -42,6 +42,8 @@ class TbUser {
   	
   	private $passw;
   	
+  	private $privileges;
+  	
 	public function TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer)
 	{
 		$this->mail=$mail;
@@ -264,14 +266,31 @@ class TbUser {
     	$this->activatelink = $activatelink;
   	}
   	
+	public function &getPrivileges() 
+ 	{
+    	return $this->privileges;
+  	}
+  
+  	public function setPrivileges($privileges) 
+  	{
+    	$this->privileges = $privileges;
+  	}
+  	
   	public function get() 
   	{	
   		$parameters=array($this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->idtypeschool,$this->birthdate,$this->phone,$this->celular,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer,$this->activatelink);
   		return $parameters;
   	}
+  	
   	public function getRecov()
   	{
   		$parameters=array($this->mail,$this->activatelink);
+  		return $parameters;
+  	}
+  	
+	public function getValidate()
+  	{
+  		$parameters=array($this->mail,$this->password);
   		return $parameters;
   	}
 }
