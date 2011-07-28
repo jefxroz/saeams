@@ -3,7 +3,7 @@ class Control
 	{  
 		public function Control()
 		{  
-			  
+			   
 		}  
 		 
 	}
