@@ -184,7 +184,7 @@ $().ready(function() {
 		}
 		else
 		{
-			header("Location: http://localhost/Proyectos/sae/pages/index.php");
+			header("Location: .././index.php");
 		}
 		
 		
