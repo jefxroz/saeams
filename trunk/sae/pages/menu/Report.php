@@ -6,16 +6,31 @@
 <?php include("top_page.php"); ?>
 </head>
 <body>
+
+<script type="text/javascript">
+function tu_funcion(){
+
+	$.messager.confirm('Hola Darwin', 'Estas seguro que quieres ir?', function(r){
+		if (r){
+			location.href = '../index.php';
+		}
+	});
+	
+
+}
+</script>
+
+
 	<div id="wrapper">	
-		<div id="content">
+		<div id="content"> 
+		<div align="right"> Aura Luz Cifuentes | <a  onclick="javascript:tu_funcion()">Salir</a></div>
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
+				
 			</div>
+			
 			<div id="colTwo">
-
-
-
 
 		<table>
 			<tr>
