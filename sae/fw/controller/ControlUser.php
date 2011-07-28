@@ -16,6 +16,16 @@
 			$this->objservice=new ServiceQuery();
 			$this->objuser=new TbUser($mail,$password,$id,$name,$surname,$address,$gender,$idtypeschool,$birthdate,$phone,$celular,$carnet,$unity,$extention,$career,$state,$idtypetrainer);
 		}
+		
+		public function setUser($objuser)
+		{
+			$this->objuser=$objuser;
+		}
+		
+		public function getUser()
+		{
+			return $this->objuser;
+		}
 		  
 		private function getResult($result,$resultmail)
 		{
@@ -38,7 +48,7 @@
 			if($result=='OK')
 			{
 				$objmail=new Mailer($this->objuser);
-				$resultmail=$objmail->sender();
+				$resultmail=$objmail->sender($result);
 			}
 			$this->getResult($result,$resultmail);
 		}
@@ -59,6 +69,23 @@
 				$resultmail=$objmail->sender();
 			}
 			$this->getResult($result,$resultmail);
+		}
+		
+		public function validate()
+		{
+			$result='OK';
+			$result=$this->objservice->validateUser($this->objuser);
+			if($result)
+			{
+				
+				$resultmail='';
+				return true;
+			}
+			else 
+			{
+				$result='Problema';
+				return false;
+			}
 		}
 	}
 ?>
