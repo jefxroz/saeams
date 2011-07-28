@@ -3,6 +3,8 @@
 insert into tbrol values(1,'ADMINISTRADOR');
 insert into tbrol values(2,'PROFESOR');
 insert into tbrol values(3,'ESTUDIANTE');
+insert into tbrol values(4,'SECRETARIA');
+
 
 --Datos de desarrollador
 
@@ -22,5 +24,101 @@ insert into tbtypeschool values(3,'DIVERSIFICADO');
 insert into tbtypeschool values(4,'UNIVERSITARIO');
 insert into tbtypeschool values(5,'MAESTRIA');
 insert into tbtypeschool values(6,'DOCTORADO');
+
+--Datos de privilegios
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR PERFIL',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER USUARIOS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'CREAR USUARIO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR USUARIO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'ELIMINAR USUARIO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER PROFESORES',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'CREAR PROFESOR',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR PROFESOR',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'ELIMINAR PROFESOR',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER CURSOS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'CREAR CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'ELIMINAR CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER HORARIOS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR HORARIO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'AGREGAR HORARIO CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR HORARIO CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'ELIMINAR HORARIO CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER ASIGNACIONES',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER ASIGNACIONES ESTUDIANTE',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'ASIGNACION',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'DESASIGNACION',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER NOTAS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER NOTAS CURSO',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'PUBLICAR NOTAS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'MODIFICAR NOTAS',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER REPORTES',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER DASHBOARD',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER INFORMACION',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER ASIGNAR',1);
+INSERT INTO tbprivilege(idprivilege,name,state) values(DEFAULT,'VER CONSULTAR NOTAS',1);
+ 
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR PERFIL');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER USUARIOS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','CREAR USUARIO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR USUARIO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','ELIMINAR USUARIO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER PROFESORES');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','CREAR PROFESOR');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR PROFESOR');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','ELIMINAR PROFESOR');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER CURSOS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','CREAR CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','ELIMINAR CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER HORARIOS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR HORARIO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','AGREGAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','ELIMINAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER ASIGNACIONES');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER ASIGNACIONES ESTUDIANTE');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','ASIGNACION');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','DESASIGNACION');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER NOTAS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER NOTAS CURSO');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','PUBLICAR NOTAS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','MODIFICAR NOTAS');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER REPORTES');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER DASHBOARD');
+SELECT * FROM f_insertprivilegerol('ADMINISTRADOR','VER INFORMACION');
+
+SELECT * FROM f_insertprivilegerol('PROFESOR','MODIFICAR PERFIL');
+SELECT * FROM f_insertprivilegerol('PROFESOR','VER NOTAS');
+SELECT * FROM f_insertprivilegerol('PROFESOR','VER NOTAS CURSO');
+SELECT * FROM f_insertprivilegerol('PROFESOR','PUBLICAR NOTAS');
+SELECT * FROM f_insertprivilegerol('PROFESOR','VER INFORMACION');
+
+SELECT * FROM f_insertprivilegerol('ESTUDIANTE','MODIFICAR PERFIL');
+SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER INFORMACION');
+SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER ASIGNAR');
+SELECT * FROM f_insertprivilegerol('ESTUDIANTE','VER CONSULTAR NOTAS');
+
+SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR PERFIL');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER HORARIOS');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR HORARIO');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','AGREGAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','MODIFICAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','ELIMINAR HORARIO CURSO');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER ASIGNACIONES');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER ASIGNACIONES ESTUDIANTE');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','ASIGNACION');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','DESASIGNACION');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER NOTAS');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER NOTAS CURSO');
+SELECT * FROM f_insertprivilegerol('SECREATARIA','VER INFORMACION');
+
+
+
+
+
+
+
+
 
 

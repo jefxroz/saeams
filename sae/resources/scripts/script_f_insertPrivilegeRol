@@ -1,0 +1,58 @@
+CREATE OR REPLACE FUNCTION f_insertprivilegerol(character varying, character varying)
+  RETURNS text AS
+$BODY$
+DECLARE
+	p_namerol ALIAS FOR $1;
+	p_nameprivilege ALIAS FOR $2;
+	v_result text='OK';
+	v_idrol integer;
+	v_idprivilege integer;
+	
+	BEGIN
+
+		BEGIN
+
+			SELECT idrol
+			INTO   v_idrol
+			FROM   tbrol r
+			WHERE  r.name=p_namerol;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Rol % no encontrado', p_namerol;
+				RAISE LOG 'Rol % no encontrado', p_namerol;
+			END;
+		END;
+
+		BEGIN
+
+			SELECT idprivilege
+			INTO   v_idprivilege
+			FROM   tbprivilege p
+			WHERE  p.name=p_nameprivilege;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Privilegio % no encontrado', p_nameprivilege;
+				RAISE LOG 'Privilegio % no encontrado', p_nameprivilege;
+			END;
+		END;
+		
+		
+		BEGIN
+			INSERT INTO tbprivilegerol(idrol,idprivilege) VALUES(v_idrol,v_idprivilege);
+			v_result='OK';
+			RAISE NOTICE 'Inserccion de rol y privilegio (%,%)',v_idrol,v_idprivilege;
+			RAISE LOG 'Inserccion del rol y privilegio (%,%)',v_idrol,v_idprivilege;
+		EXCEPTION WHEN unique_violation THEN
+			BEGIN
+				v_result='Error no se puede realizar la inserccion de rol y privilegio';
+				RAISE EXCEPTION 'Violacion unique Error en la inserccion de tbprivilegerol con los parametros (%,%)',p_namerol,p_nameprivilege;
+				RAISE LOG 'Violacion unique Error en la inserccion de tbprivilegerol con los parametros (%,%)',p_namerol,p_nameprivilege;
+			END;
+		END;
+	RETURN v_result;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;

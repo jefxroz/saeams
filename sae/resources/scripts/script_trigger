@@ -14,10 +14,10 @@ BEGIN
   END IF;
   v_comment='';
   IF TG_OP ='UPDATE' THEN
-		IF OLD.state=2 AND NEW.state=1 AND OLD.actuallylink != NEW.actuallylink AND NEW.actuallylink ='' THEN
-			v_comment=v_comment||'ACTIVACION DE CUENTA:ESTADO:ACTUALLYLINK';
-		ELSEIF OLD.password != NEW.password AND OLD.actuallylink != NEW.actuallylink AND NEW.actuallylink is null THEN
-			v_comment=v_comment||'RECUPERACION DE CONTRASEÑA:PASSWORD:ACTUALLYLINK';
+		IF OLD.state=2 AND NEW.state=1 AND OLD.actuallykey != NEW.actuallykey AND NEW.actuallykey ='' THEN
+			v_comment=v_comment||'ACTIVACION DE CUENTA:ESTADO:ACTUALLYKEY';
+		ELSEIF OLD.password != NEW.password AND OLD.actuallykey != NEW.actuallykey AND NEW.actuallykey is null THEN
+			v_comment=v_comment||'RECUPERACION DE CONTRASEÑA:PASSWORD:ACTUALLYKEY';
 		ELSE
 			IF OLD.mail != NEW.mail THEN
 			v_comment=v_comment||':EMAIL';
@@ -76,8 +76,8 @@ BEGIN
   
   BEGIN
        INSERT INTO tbhistoryuser(idhistoryuser,iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,historydate,operation,idpage,comment) VALUES(DEFAULT,NEW.iduser,NEW.mail,NEW.password,NEW.id,NEW.name,NEW.surname,NEW.address,NEW.gender,NEW.birthdate,NEW.phone,NEW.celular,NEW.carnet,NEW.unity,NEW.extention,NEW.career,NEW.state,NEW.idtypetrainer,NEW.idtypeschool,current_date,TG_OP,v_idpage,v_comment);
-	IF NEW.actuallylink !='' THEN
-		INSERT INTO tbhistoryUserMail(idhistoryusermail,activatelink,iduser,historydate,operation,idpage) VALUES(DEFAULT,NEW.actuallylink,NEW.iduser,current_date,TG_OP,v_idpage);
+	IF NEW.actuallykey !='' THEN
+		INSERT INTO tbhistoryUserMail(idhistoryusermail,actuallykey,iduser,historydate,operation,idpage) VALUES(DEFAULT,NEW.actuallykey,NEW.iduser,current_date,TG_OP,v_idpage);
 	END IF;
        RETURN NULL;
   END;

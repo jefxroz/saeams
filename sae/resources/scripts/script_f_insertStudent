@@ -23,7 +23,7 @@ DECLARE
   	p_career ALIAS FOR $15;
 	p_state ALIAS FOR $16;
   	p_idtypetrainer ALIAS FOR $17;
-  	p_activelink  ALIAS FOR $18;
+  	p_actuallykey  ALIAS FOR $18;
 	v_countuser int;
 	BEGIN
 
@@ -43,7 +43,7 @@ DECLARE
 
 		IF v_countuser=0 THEN
 			BEGIN
-				INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,actuallylink) VALUES(DEFAULT,p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_phone,p_celular,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer,p_idtypeschool,p_activelink);
+				INSERT INTO tbuser(iduser,mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,state,idtypetrainer,idtypeschool,actuallykey) VALUES(DEFAULT,p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_phone,p_celular,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer,p_idtypeschool,p_actuallykey);
 				p_result='OK';
 				RAISE NOTICE 'Inserccion de usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',p_mail,p_password,p_id,p_name,p_surname,p_address,p_gender,p_birthdate,p_carnet,p_unity,p_extention,p_career,p_state,p_idtypetrainer;
 				p_result:=f_insertUserRol('ESTUDIANTE',p_mail);
