@@ -111,7 +111,7 @@
 			 data: {service:'getcaptcha'},
 			 type: 'post',
 			 success: function(data){
-				 alert(data.uno);
+				 //alert(data.uno);
 			     document.id_img_captcharecov.src="main/captcha.php?texto="+data.uno;
 			     document.getElementById("id_hid_captcharecov").value=data.dos;
 			     document.getElementById("id_captcharecov").value=data.uno;
@@ -130,7 +130,7 @@
 		$('div[name|="pg_login"]').each(function(index) {
 	           $(this).hide();  
 	     });
-	     alert(id_page);
+	     //alert(id_page);
 	}
 
 	function saveUser()

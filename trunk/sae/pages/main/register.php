@@ -1,5 +1,4 @@
 <div name="pg_registrer"  >
-
 	<table align="center">
 	<tr>
 	<td><img src=".././resources/images/user_48.png" alt="Usuarios"></td>
@@ -89,7 +88,6 @@
 	<br/>	
 	<div id="panelm3" class="easyui-panel" title="Datos de la Instituci&oacute;n" collapsible="true"  style="background:#fafafa;">
 	<br/>
-	
 	<table width="100%" border="0" cellspacing="3" cellpadding="3" >
 				<tr>
 					<td width="35%"  align="left"><label for="id_carnet">Carnet: </label><br/></td>
@@ -107,8 +105,6 @@
 					<td width="35%"  align="left"><label for="id_career">Carrera: </label><P></td>
 					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  /><P></td>
 				</tr>
-				
-				
 	</table>
 	</div>
 		<table align="center">
@@ -117,6 +113,5 @@
     			<td><a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancel()">Cancelar</a></td>  
 			</tr>
 		</table>
-	
 	</form>
 </div>
