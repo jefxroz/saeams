@@ -1,6 +1,7 @@
 <?php  
 	require_once("Connection.php");
 	require_once("mapping/TbTypeSchool.php");
+	require_once("mapping/TbPrivilege.php");
 
 	class ServiceQuery
 	{  
@@ -68,6 +69,34 @@
 				$result=$this->objconn->ejecuteStatement("ACTIVATE_RECOVER",$accountparam);
 				$row = $this->objconn->getRow($result,0 );
 				return $row[0];
+			}
+		}
+		
+		public function validateUser(&$objuser)
+		{
+			if($this->objconn->prepared("VALIDATE_USER","SELECT * from f_validateuser($1,$2);"))
+			{	
+				$result=$this->objconn->ejecuteStatement("VALIDATE_USER",$objuser->getValidate());
+				$row = $this->objconn->getRow($result,0 );
+								
+				$objuser->setIdUser($row[1]);
+				if($objuser->getIdUser())
+				{
+					while($row = $this->objconn->getResult($result))
+					{ 	
+						if($row[0]!=1)
+						{
+							$privilege=new TbPrivilege($row[1],$row[2]); 
+							$privileges[]=$privilege;
+						}
+					}	
+					if($privileges) 
+					{
+						$objuser->setPrivileges($privileges);
+					}
+					return true;
+				}
+				return false;
 			}
 		}
 		

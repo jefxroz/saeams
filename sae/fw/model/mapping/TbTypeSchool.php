@@ -1,8 +1,7 @@
 <?php
 
-
-
-class TbTypeSchool {
+class TbTypeSchool 
+{
  
   private $idtypeschool;
   
@@ -14,19 +13,23 @@ class TbTypeSchool {
   	$this->name=$name;
   }
   
-  public function &getIdTypeSchool() {
+  public function &getIdTypeSchool() 
+  {
     return $this->idtypeschool;
   }
    
-  public function setIdTypeSchool(&$idtypeschool) {
+  public function setIdTypeSchool(&$idtypeschool) 
+  {	
     $this->idtypeschool = $idtypeschool;
   }
   
-  public function &getName() {
+  public function &getName() 
+  {
     return $this->name;
   }
   
-  public function setName(&$name) {
+  public function setName(&$name) 
+  {
     $this->name = $name;
   }
   
