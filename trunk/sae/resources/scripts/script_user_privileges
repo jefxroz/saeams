@@ -12,31 +12,31 @@ GRANT ALL PRIVILEGES ON DATABASE sae_dbassignations to saeadmin;
 --Instrucciones sacadas en base al siguiente select 
 --select 'grant select, update, insert, delete on '||tablename||' to saeweb;' from pg_tables where tableowner='saeadmin';
 
+grant select, update, insert, delete on tbhistoryprivilegerol to saeweb;
 grant select, update, insert, delete on tbtypetrainer to saeweb;
 grant select, update, insert, delete on tbhistoryuser to saeweb;
 grant select, update, insert, delete on tbassignation to saeweb;
 grant select, update, insert, delete on tbshedule to saeweb;
-grant select, update, insert, delete on tbhistoryinstitucion to saeweb;
-grant select, update, insert, delete on tbhistorypage to saeweb;
-grant select, update, insert, delete on tbprivilegerol to saeweb;
-grant select, update, insert, delete on tbcourse to saeweb;
-grant select, update, insert, delete on tbdeveloper to saeweb;
-grant select, update, insert, delete on tbrol to saeweb;
-grant select, update, insert, delete on tbprivilege to saeweb;
-grant select, update, insert, delete on tbinstitution to saeweb;
-grant select, update, insert, delete on tbhistoryassignation to saeweb;
-grant select, update, insert, delete on tbclassroom to saeweb;
-grant select, update, insert, delete on tbtypeschool to saeweb;
 grant select, update, insert, delete on tbhistoryusermail to saeweb;
-grant select, update, insert, delete on tbdetailassignation to saeweb;
-grant select, update, insert, delete on tbhistoryprivilegerol to saeweb;
-grant select, update, insert, delete on tbuser to saeweb;
-grant select, update, insert, delete on tbhistorydetailassignation to saeweb;
-grant select, update, insert, delete on tbpage to saeweb;
-grant select, update, insert, delete on tbuserrol to saeweb;
+grant select, update, insert, delete on tbhistoryinstitucion to saeweb;
 grant select, update, insert, delete on tbhistoryuserrol to saeweb;
 grant select, update, insert, delete on tbhistorycourse to saeweb;
+grant select, update, insert, delete on tbprivilegerol to saeweb;
 grant select, update, insert, delete on tbhistoryshedule to saeweb;
+grant select, update, insert, delete on tbhistoryassignation to saeweb;
+grant select, update, insert, delete on tbhistorypage to saeweb;
+grant select, update, insert, delete on tbhistorydetailassignation to saeweb;
+grant select, update, insert, delete on tbrol to saeweb;
+grant select, update, insert, delete on tbprivilege to saeweb;
+grant select, update, insert, delete on tbclassroom to saeweb;
+grant select, update, insert, delete on tbtypeschool to saeweb;
+grant select, update, insert, delete on tbuserrol to saeweb;
+grant select, update, insert, delete on tbdetailassignation to saeweb;
+grant select, update, insert, delete on tbcourse to saeweb;
+grant select, update, insert, delete on tbinstitution to saeweb;
+grant select, update, insert, delete on tbdeveloper to saeweb;
+grant select, update, insert, delete on tbuser to saeweb;
+grant select, update, insert, delete on tbpage to saeweb;
 
 
 --Otorgar permisos a las tablas a SAEADMIN

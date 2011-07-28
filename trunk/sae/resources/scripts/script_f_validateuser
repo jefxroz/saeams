@@ -1,0 +1,71 @@
+CREATE OR REPLACE FUNCTION validateUser(IN character varying,IN character varying,OUT p_num integer,OUT p_id integer, OUT p_result character varying)
+  RETURNS SETOF record AS
+$BODY$
+DECLARE
+	p_mail ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	v_iduser   integer;
+	v_countuser integer;
+	registro RECORD;
+
+	BEGIN
+		BEGIN
+
+			SELECT count(u.iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.mail=p_mail
+			AND    u.password=p_password
+			AND    u.state=1
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser>0 THEN
+			BEGIN
+				FOR registro IN SELECT 1 num,iduser,name 
+						FROM tbuser
+						WHERE mail=p_mail
+						AND   password=p_password
+						AND   state=1
+						LIMIT 1 LOOP
+					BEGIN
+						p_num:=registro.num;
+						p_id:=registro.iduser;
+						p_result:=registro.name;
+						v_iduser=p_id;
+						RETURN NEXT;
+					END;
+				END LOOP;
+		
+				FOR registro IN SELECT 2 num,p.idprivilege,p.name 
+						FROM tbprivilege p,tbprivilegerol pr,tbrol r,tbuserrol ur
+						WHERE p.idprivilege=pr.idprivilege
+						AND   r.idrol=pr.idrol
+						AND   r.idrol=ur.idrol
+						AND   ur.iduser=v_iduser LOOP
+					BEGIN
+						p_num:=registro.num;
+						p_id:=registro.idprivilege;
+						p_result:=registro.name;
+						RETURN NEXT;
+					END;
+				END LOOP;
+				
+			END;
+		ELSE
+			BEGIN
+				p_result='El Usuario solicitado no existe';
+				RETURN NEXT;
+			END;
+		END IF;
+		RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;

@@ -4,7 +4,7 @@ $BODY$
 DECLARE
 	p_iduser ALIAS FOR $1;
 	p_password ALIAS FOR $2;
-	p_actuallylink ALIAS FOR $3;
+	p_actuallykey ALIAS FOR $3;
 	v_countuser int;
 	BEGIN
 
@@ -14,8 +14,8 @@ DECLARE
 			INTO   v_countuser
 			FROM   tbuser u
 			WHERE  u.iduser=p_iduser
-			AND    u.actuallylink=p_actuallylink
-			AND    u.state=1
+			AND    u.actuallykey=p_actuallykey
+			AND    u.state=1 or state=2
 			LIMIT  1;
 		EXCEPTION WHEN NO_DATA_FOUND THEN
 			BEGIN
@@ -28,16 +28,17 @@ DECLARE
 			BEGIN
 				UPDATE  tbuser 
 				SET    password=p_password,
-				actuallylink=''
+				actuallykey='',
+				state=1
 				WHERE  iduser=p_iduser
-				AND    actuallylink=p_actuallylink
-				AND    state=1;
+				AND    actuallykey=p_actuallykey
+				AND    state=1 or state=2;
 				p_result='OK';
-				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallylink;
+				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallykey;
 			EXCEPTION WHEN unique_violation THEN
 				BEGIN
 					p_result='Error no se puede realizar la accion solicitada';
-					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallylink;
+					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallykey;
 					ROLLBACK;
 				END;
 			END;

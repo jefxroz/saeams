@@ -1,9 +1,9 @@
-CREATE OR REPLACE FUNCTION f_recover(IN character varying, IN character varying, OUT p_result character varying, OUT p_iduser integer,OUT p_name character varying,OUT p_surname character varying )
+CREATE OR REPLACE FUNCTION f_recover(IN character varying, IN character varying, OUT p_result character varying, OUT p_iduser integer,OUT p_name character varying,OUT p_surname character varying)
   RETURNS SETOF record AS
 $BODY$ 
 DECLARE
 	p_mail ALIAS FOR $1;
-	p_activelink  ALIAS FOR $2;
+	p_actuallykey  ALIAS FOR $2;
 	v_state int;
 	v_countuser int;
 	BEGIN
@@ -14,7 +14,7 @@ DECLARE
 			INTO   v_countuser
 			FROM   tbuser u
 			WHERE  u.mail=p_mail
-			AND    u.state=1
+			AND   (u.state=2 OR u.state=1)
 			LIMIT  1;
 			
 		EXCEPTION WHEN NO_DATA_FOUND THEN
@@ -31,7 +31,6 @@ DECLARE
 					INTO   p_iduser,p_name,p_surname,v_state
 					FROM  tbuser u
 					WHERE u.mail=p_mail
-					AND   u.state=1
 					LIMIT 1; 
 				EXCEPTION WHEN NO_DATA_FOUND THEN
 					BEGIN
@@ -39,12 +38,11 @@ DECLARE
 						RAISE LOG 'Usuario no existe con email % estado %',p_mail,p_state;
 					END;
 				END;
-				
-				
+						
 				UPDATE tbuser 
-				SET    actuallylink=p_activelink
+				SET    actuallykey=p_actuallykey
 				WHERE mail=p_mail
-				AND   state=1;
+				AND   state=1 or state=2;
 				p_result='OK';
 				RAISE NOTICE 'Actualizacion de usuario para recuperar password (%,%,%)',p_mail,p_name,p_surname;
 				

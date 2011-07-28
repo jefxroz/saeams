@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION f_activatestudent(IN integer, IN character varying, O
 $BODY$ 
 DECLARE
 	p_iduser ALIAS FOR $1;
-	p_actuallylink ALIAS FOR $2;
+	p_actuallykey ALIAS FOR $2;
 	v_countuser int;
 	BEGIN
 
@@ -15,7 +15,7 @@ DECLARE
 			INTO   v_countuser
 			FROM   tbuser u
 			WHERE  u.iduser=p_iduser
-			AND    u.actuallylink=p_actuallylink
+			AND    u.actuallykey=p_actuallykey
 			AND    u.state=2
 			LIMIT  1;
 		EXCEPTION WHEN NO_DATA_FOUND THEN
@@ -29,16 +29,16 @@ DECLARE
 			BEGIN
 				UPDATE  tbuser 
 				SET    state=1,
-				       actuallylink=''
+				       actuallykey=''
 				WHERE  iduser=p_iduser
-				AND    actuallylink=p_actuallylink
+				AND    actuallykey=p_actuallykey
 				AND    state=2;
 				p_result='OK';
-				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallylink;
+				RAISE NOTICE 'Activacion de cuenta para los parametros (%,%)',p_iduser,p_actuallykey;
 			EXCEPTION WHEN unique_violation THEN
 				BEGIN
 					p_result='Error no se puede realizar la accion solicitada';
-					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallylink;
+					RAISE LOG 'No se puede realizar Actualizacion de estado tbuser con los parametros (%,%)',p_iduser,p_actuallykey;
 					ROLLBACK;
 				END;
 			END;
