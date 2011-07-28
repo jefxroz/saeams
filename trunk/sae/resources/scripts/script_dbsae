@@ -218,11 +218,11 @@ CREATE TABLE TbDeveloper (
   PRIMARY KEY (iddeveloper));
 CREATE TABLE TbHIstoryUserMail (
   idhistoryusermail  SERIAL NOT NULL, 
-  activatelink      int4 NOT NULL, 
+  activatelink      varchar(255) NOT NULL, 
   Iduser            int4 NOT NULL, 
   historydate       timestamp(6) NOT NULL, 
-  operation         int4 UNIQUE, 
-  idpage            int4 NOT NULL, 
+  operation         varchar(200), 
+  idpage            int4, 
   PRIMARY KEY (idhistoryusermail));
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkUserHisotryShedule FOREIGN KEY (idusertrainer) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryInstitucion ADD CONSTRAINT fkInstitucionHistoryInstitution FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution) ON UPDATE Cascade ON DELETE Cascade;
