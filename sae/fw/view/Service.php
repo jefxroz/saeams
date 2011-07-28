@@ -27,5 +27,9 @@
 			echo $objservice->ActivateRecover($code, $activatekey,$password);
 		}
 	}
+	else if($service=='menu')
+	{
+		echo 'hola';
+	}
 	
 ?>
