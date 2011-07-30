@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION validateUser(IN character varying,IN character varying,OUT p_num integer,OUT p_id integer, OUT p_result character varying)
+CREATE OR REPLACE FUNCTION f_validateuser(IN character varying, IN character varying, OUT p_num integer, OUT p_id integer, OUT p_result character varying)
   RETURNS SETOF record AS
 $BODY$
 DECLARE
