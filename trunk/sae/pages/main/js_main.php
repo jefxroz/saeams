@@ -42,6 +42,7 @@
 		});
 		
 	});
+	
 	function cancel(){
 		id_page="0";
 		$('div[name|="pg_registrer"]').each(function(index) {
