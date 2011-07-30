@@ -23,11 +23,16 @@
 	
 				<img src="../.././resources/images/FACING.png" alt="" width="80" height="80" class="image" />
 	</td>
-	<td width="80%">
+	<td width="70%">
 	<h1>
 				Campus Virtual SAE-SAP
 				<br>
 				Facultad de Ingenieria
+	</h1>
+	</td>
+	<td width="10%">
+	<h1>
+
 	</h1>
 	</td>
 	<td width="10%">
