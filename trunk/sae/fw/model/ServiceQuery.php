@@ -80,6 +80,7 @@
 				$row = $this->objconn->getRow($result,0 );
 								
 				$objuser->setIdUser($row[1]);
+				$objuser->setName($row[2]);
 				if($objuser->getIdUser())
 				{
 					while($row = $this->objconn->getResult($result))
@@ -94,9 +95,38 @@
 					{
 						$objuser->setPrivileges($privileges);
 					}
+					
+					if($this->objconn->prepared("GET_USER","SELECT * from tbuser where iduser=$1"))
+					{
+						$param=array($objuser->getIdUser());
+						$resultu=$this->objconn->ejecuteStatement("GET_USER", $param);
+						$rowu=$this->objconn->getRow($resultu,0);
+						$objuser->setMail($rowu[1]);
+						$objuser->setPassword($rowu[2]);
+						$objuser->setId($rowu[3]);
+						$objuser->setName($rowu[4]);
+						$objuser->setSurname($rowu[5]);
+						$objuser->setAddress($rowu[6]);
+						$objuser->setGender($rowu[7]);
+						$objuser->setBirthDate($rowu[8]);
+						$objuser->setCarnet($rowu[9]);
+						$objuser->setUnity($rowu[10]);
+						$objuser->setExtention($rowu[11]);
+						$objuser->setCareer($rowu[12]);
+					}
 					return true;
 				}
 				return false;
+			}
+		}
+		public function updateChangeProfile(&$objuser)
+		{
+			if($this->objconn->prepared("UPDATE_PROFILE","SELECT * from f_updateuser($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18);"))
+			{	
+				$result=$this->objconn->ejecuteStatement("UPDATE_PROFILE",$objuser->get());
+				$row = $this->objconn->getRow($result,0 );
+				$objuser->setIdUser($row[1]);
+				return $row[0];
 			}
 		}
 		
