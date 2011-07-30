@@ -47,8 +47,8 @@
 			$result=$this->objservice->insertUserStudent($this->objuser);
 			if($result=='OK')
 			{
-				$objmail=new Mailer($this->objuser);
-				$resultmail=$objmail->sender($result);
+				//$objmail=new Mailer($this->objuser);
+				//$resultmail=$objmail->sender($result);
 			}
 			$this->getResult($result,$resultmail);
 		}
@@ -86,6 +86,13 @@
 				$result='Problema';
 				return false;
 			}
+		}
+		
+		public function changeProfile()
+		{
+			$result='OK';
+			$result=$this->objservice->updateChangeProfile($this->objuser);
+			return $this->getResult($result,$resultmail);
 		}
 	} 
 ?>
