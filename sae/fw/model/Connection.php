@@ -85,9 +85,8 @@
 		public function ejecuteQueryParameters($p_query,$p_parameters)
 		{
 			$this->total_querys++;  
-			$l_namequery=preparedQuery($p_query);
-			$l_result = pg_execute($this->conexion, $l_namequery, $p_parameters); 
-			return $this->validateResult($l_result);
+			$result = pg_execute($this->conexion, $l_namequery, $p_parameters); 
+			return $this->validateResult($result);
 		}
 		
 		public function ejecuteQueryOne($p_query,$p_parameters){
