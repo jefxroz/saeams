@@ -19,6 +19,9 @@
 include("top_page.php"); 
 ?>
 <script type="text/javascript" >
+
+var url='../../../fw/view/User.php?service=4';
+
 $().ready(function() {
 	$.extend($.fn.validatebox.defaults.rules, {
 		minLength: {
@@ -43,12 +46,45 @@ $().ready(function() {
 	});
 });
 
+function saveUser()
+{
+
+	$('#fm_updateuser').form('submit',{
+		url: url,
+		onSubmit: function(){
+			return $(this).form('validate');
+		},
+		success: function(result){
+			alert(url);
+			var result = eval('('+result+')');
+			
+			if (result.success){
+				$.messager.show({
+					title: 'Modificacion de perfil Exitoso',
+					msg: 'Se ha modificado perfil sin Problemas!!!'
+				});
+				cancel();		// close the dialog
+				
+			} else {
+				$.messager.show({
+					title: 'Error',
+					msg: result.msg
+				});
+			}
+		}
+	});
+}
+
+
 </script>
 
 </head>
 <body>
 	<div id="wrapper">	
 		<div id="content">
+		<div align="right"> Bienvenido:
+		<?php echo $objuser->getName()." ".$objuser->getSurname(); ?>
+		 | <a  onclick="javascript:tu_funcion()">Salir</a></div>
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
@@ -69,22 +105,22 @@ $().ready(function() {
 
 
 
-	<form method="post" id="fm_register" action="">
+	<form method="post" id="fm_updateuser" action="">
 
 	<div id="panelm1" class="easyui-panel" title="Datos de acceso"   style="background:#fafafa;">
 		<br/>
 		<table width="100%" border="0" cellspacing="3" cellpadding="3" >		
 				<tr>
 					<td width="35%"  align="left"><label  >* Correo Electr&oacute;nico: </label></td>
-					<td width="65%" ><label  >micorreo@gmail.com </label></td>
+					<td width="65%" ><label  ><?php echo $objuser->getMail();?> </label></td>
 				</tr>
 				<tr>
 					<td width="35%" align="left"><label for="id_password">* Elige una contrase&ntilde;a: </label></td>
-					<td width="65%" ><input type="password" name="id_password" id="id_password" class="easyui-validatebox"  size="30"  validType="minLength[5]" /></td>
+					<td width="65%" ><input type="password" name="id_password" id="id_password" class="easyui-validatebox"  size="30"  validType="minLength[5]" value="<?php echo $objuser->getPassword();?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%" align="left"><label for="id_pass_comp">* Vuelve a introducir la contrase&ntilde;a: </label></td>
-					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox"  size="30"  validType="txt_valid_pass" /></td>
+					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox"  size="30"  validType="txt_valid_pass" value="<?php echo $objuser->getPassword();?>" /></td>
 				</tr>
 		</table>
 	</div>	
@@ -95,29 +131,29 @@ $().ready(function() {
 	<table width="100%" border="0" cellspacing="3" cellpadding="3" >
 				<tr>
 					<td width="35%"  align="left"><label for="id_id">DPI / Cedula: </label></td>
-					<td width="65%"><input type="text" name="id_id" id="id_id" size="30" /></td>
+					<td width="65%"><input type="text" name="id_id" id="id_id" size="30" value="<?php echo $objuser->getId();?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label >* Nombre: </label></td>
-					<td width="65%"><label  >ejemplo de nombre </label></td>
+					<td width="65%"><label  ><?php echo $objuser->getName();?> </label></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label >* Apellido: </label></td>
-					<td width="65%"><label  >ejemplo de apellido</label></td>
+					<td width="65%"><label  ><?php echo $objuser->getSurname();?></label></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_address">* Direcci&oacute;n: </label></td>
-					<td width="65%"><input type="text" name="id_address" id="id_address" class="easyui-validatebox" size="70" /></td>
+					<td width="65%"><input type="text" name="id_address" id="id_address" class="easyui-validatebox" size="70" value="<?php echo $objuser->getAddress();?>" /></td>
 				</tr>
 				<tr>
 					<td width="35%"   align="left"><label for="id_gender">* Genero: </label><br/></td>
 					<td width="65%">
-						<label  >genero</label>
+						<label  ><?php  if($objuser->getGender()==0){echo "MASCULINO";} else{echo "FEMENINO";} ?></label>
 					</td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_birthdate">* Fecha de Nacimiento: </label><P></td>
-					<td width="65%"><label  >fecha_nacimiento</label></td>
+					<td width="65%"><label  ><?php echo $objuser->getBirthDate();?></label></td>
 				</tr>
 	</table>
 	</div>
@@ -128,19 +164,19 @@ $().ready(function() {
 	<table width="100%" border="0" cellspacing="3" cellpadding="3" >
 				<tr>
 					<td width="35%"  align="left"><label for="id_carnet">Carnet: </label><br/></td>
-					<td width="65%"><input  name="id_carnet" id="id_carnet"  class="easyui-numberbox" type="text" precision="0"  /></td>
+					<td width="65%"><input  name="id_carnet" id="id_carnet"  class="easyui-numberbox" type="text" precision="0" value="<?php echo $objuser->getCarnet();?>" /></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_unity">Unidad: </label></td>
-					<td width="65%"><input type="text" name="id_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
+					<td width="65%"><input type="text" name="id_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo $objuser->getUnity();?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_extention">Extensi&oacute;n: </label></td>
-					<td width="65%"><input type="text" name="id_extention" id="id_extention" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" /></td>
+					<td width="65%"><input type="text" name="id_extention" id="id_extention" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo $objuser->getExtention();?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_career">Carrera: </label><P></td>
-					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  /><P></td>
+					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  value="<?php echo $objuser->getCareer();?>"/><P></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_page"></label><P></td>
@@ -184,7 +220,7 @@ $().ready(function() {
 		}
 		else
 		{
-			header("Location: .././index.php");
+			header("Location: http://localhost/Proyectos/sae/pages/index.php");
 		}
 		
 		
