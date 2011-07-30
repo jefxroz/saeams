@@ -1,0 +1,184 @@
+CREATE OR REPLACE FUNCTION f_updateuser(IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN integer, IN integer, IN timestamp without time zone, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN character varying, OUT p_result character varying, OUT p_iduser integer)
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_mail ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	p_id ALIAS FOR $3;
+	p_name ALIAS FOR $4;  	
+  	p_surname ALIAS FOR $5;
+	p_address ALIAS FOR $6;
+	p_gender ALIAS FOR $7;
+	p_idtypeschool ALIAS FOR $8;
+  	p_birthdate ALIAS FOR $9;
+  	p_phone ALIAS FOR $10;
+  	p_celular ALIAS FOR $11;
+  	p_carnet ALIAS FOR $12;
+	p_unity ALIAS FOR $13;
+  	p_extention ALIAS FOR $14;
+  	p_career ALIAS FOR $15;
+	p_state ALIAS FOR $16;
+  	p_idtypetrainer ALIAS FOR $17;
+  	p_actuallykey  ALIAS FOR $18;
+	v_countuser int;
+	v_mail     character varying;
+	v_password character varying;
+	v_id       character varying;
+	v_name     character varying;
+	v_surname  character varying;
+	v_address  character varying;
+	v_gender   int;
+	v_idtypeschool int;
+	v_birthdate    date;
+	v_phone        int;
+	v_celular      int;
+	v_carnet       int;
+	v_unity        int;
+	v_extention    int;
+	v_career       int;
+	v_idtypetrainer int;
+	
+	
+	BEGIN
+
+		BEGIN
+
+			SELECT count(iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.iduser=p_iduser
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser=1 THEN
+			BEGIN
+				BEGIN
+					SELECT mail,password,id,name,surname,address,gender,birthdate,phone,celular,carnet,unity,extention,career,idtypetrainer,idtypeschool
+					INTO   v_mail,v_password,v_id,v_name,v_surname,v_address,v_gender,v_birthdate,v_phone,v_celular,v_carnet,v_unity,v_career,v_idtypetrainer,v_idtypeschool
+					FROM   tbuser
+					WHERE iduser=p_iduser;
+				END;
+				
+				BEGIN
+					
+					IF p_mail != v_mail
+						v_mail = p_mail;	
+					END IF;
+					
+					IF p_password != v_password
+						v_password = p_password;
+					END IF;
+					
+					IF p_id != v_id
+						v_id = p_id;
+					END IF;
+					
+					IF p_name != v_name
+						v_name = p_name;
+					END IF;
+					
+					IF p_surname != v_surname
+						v_surname = p_surname;
+					END IF;
+				
+					IF p_address != v_address
+						v_address = p_address;
+					END IF;
+					
+					IF p_gender != v_gender
+						v_gender = p_gender;
+					END IF;
+					
+					IF p_birthdate != v_birthdate
+						v_birthdate = p_birthdate;
+					END IF;
+					
+					IF p_phone != v_phone
+						v_phone = p_phone;
+					END IF;
+					
+					IF p_celular != v_celular
+						v_celular = p_celular
+					END IF;
+					
+					IF p_carnet != v_carnet
+						v_carnet = p_carnet 
+					END IF;
+					
+					IF p_unity != v_unity
+						v_unity = p_unity;
+					END IF;
+					
+					IF p_extention != v_extention
+						v_extention = p_extention;
+					END IF;
+					
+					IF p_career != v_career
+						v_career=p_career;
+					END IF;
+					
+					IF p_idtypetrainer != v_idtypetrainer
+						v_idtypetrainer = p_idtypetrainer;
+					END IF;
+										
+					IF p_idtypeschool != v_idtypeschool
+						v_idtypeschool = p_idtypeschool;
+					END IF;
+					
+				END;
+				
+				
+				UPDATE  tbuser 
+				SET     mail=v_mail,
+				        password=v_password,
+				        id=v_id,
+				        name=v_name,
+				        surname=v_surname,
+				        address=v_address,
+				        gender=v_gender,
+				        birthdate=v_birthdate,
+				        phone=v_phone,
+				        celular=v_celular,
+				        carnet=v_carnet,
+				        unity=v_unity,
+				        extention=v_extention,
+				        career=v_career,
+				        idtypetrainer=v_idtypetrainer,
+				        idtypeschool=v_idtypeschool 
+				WHERE   iduser=p_iduser; 
+				p_result='OK';
+				RAISE NOTICE 'Actualizacion del usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,v_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_state,v_idtypetrainer;
+				
+				IF p_result='OK' THEN
+				
+					BEGIN
+						SELECT iduser
+						INTO   p_iduser
+						FROM tbuser
+						WHERE mail=p_mail;
+					END;
+				
+				END IF;
+				
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la actualizacion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,p_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_state,v_idtypetrainer;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='El usuario con email: '||'"'||p_mail||'"'||'  ya esta en uso';
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
