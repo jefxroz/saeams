@@ -204,7 +204,7 @@ if($service==4)
 	  )
 	{
 	
-		$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),2,null);
+		$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null);
 		$objcontroller->registerStudent();	
 	}
 	else
