@@ -9,23 +9,20 @@
 		
 		public function Mail()
 		{  
-			/*$this->mail = new PHPMailer();
+			$this->mail = new PHPMailer();
 			$this->mail->IsSMTP();
 			$this->mail->SMTPAuth = true;
 			$this->mail->SMTPSecure = "ssl";
-			//$this->mail->Host = "smtp.gmail.com";
-			//$this->mail->Port = 465;
-			//$this->mail->Username = "no.reply.saesap@gmail.com";
-			//$this->mail->Password = "Sa35apwe8";
-			
-			$this->mail->Host = "correo.ingenieria-usac.edu.gt";
+			$this->mail->Host = "smtp.gmail.com";
+			$this->mail->Port = 465;
+			$this->mail->Username = "no.reply.saesap@gmail.com";
+			$this->mail->Password = "Sa35apwe8";
+			/*$this->mail->Host = "correo.ingenieria-usac.edu.gt";
 			$this->mail->Port = 25;
 			$this->mail->Username = "itcoeprueba";
-			$this->mail->Password = "itcoe42";
-			
-			
-			$this->mail->From = "itcoeprueba@ingenieria-usac.edu.gt";
-			$this->mail->FromName = "Equipo SAESAP";*/
+			$this->mail->Password = "itcoe42";*/
+			$this->mail->From = "no.reply.saesap@gmail.com";
+			$this->mail->FromName = "Equipo SAESAP";
 		}
 					
 		public function send($mail,$name,$surname,$subject,$message,$messagetxt,&$result)
