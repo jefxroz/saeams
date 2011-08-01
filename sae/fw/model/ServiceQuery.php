@@ -121,9 +121,9 @@
 		}
 		public function updateChangeProfile(&$objuser)
 		{
-			if($this->objconn->prepared("UPDATE_PROFILE","SELECT * from f_updateuser($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18);"))
+			if($this->objconn->prepared("UPDATE_PROFILE","SELECT * from f_updateuser($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19);"))
 			{	
-				$result=$this->objconn->ejecuteStatement("UPDATE_PROFILE",$objuser->get());
+				$result=$this->objconn->ejecuteStatement("UPDATE_PROFILE",$objuser->getAll());
 				$row = $this->objconn->getRow($result,0 );
 				$objuser->setIdUser($row[1]);
 				return $row[0];

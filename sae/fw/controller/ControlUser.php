@@ -88,9 +88,10 @@
 			}
 		}
 		
-		public function changeProfile()
+		public function editProfile($iduser)
 		{
 			$result='OK';
+			$this->objuser->setIdUser($iduser);
 			$result=$this->objservice->updateChangeProfile($this->objuser);
 			return $this->getResult($result,$resultmail);
 		}
