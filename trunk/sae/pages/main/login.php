@@ -14,7 +14,7 @@
 		<div name ="pg_login" >
 		
 			<div id="p" class="easyui-panel" title="SAE-SAP"  style="background:#fafafa;">
-				<form  action="http://localhost/Proyectos/sae/fw/view/User.php?service=3" method="post">	
+				<form  action=".././fw/view/User.php?service=3" method="post">	
 				
 				<h3 align="center"> INGRESO </h3>
 							<div align="center">					
