@@ -20,7 +20,7 @@ include("top_page.php");
 ?>
 <script type="text/javascript" >
 
-var url='../../../fw/view/User.php?service=4';
+var url='../.././fw/view/User.php?service=4';
 
 $().ready(function() {
 	$.extend($.fn.validatebox.defaults.rules, {
@@ -109,10 +109,14 @@ function saveUser()
 
 	<div id="panelm1" class="easyui-panel" title="Datos de acceso"   style="background:#fafafa;">
 		<br/>
+		
 		<table width="100%" border="0" cellspacing="3" cellpadding="3" >		
+				
 				<tr>
 					<td width="35%"  align="left"><label  >* Correo Electr&oacute;nico: </label></td>
-					<td width="65%" ><label  ><?php echo $objuser->getMail();?> </label></td>
+					<td width="65%" ><label  ><?php echo $objuser->getMail();?> </label>
+					<input type="hidden" name="id_user" id="id_user"  value="<?php echo $objuser->getIdUser();?>"/>
+					</td>
 				</tr>
 				<tr>
 					<td width="35%" align="left"><label for="id_password">* Elige una contrase&ntilde;a: </label></td>
