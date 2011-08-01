@@ -81,7 +81,7 @@ if($service==1)
 	  )
 	{
 	
-		$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),2,null);
+		$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null);
 		$objcontroller->registerStudent();	
 	}
 	else
@@ -136,42 +136,44 @@ else if($service==3)
 }
 if($service==4)
 {
-	$mail = $_REQUEST['id_mail'];
-	$valmail=new ValidatorMail('Correo',$mail,true);
-
+	//$mail = $_REQUEST['id_mail'];
+	//$valmail=new ValidatorMail('Correo',$mail,true);
+	
+	$iduser=$_REQUEST['id_user'];
+	
 	$password = $_REQUEST['id_password'];
 	$passcomp = $_REQUEST['id_pass_comp'];
-	$valpassword=new ValidatorPassword('Contraseña',$password,true);
+	$valpassword=new ValidatorPassword('Contraseña',$password,false);
 	$valpassword->setMin(5);
 	
 	$id = $_REQUEST['id_id'];
 	$valid=new ValidatorDefault('DPI o Cedula',$id,false);
 
-	$name = $_REQUEST['id_name'];
-	$valname=new ValidatorDefault('Nombre',$name,true);
+	//$name = $_REQUEST['id_name'];
+	//$valname=new ValidatorDefault('Nombre',$name,true);
 
-	$surname = $_REQUEST['id_surname'];
-	$valsurname=new ValidatorDefault('Surname',$surname,true);
+	//$surname = $_REQUEST['id_surname'];
+	//$valsurname=new ValidatorDefault('Surname',$surname,true);
 
 	$address = $_REQUEST['id_address'];
 	$valaddress=new ValidatorDefault('Direccion',$address,true);
 
-	$gender = $_REQUEST['id_gender'];
-	$valgender=new ValidatorInteger('Genero',$gender,true);
+	//$gender = $_REQUEST['id_gender'];
+	//$valgender=new ValidatorInteger('Genero',$gender,true);
 
-	$school = $_REQUEST['id_school'];
-	$valschool=new ValidatorInteger('Escolaridad',$school,true);
+	//$school = $_REQUEST['id_school'];
+	//$valschool=new ValidatorInteger('Escolaridad',$school,true);
 	
-	$birthdate= $_REQUEST['id_birthdate'];
-	$valbirthdate=new ValidatorDate('Fecha',$birthdate,true);
+	//$birthdate= $_REQUEST['id_birthdate'];
+	//$valbirthdate=new ValidatorDate('Fecha',$birthdate,true);
 	
-	$phone= $_REQUEST['id_phone'];
-	$valphone=new ValidatorInteger('Telefono',$phone,false);
-	$valphone->setMin(8);
+	//$phone= $_REQUEST['id_phone'];
+	//$valphone=new ValidatorInteger('Telefono',$phone,false);
+	//$valphone->setMin(8);
 	
-	$celular= $_REQUEST['id_celular'];
-	$valcelular=new ValidatorInteger('Celular',$phone,false);
-	$valcelular->setMin(8);
+	//$celular= $_REQUEST['id_celular'];
+	//$valcelular=new ValidatorInteger('Celular',$phone,false);
+	//$valcelular->setMin(8);
 	
 	$carnet= $_REQUEST['id_carnet'];
 	$valcarnet=new ValidatorInteger('Carnet',$carnet,false);
@@ -190,22 +192,30 @@ if($service==4)
 	$valcareer=new ValidatorInteger('Carrera',$career,false);
 	$valcareer->setMin(2);
 	
-	$captcha=$_REQUEST['id_captcha'];
-	$hidcapcha=$_REQUEST['id_hid_captcha'];
-	$valcaptcha=new ValidatorCaptcha('Captcha',$captcha,$hidcapcha,true);
+	//$captcha=$_REQUEST['id_captcha'];
+	//$hidcapcha=$_REQUEST['id_hid_captcha'];
+	//$valcaptcha=new ValidatorCaptcha('Captcha',$captcha,$hidcapcha,true);
 	
-	
-	if(
+	/*if(
 		$valmail->verify() and $valpassword->verify($passcomp) and $valid->verify() and 
 	   	$valname->verify() and $valsurname->verify() and $valaddress->verify() and 
 	   	$valgender->verify() and $valschool->verify() and $valbirthdate->verify() and
 	   	$valcarnet->verify() and $valphone->verify() and $valcelular->verify() and 
-	   	$valunity->verify() and $valextention->verify() and $valcareer->verify() and $valcaptcha->verify()
+	   	$valunity->verify() and $valextention->verify() and $valcareer->verify()
+	  )*/
+	if(
+		$valpassword->verify($passcomp) and $valid->verify() and 
+	   	$valaddress->verify() and 
+	   	$valcarnet->verify() and 
+	   	$valunity->verify() and $valextention->verify() and $valcareer->verify()
 	  )
 	{
 	
-		$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null);
-		$objcontroller->registerStudent();	
+		//$objcontroller=new ControlUser($valmail->getField(), $valpassword->getField(),$valid->getField(),$valname->getField(),$valsurname->getField(),$valaddress->getField(),$valgender->getField(),$valschool->getField(),$valbirthdate->getField(),$valphone->getField(),$valcelular->getField(),$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),1,null);
+		$objcontroller=new ControlUser(null, $valpassword->getField(),$valid->getField(),null,null,$valaddress->getField(),null,null,null,null,null,$valcarnet->getField(),$valunity->getField(),$valextention->getField(),$valcareer->getField(),null,null);
+	
+		$objcontroller->editProfile($iduser);
+			
 	}
 	else
 	{

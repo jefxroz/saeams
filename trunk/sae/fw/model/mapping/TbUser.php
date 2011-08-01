@@ -2,7 +2,7 @@
 
 class TbUser {
   
-	private $idUser;
+	private $iduser;
   
   	private $mail;
   
@@ -76,12 +76,12 @@ class TbUser {
 	
   	public function &getIdUser() 
   	{
-    	return $this->idUser;
+    	return $this->iduser;
   	}
   
-  	public function setIdUser(&$idUser) 
+  	public function setIdUser(&$iduser) 
   	{
-    	$this->idUser = $idUser;
+    	$this->iduser = $iduser;
   	}
     
   	public function &getName() 
@@ -279,6 +279,13 @@ class TbUser {
   	public function get() 
   	{	
   		$parameters=array($this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->idtypeschool,$this->birthdate,$this->phone,$this->celular,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer,$this->activatelink);
+  		return $parameters;
+  	}
+  	
+	public function getAll() 
+  	{	
+  		
+  		$parameters=array($this->iduser,$this->mail,$this->password,$this->id,$this->name,$this->surname,$this->address,$this->gender,$this->idtypeschool,$this->birthdate,$this->phone,$this->celular,$this->carnet,$this->unity,$this->extention,$this->career,$this->state,$this->idtypetrainer,$this->activatelink);
   		return $parameters;
   	}
   	
