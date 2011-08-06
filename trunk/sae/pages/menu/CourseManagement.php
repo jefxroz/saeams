@@ -1,3 +1,15 @@
+<?php 
+	require_once("../.././fw/model/mapping/TbUser.php");
+	require_once("../.././fw/model/mapping/TbPrivilege.php");
+	session_start();
+
+	//echo 'Hola';
+	$objuser = unserialize($_SESSION['usuario']);	
+	if($objuser)
+	{
+		$privileges=$objuser->getPrivileges();	
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//ES" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -98,4 +110,13 @@
 	</div>
 	</body>
 </html>
+<?php
+
+		}
+		else
+		{
+			header("Location: http://localhost/Proyectos/sae/pages/index.php");
+		}
 		
+		
+?>
