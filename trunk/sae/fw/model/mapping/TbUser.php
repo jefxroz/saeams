@@ -130,7 +130,7 @@ class TbUser {
     	return $this->password;
   	}
  	
-  	public function setPassword(&$password) {
+  	public function setPassword($password) {
     	$this->password = $password;
   	}
   
@@ -298,6 +298,11 @@ class TbUser {
 	public function getValidate()
   	{
   		$parameters=array($this->mail,$this->password);
+  		return $parameters;
+  	}
+	public function getProfile()
+  	{
+  		$parameters=array($this->iduser,$this->password,$this->id,$this->address,$this->carnet,$this->unity,$this->extention,$this->career);
   		return $parameters;
   	}
 }

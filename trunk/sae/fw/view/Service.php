@@ -27,9 +27,11 @@
 			echo $objservice->ActivateRecover($code, $activatekey,$password);
 		}
 	}
-	else if($service=='menu')
+	else if($service=='logout')
 	{
-		echo 'hola';
+		session_start();
+		session_destroy();
+		header("Location: http://localhost/Proyectos/sae/pages/index.php");
 	}
 	
 ?>

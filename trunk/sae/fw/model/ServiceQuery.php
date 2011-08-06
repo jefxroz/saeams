@@ -109,10 +109,10 @@
 						$objuser->setAddress($rowu[6]);
 						$objuser->setGender($rowu[7]);
 						$objuser->setBirthDate($rowu[8]);
-						$objuser->setCarnet($rowu[9]);
-						$objuser->setUnity($rowu[10]);
-						$objuser->setExtention($rowu[11]);
-						$objuser->setCareer($rowu[12]);
+						$objuser->setCarnet($rowu[11]);
+						$objuser->setUnity($rowu[12]);
+						$objuser->setExtention($rowu[13]);
+						$objuser->setCareer($rowu[14]);
 					}
 					return true;
 				}
@@ -121,9 +121,9 @@
 		}
 		public function updateChangeProfile(&$objuser)
 		{
-			if($this->objconn->prepared("UPDATE_PROFILE","SELECT * from f_updateuser($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19);"))
+			if($this->objconn->prepared("UPDATE_PROFILE","SELECT * from f_editprofile($1,$2,$3,$4,$5,$6,$7,$8);"))
 			{	
-				$result=$this->objconn->ejecuteStatement("UPDATE_PROFILE",$objuser->getAll());
+				$result=$this->objconn->ejecuteStatement("UPDATE_PROFILE",$objuser->getProfile());
 				$row = $this->objconn->getRow($result,0 );
 				$objuser->setIdUser($row[1]);
 				return $row[0];

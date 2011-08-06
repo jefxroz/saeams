@@ -92,6 +92,7 @@
 		{
 			$result='OK';
 			$this->objuser->setIdUser($iduser);
+			if(!$this->objuser->getPassw()){	$this->objuser->setPassword(null);}
 			$result=$this->objservice->updateChangeProfile($this->objuser);
 			return $this->getResult($result,$resultmail);
 		}
