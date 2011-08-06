@@ -1,0 +1,94 @@
+CREATE OR REPLACE FUNCTION f_editprofile(IN integer, IN character varying, IN character varying, IN character varying, IN integer, IN integer, IN integer, IN integer,OUT p_result character varying, OUT p_iduser integer)
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_iduser   ALIAS FOR $1;
+	p_password ALIAS FOR $2;
+	p_id ALIAS FOR $3;
+	p_address ALIAS FOR $4;
+	p_carnet ALIAS FOR $5;
+	p_unity ALIAS FOR $6;
+  	p_extention ALIAS FOR $7;
+  	p_career ALIAS FOR $8;
+	v_countuser integer;
+	v_password character varying;
+	v_id       character varying;
+	v_address  character varying;
+	v_carnet       integer;
+	v_unity        integer;
+	v_extention    integer;
+	v_career       integer;
+	
+	
+	BEGIN		
+		BEGIN
+
+			SELECT count(iduser)
+			INTO   v_countuser
+			FROM   tbuser u
+			WHERE  u.iduser=p_iduser
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Usuario no existe con email %',p_mail;
+			END;
+		END;
+
+		IF v_countuser=1 THEN
+			BEGIN
+				BEGIN
+					SELECT password
+					INTO   v_password
+					FROM   tbuser
+					WHERE iduser=p_iduser;
+				END;
+				
+				BEGIN
+
+					IF p_password != v_password and p_password IS NOT NULL THEN
+						v_password = p_password;
+					END IF;
+					
+				END;
+				
+				
+				UPDATE  tbuser 
+				SET     password=v_password,
+				        address=p_address,
+				        carnet=p_carnet,
+				        unity=p_unity,
+				        extention=p_extention,
+				        career=p_career
+				WHERE   iduser=p_iduser; 
+				p_result='OK';
+				RAISE NOTICE 'Actualizacion del usuario con los parametros (%,%,%,%,%,%,%)',p_password,p_id,p_address,p_carnet,p_unity,p_extention,p_career;
+				
+				IF p_result='OK' THEN
+				
+					BEGIN
+						SELECT iduser
+						INTO   p_iduser
+						FROM tbuser
+						WHERE iduser=p_iduser;
+					END;
+				
+				END IF;
+				
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la actualizacion de tbuser con los parametros (%,%,%,%,%,%,%)',v_password,v_id,v_address,v_carnet,v_unity,v_extention,v_career,v_idtypetrainer;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='El usuario con email: '||'"'||p_mail||'"'||'  ya esta en uso';
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
