@@ -55,7 +55,6 @@ function saveUser()
 			return $(this).form('validate');
 		},
 		success: function(result){
-			alert(url);
 			var result = eval('('+result+')');
 			
 			if (result.success){
@@ -84,7 +83,7 @@ function saveUser()
 		<div id="content">
 		<div align="right"> Bienvenido:
 		<?php echo $objuser->getName()." ".$objuser->getSurname(); ?>
-		 | <a  onclick="javascript:tu_funcion()">Salir</a></div>
+		 | <a  href="../.././fw/view/Service.php?service=logout">Salir</a></div>
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
@@ -119,12 +118,16 @@ function saveUser()
 					</td>
 				</tr>
 				<tr>
+					<td width="35%" align="left"><label for="id_password_actually">* contrase&ntilde;a actual: </label></td>
+					<td width="65%" ><label  ><?php echo $objuser->getPassword();?> </label></td>
+				</tr>
+				<tr>
 					<td width="35%" align="left"><label for="id_password">* Elige una contrase&ntilde;a: </label></td>
-					<td width="65%" ><input type="password" name="id_password" id="id_password" class="easyui-validatebox"  size="30"  validType="minLength[5]" value="<?php echo $objuser->getPassword();?>"/></td>
+					<td width="65%" ><input type="password" name="id_password" id="id_password" class="easyui-validatebox"  size="30"  validType="minLength[5]" value=""/></td>
 				</tr>
 				<tr>
 					<td width="35%" align="left"><label for="id_pass_comp">* Vuelve a introducir la contrase&ntilde;a: </label></td>
-					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox"  size="30"  validType="txt_valid_pass" value="<?php echo $objuser->getPassword();?>" /></td>
+					<td width="65%" ><input type="password" name="id_pass_comp" id="id_pass_comp" class="easyui-validatebox"  size="30"  validType="txt_valid_pass" value="" /></td>
 				</tr>
 		</table>
 	</div>	
@@ -172,15 +175,15 @@ function saveUser()
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_unity">Unidad: </label></td>
-					<td width="65%"><input type="text" name="id_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo $objuser->getUnity();?>"/></td>
+					<td width="65%"><input type="text" name="id_unity" id="id_unity" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo str_pad($objuser->getUnity(),2,"0",STR_PAD_LEFT); ?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_extention">Extensi&oacute;n: </label></td>
-					<td width="65%"><input type="text" name="id_extention" id="id_extention" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo $objuser->getExtention();?>"/></td>
+					<td width="65%"><input type="text" name="id_extention" id="id_extention" size="10" type="text"  class="easyui-validatebox"  validType="minLength[2]" value="<?php echo str_pad($objuser->getExtention(),2,"0",STR_PAD_LEFT); ?>"/></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_career">Carrera: </label><P></td>
-					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  value="<?php echo $objuser->getCareer();?>"/><P></td>
+					<td width="65%"><input type="text" name="id_career" id="id_career" size="10"  type="text" class="easyui-validatebox"  validType="minLength[2]"  value="<?php echo str_pad($objuser->getCareer(),2,"0",STR_PAD_LEFT); ?>"/><P></td>
 				</tr>
 				<tr>
 					<td width="35%"  align="left"><label for="id_page"></label><P></td>
