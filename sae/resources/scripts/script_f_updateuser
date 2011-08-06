@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION f_updateuser(IN integer,IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN integer, IN integer, IN timestamp without time zone, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN character varying, OUT p_result character varying, OUT p_iduser integer)
+CREATE OR REPLACE FUNCTION f_updateuser(IN integer, IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN character varying, IN integer, IN integer, IN timestamp without time zone, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN integer, IN character varying, OUT p_result character varying, OUT p_iduser integer)
   RETURNS SETOF record AS
 $BODY$ 
 DECLARE
@@ -71,7 +71,7 @@ DECLARE
 						v_mail = p_mail;	
 					END IF;
 					
-					IF p_password != v_password THEN
+					IF p_password != v_password and p_password IS NOT NULL THEN
 						v_password = p_password;
 					END IF;
 					
@@ -153,7 +153,7 @@ DECLARE
 				        idtypeschool=v_idtypeschool 
 				WHERE   iduser=p_iduser; 
 				p_result='OK';
-				RAISE NOTICE 'Actualizacion del usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,v_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_state,v_idtypetrainer;
+				RAISE NOTICE 'Actualizacion del usuario con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,v_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_idtypetrainer;
 				
 				IF p_result='OK' THEN
 				
@@ -169,7 +169,7 @@ DECLARE
 			EXCEPTION WHEN unique_violation THEN
 				BEGIN
 					p_result='Error no se puede realizar la accion solicitada';
-					RAISE LOG 'Violacion unique Error en la actualizacion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,p_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_state,v_idtypetrainer;
+					RAISE LOG 'Violacion unique Error en la actualizacion de tbuser con los parametros (%,%,%,%,%,%,%,%,%,%,%,%,%)',v_mail,v_password,v_id,p_name,v_surname,v_address,v_gender,v_birthdate,v_carnet,v_unity,v_extention,v_career,v_idtypetrainer;
 					ROLLBACK;
 				END;
 			END;
