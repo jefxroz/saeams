@@ -17,12 +17,12 @@
 <title>Gestionar Cursos - SAE-SAP</title>
 <?php include("top_page.php"); ?>
 	<script>
+		var url;
+	
 		$(function(){
-			$('#test').datagrid({
-				title:'Gestionar Cursos',
+			$('#dgcourse').datagrid({
 				iconCls:'icon-save',
-				width:800,
-				height:400,
+				pageSize:10,
 				nowrap: false,
 				striped: true,
 				collapsible:true,
@@ -30,39 +30,14 @@
 				sortOrder: 'desc',
 				remoteSort: false,
 				idField:'code',
+				
 				frozenColumns:[[
-	                {title:'Codigo',field:'code',width:80,sortable:true}
+	                {title:'Codigo',field:'idcourse',width:80,sortable:true},
 				]],
-				columns:[[
-			        {title:'Informaci&oacute;n de los cursos',colspan:4},
-					{field:'Modd',title:'Modificar',width:100,align:'center', rowspan:2,
-						formatter:function(value,rec){
-							return '<span style="color:red">Edit Delete</span>';
-						}
-					}
-				],[
-					{field:'name',title:'Nombre',width:120},
-					{field:'descr',title:'Descripci&oacute;n',width:120,rowspan:2,sortable:true,
-						sorter:function(a,b){
-							return (a>b?1:-1);
-						}
-					},
-					{field:'Duration',title:'Duraci&oacute;n',width:150},
-					{field:'cost',title:'Costo',width:120}
-				]],
-				pagination:true,
-				rownumbers:true,
-				toolbar:[{
-					id:'btnadd',
-					text:'Crear Curso',
-					iconCls:'icon-add',
-					handler:function(){
-						$('#btnsave').linkbutton('enable');
-						
-					}
-				}]
+				url:'../.././fw/view/Course.php?service=1',
+				pagination:true
 			});
-			var p = $('#test').datagrid('getPager');
+			var p = $('#dgcourse').datagrid('getPager');
 			if (p){
 				$(p).pagination({
 					onBeforeRefresh:function(){
@@ -71,12 +46,39 @@
 				});
 			}
 		});
+
+		function viewCourse(){			
+			var row = $('#dgcourse').datagrid('getSelected');
+
+			if (row){
+				//document.getElementById("namecourse").value='hola';
+				//$('#fmcourse').form('load',row);
+
+				//url = '../.././fw/view/Course.php?service=3&id='+row.idcourse;
+				document.location.href='Course.php?service=4&id='+row.idcourse;
+				
+				
+			}
+			else 
+			{
+				$.messager.show({
+					title: 'Advertencia',
+					msg: 'No se ha seleccionado ningun curso!!!'
+				});
+			}
+
+		}
+		
+			
 </script>
 
 </head>
 <body>
 	<div id="wrapper">	
 		<div id="content">
+		<div align="right"> Bienvenido:
+		<?php echo $objuser->getName()." ".$objuser->getSurname(); ?>
+		 | <a  href="../.././fw/view/Service.php?service=logout">Salir</a></div>
 			<div id="colOne">
 				
 				<?php include("menu.php"); ?>
@@ -95,12 +97,36 @@
 				 			&nbsp;&nbsp;
 				 			<a href="#" class="easyui-linkbutton" iconCls="icon-search">Buscar</a>
 				 			&nbsp;&nbsp;
-				 			<a href="#" class="easyui-linkbutton" iconCls="icon-reload">Mostrar Todos</a>
-				 										
+				 			<a href="#" class="easyui-linkbutton" iconCls="icon-reload">Mostrar Todos</a>							
 					</div>
 				<br/>
-					
-					<table id="test"></table>	         
+					<!--  
+					<table id="test"></table>	 
+					-->  
+				<table id="dgcourse" title="Gestionar Cursos" class="easyui-datagrid" style="width:800px;height:400px" 
+				toolbar="#toolbar" 
+				fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th  width="700" colspan=4>Informaci&oacute;n de los cursos</th>
+						</tr>
+						<tr>
+							<th field="name" width="600">Curso</th>
+							<th field="duration" width="50">Duraci&oacute;n</th>
+							<th field="nameinstitution" width="120" >Nombre de Instituci&oacute;n</th>
+						</tr>
+					</thead>
+				</table>
+
+			<div id="toolbar">
+		
+				<a href="Course.php?service=2" class="easyui-linkbutton" iconCls="icon-add" plain="true" >Crear Curso</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="viewCourse()">Ver Curso</a>
+			</div>
+			
+
+			
+					      
 					<br style="clear:both;" />
 				</div>
 			</div>
