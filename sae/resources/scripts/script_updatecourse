@@ -1,0 +1,79 @@
+CREATE OR REPLACE FUNCTION f_updatecourse(IN integer,IN character varying, IN character varying, IN integer, IN integer,IN character varying, OUT p_result character varying, OUT p_idcourse integer)
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_idcourse ALIAS FOR $1;
+	p_name ALIAS FOR $2;
+	p_description ALIAS FOR $3;
+	p_idinstitution ALIAS FOR $4;
+	p_duration ALIAS FOR $5;
+	p_operation ALIAS FOR $6;
+	  	
+  	v_countcourse int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(idcourse)
+			INTO   v_countcourse
+			FROM   tbcourse u
+			WHERE  u.idcourse=p_idcourse
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos para el usuario seleccionado';
+				RAISE LOG 'Curso no existe con nombre %',p_name;
+			END;
+		END;
+
+		IF v_countcourse>0 THEN
+			BEGIN
+				IF p_operation='ACTUALIZAR' THEN		
+					UPDATE tbcourse 
+					SET name=p_name,
+						description=p_description,
+						idinstitution=p_idinstitution,
+						duration=p_duration
+					WHERE idcourse=p_idcourse
+					AND   state=1;
+				RAISE NOTICE ' el curso para el  idcourse (%) con los parametros (%,%,%,%)',p_idcourse,p_name,p_description,p_idinstitution,p_duration;
+				
+				ELSEIF p_operation='ELIMINAR' THEN
+					UPDATE tbcourse 
+					SET state=0
+					WHERE idcourse=p_idcourse
+					AND   state=1;
+				RAISE NOTICE 'Eliminacion el curso para el  idcourse (%)',p_idcourse;
+				END IF;
+				
+				p_result='OK';
+				
+				IF p_result='OK' THEN
+				
+					BEGIN
+						SELECT idcourse
+						INTO   p_idcourse
+						FROM tbcourse
+						WHERE idcourse=p_idcourse;
+					END;
+				
+				END IF;
+				
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la Actualizacon  de tbcourse con los parametros (%,%,%,%)',p_name,p_description,p_idinstitution,p_duration;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='El curso con nombre: '||'"'||p_name||'"'||'  no existe';
+			RAISE NOTICE 'El curso con nombre: %  no existe',p_name;
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
