@@ -112,3 +112,7 @@ SELECT * FROM f_insertprivilegerol('SECRETARIA','DESASIGNACION');
 SELECT * FROM f_insertprivilegerol('SECRETARIA','VER NOTAS');
 SELECT * FROM f_insertprivilegerol('SECRETARIA','VER NOTAS CURSO');
 SELECT * FROM f_insertprivilegerol('SECRETARIA','VER INFORMACION');
+
+INSERT INTO tbinstitution VALUES(DEFAULT,'ITCOE',1);
+INSERT INTO tbinstitution VALUES(DEFAULT,'SAESAP',1);
+
