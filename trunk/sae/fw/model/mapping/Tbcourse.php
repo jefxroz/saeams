@@ -17,88 +17,41 @@
  * @orm TbCourse
  */
 class TbCourse {
-  public function deleteAndDissociate() {
-    if($this->getIdInstitution() != null) {
-      foreach($this->getIdInstitution()->tbCourse as $index => $obj) {
-        if (($obj->idCourse == $this->idCourse)) {
-          $indexes[] = $index;
-        }
-      }
-      if($indexes) {
-        foreach($indexes as $index) {
-          $this->getIdInstitution()->tbCourse[$index] = null;
-        }
-      }
-    }
-    foreach($this->tbShedule as $lTbShedule) {
-      $lTbShedule->setIdCourse(null);
-    }
-    foreach($this->tbHistoryShedule as $lTbHistoryShedule) {
-      $lTbHistoryShedule->setIdCourse(null);
-    }
-    foreach($this->tbHistoryCourse1 as $lTbHistoryCourse1) {
-      $lTbHistoryCourse1->setIdCourse1(null);
-    }
-    return true;
-  }
   
-  /**
-   * @orm idCourse int
-   * @dbva id(autogenerate) 
-   */
-  private $idCourse;
+  private $idcourse;
   
-  /**
-   * @orm Name char
-   */
   private $name;
   
-  /**
-   * @orm Description char
-   */
   private $description;
   
-  /**
-   * @orm has one TbInstitution inverse(tbCourse)
-   * @dbva fk(idInstitution) 
-   */
-  private $idInstitution;
+  private $idinstitution;
   
-  /**
-   * @orm Duration int
-   */
   private $duration;
   
-  /**
-   * @orm State int
-   */
   private $state;
   
-  /**
-   * @orm has many TbShedule inverse(idCourse)
-   * @dbva inverse(idCourse) 
-   */
-  private $tbShedule;
+  private $tbshedule;
   
-  /**
-   * @orm has many TbHistoryShedule inverse(idCourse)
-   * @dbva inverse(idCourse) 
-   */
-  private $tbHistoryShedule;
+  private $nameinstitution;
   
-  /**
-   * @orm has many TbHistoryCourse inverse(idCourse1)
-   * @dbva inverse(idCourse) 
-   */
-  private $tbHistoryCourse1;
+  public function TbCourse($idcourse,$name,$description,$duration,$idinstitution,$nameinstitution)
+  {
+  	
+  	$this->idcourse=$idcourse;
+  	$this->name=$name;
+  	$this->description=$description;
+  	$this->duration=$duration;
+  	$this->idinstitution=$idinstitution;
+  	$this->nameinstitution=$nameinstitution;
+  }
   
   public function &getIdCourse() {
-    return $this->idCourse;
+    return $this->idcourse;
   }
   
   
-  public function setIdCourse(&$idCourse) {
-    $this->idCourse = $idCourse;
+  public function setIdCourse(&$idcourse) {
+    $this->idcourse = $idcourse;
   }
   
   
@@ -143,100 +96,43 @@ class TbCourse {
   
   
   public function &getIdInstitution() {
-    return $this->idInstitution;
+    return $this->idinstitution;
   }
   
   
   public function setIdInstitution(&$idInstitution) {
-    $this->idInstitution = $idInstitution;
+    $this->idinstitution = $idinstitution;
+  }
+  
+	public function &getNameInstitution() {
+    return $this->nameinstitution;
   }
   
   
-  public function getTbShedule() {
-    return $this->tbShedule;
+  public function setNameInstitution(&$idInstitution) {
+    $this->nameinstitution = $nameinstitution;
   }
-  
-  
-  public function setTbShedule($tbShedule) {
-    $this->tbShedule = $tbShedule;
-  }
-  
-  
-  public function getTbHistoryShedule() {
-    return $this->tbHistoryShedule;
-  }
-  
-  
-  public function setTbHistoryShedule($tbHistoryShedule) {
-    $this->tbHistoryShedule = $tbHistoryShedule;
-  }
-  
-  
-  public function getTbHistoryCourse1() {
-    return $this->tbHistoryCourse1;
-  }
-  
-  
-  public function setTbHistoryCourse1($tbHistoryCourse1) {
-    $this->tbHistoryCourse1 = $tbHistoryCourse1;
-  }
-  
-  
-  public function __toString() {
-    $s = '';
-    $s .= $this->toString(false);
-    return $s;
-  }
-  
-  public function toString($idOnly) {
-    $s = '';
-    if($idOnly) {
-      $s .= $this->idCourse;
-    }
-    else {
-      $s .= get_class($this);
-      $s .= '[';
-      $s .= 'idCourse' . '=' . $this->idCourse. ' ';
-      $s .= 'name' . '=' . $this->name. ' ';
-      $s .= 'description' . '=' . $this->description. ' ';
-      if ($this->idInstitution instanceof epObject)  {
-        $s .= 'idInstitution.Persist_ID=' . $this->idInstitution->toString(true). ' ';
-      }
-      else {
-        $s .= 'idInstitution=null ';
-      }
-      
-      $s .= 'duration' . '=' . $this->duration. ' ';
-      $s .= 'state' . '=' . $this->state. ' ';
-      $s .= 'count tbShedule'. '=' ;
-      if($this->tbShedule) {
-        $s .= $this->tbShedule->count() . ' ';
-      }
-      else {
-        $s .= 0;
-      }
-      
-      $s .= 'count tbHistoryShedule'. '=' ;
-      if($this->tbHistoryShedule) {
-        $s .= $this->tbHistoryShedule->count() . ' ';
-      }
-      else {
-        $s .= 0;
-      }
-      
-      $s .= 'count tbHistoryCourse1'. '=' ;
-      if($this->tbHistoryCourse1) {
-        $s .= $this->tbHistoryCourse1->count() . ' ';
-      }
-      else {
-        $s .= 0;
-      }
-      
-      $s .= ']';
-    }
     
-    return $s;
+  public function getObjects() {
+      return array('nameinstitution'=>$this->nameinstitution,'idinstitution'=>$this->idinstitution,'idcourse'=>$this->idcourse,'name'=>$this->name,'description'=>$this->description,'duration'=>$this->duration);
   }
+  
+	public function get() 
+  	{	
+  		$parameters=array($this->name,$this->description,$this->idinstitution,$this->duration);
+  		return $parameters;
+  	}
+  	
+	public function getUpdate() 
+  	{	
+  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ACTUALIZAR');
+  		return $parameters;
+  	}
+public function getDelete() 
+  	{	
+  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ELIMINAR');
+  		return $parameters;
+  	}
   
 }
 
