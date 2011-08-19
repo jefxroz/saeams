@@ -66,6 +66,11 @@
 				return "No se realizo la activacion de cuenta correctamente";
 			}
 		}
+		public function getInstitution()
+		{
+			$objservice=new ServiceQuery();
+			return json_encode($objservice->getInstitution());
+		}
 		
 		
 		 

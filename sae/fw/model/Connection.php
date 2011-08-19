@@ -36,9 +36,9 @@
 		}
 		
 		private function validateResult($result){
-			if(!$result)
+			if($result=='Error')
 			{  
-				echo 'PgError ' . pg_last_error();  
+				return 'PgError ' . pg_last_error();  
 				exit;
 			}
 			return $result;
@@ -60,7 +60,9 @@
 				{
 					try 
 					{
-						$v_result = pg_execute($this->conexion, $this->name, $p_parameters) or die("Error en el registro");
+						
+						$v_result = pg_execute($this->conexion, $this->name, $p_parameters) or die("Error");
+						
 					}
 					catch (Exception $e)				
 					{

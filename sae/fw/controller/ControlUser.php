@@ -2,7 +2,7 @@
 	require_once("Control.php");
 	require_once("ControlService.php");
 	require_once("../model/ServiceQuery.php");
-	require_once("../model/mapping/Tbuser.php");
+	require_once("../model/mapping/TbUser.php");
 	require_once("mailer/Mailer.php");
 	require_once("mailer/MailerRecover.php");
 	

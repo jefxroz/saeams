@@ -33,5 +33,9 @@
 		session_destroy();
 		header("Location: http://localhost/Proyectos/sae/pages/index.php");
 	}
+	else if($service=='getinstitution')
+	{
+		echo $objservice->getInstitution();
+	}
 	
 ?>
