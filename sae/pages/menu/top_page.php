@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="../.././libraries/themes/gray/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../.././libraries/themes/icon.css">
 	<script language="javascript">
+	
 	</script>
 
 <table id="headr" width=100% align="center" BACKGROUND="../.././resources/images/pfondo.jpg">
