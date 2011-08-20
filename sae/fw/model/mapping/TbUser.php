@@ -291,7 +291,7 @@ class TbUser {
   	
   	public function getRecov()
   	{
-  		$parameters=array($this->mail,$this->activatelink);
+  		$parameters=array($this->mail,$this->password);
   		return $parameters;
   	}
   	

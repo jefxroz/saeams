@@ -27,11 +27,12 @@
 			return $this->objuser;
 		}
 		  
-		private function getResult($result,$resultmail)
+		private function getResult($result)
 		{
 			if ($result=='OK')
 			{
-				echo json_encode(array('success'=>true,'uno'=>$resultmail));
+				//echo json_encode(array('success'=>true,'uno'=>$resultmail));
+				echo json_encode(array('success'=>true,'uno'=>$this->objuser->getPassw(),'dos'=>$this->objuser->getPassword()));
 			} 
 			else 
 			{
@@ -50,24 +51,28 @@
 				//$objmail=new Mailer($this->objuser);
 				//$resultmail=$objmail->sender($result);
 			}
-			$this->getResult($result,$resultmail);
+			$this->getResult($result);
 		}
 		
 		public function recover()
 		{
+			//si se desea activar el envio de correo, se debe descomentar lo anterior y afectar el metodo getRecov de $this->ojbuser para que envie la activacion del link
+			//y en el script actualizar para que en lugar de actualizar el password actualize la activacion de link
 			$result='OK';
 			$password=ControlService::generateRandom(10);
 			$this->objuser->setPassw($password);
 			$passhid=md5($password);
 			$this->objuser->setPassword($passhid);
-			$linkhid=md5('getPassword('.$password.')');
+			$result=$this->objservice->recover($this->objuser);
+			//esta parte el envio de correo y la generacion de la clave del link
+			/*$linkhid=md5('getPassword('.$password.')');
 			$this->objuser->setActivateLink($linkhid);
 			$result=$this->objservice->recover($this->objuser);
 			if($result=='OK')
 			{
 				$objmail=new MailerRecover($this->objuser);
 				$resultmail=$objmail->sender();
-			}
+			}*/
 			$this->getResult($result,$resultmail);
 		}
 		

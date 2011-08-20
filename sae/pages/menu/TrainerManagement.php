@@ -14,13 +14,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<title>Gestionar Cursos - SAE-SAP</title>
+<title>Gestionar Profesores - SAE-SAP</title>
 <?php include("top_page.php"); ?>
 	<script>
 		var url;
 	
 		$(function(){
-			$('#dgcourse').datagrid({
+			$('#dgtrainer').datagrid({
 				iconCls:'icon-save',
 				pageSize:10,
 				nowrap: false,
@@ -32,12 +32,12 @@
 				idField:'code',
 				
 				frozenColumns:[[
-	                {title:'Codigo',field:'idcourse',width:80,sortable:true},
+	                {title:'Codigo',field:'idtrainer',width:80,sortable:true},
 				]],
-				url:'../.././fw/view/Course.php?service=1',
+				url:'../.././fw/view/trainer.php?service=1',
 				pagination:true
 			});
-			var p = $('#dgcourse').datagrid('getPager');
+			var p = $('#dgtrainer').datagrid('getPager');
 			if (p){
 				$(p).pagination({
 					onBeforeRefresh:function(){
@@ -47,21 +47,21 @@
 			}
 		});
 
-		function viewCourse(){			
-			var row = $('#dgcourse').datagrid('getSelected');
+		function viewtrainer(){			
+			var row = $('#dgtrainer').datagrid('getSelected');
 
 			if (row){
-				//document.getElementById("namecourse").value='hola';
-				//$('#fmcourse').form('load',row);
+				//document.getElementById("nametrainer").value='hola';
+				//$('#fmtrainer').form('load',row);
 
-				//url = '../.././fw/view/Course.php?service=3&id='+row.idcourse;
-				document.location.href='Course.php?service=4&id='+row.idcourse;
+				//url = '../.././fw/view/trainer.php?service=3&id='+row.idtrainer;
+				document.location.href='trainer.php?service=4&id='+row.idtrainer;
 				
 				
 			}
 			else 
 			{
-				$.messager.alert('Advertencia','No se ha seleccionado ningun curso','error');
+				$.messager.alert('Advertencia','No se ha seleccionado ningun profesor!!!','error');
 			}
 
 		}
@@ -84,8 +84,8 @@
 			              
 				<table>
 					<tr>
-						<td><img src="../.././resources/images/course_48.png" ></td>
-						<td><h2>Gestionar Cursos</h2></td>
+						<td><img src="../.././resources/images/trainer_48.png" ></td>
+						<td><h2>Gestionar profesores</h2></td>
 					</tr>
 				</table>
 				<br/>			          	
@@ -102,17 +102,17 @@
 					<!--  
 					<table id="test"></table>	 
 					-->  
-				<table id="dgcourse" title="Gestionar Cursos" class="easyui-datagrid" style="width:800px;height:400px" 
+				<table id="dgtrainer" title="Gestionar Profesores" class="easyui-datagrid" style="width:800px;height:400px" 
 				toolbar="#toolbar" 
 				fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
-							<th  width="700" colspan=4>Informaci&oacute;n de los cursos</th>
+							<th  width="700" colspan=4>Informaci&oacute;n de los profesores</th>
 						</tr>
 						<tr>
-							<th field="name" width="600">Curso</th>
-							<th field="duration" width="50">Duraci&oacute;n</th>
-							<th field="nameinstitution" width="120" >Nombre de Instituci&oacute;n</th>
+							<th field="name" width="150">Nombres</th>
+							<th field="surname" width="150">Apellidos</th>
+							<th field="typetrainer" width="100" >Tipo de Profesor</th>
 						</tr>
 					</thead>
 				</table>
@@ -120,13 +120,13 @@
 			<div id="toolbar">
 		
 		<?php
-				if(isPrivilege("CREAR CURSO",$privileges))
+				if(isPrivilege("CREAR PROFESOR",$privileges))
 				{
-					echo '<a href="Course.php?service=2" class="easyui-linkbutton" iconCls="icon-add" plain="true" >Crear Curso</a>';
+					echo '<a href="trainer.php?service=2" class="easyui-linkbutton" iconCls="icon-add" plain="true" >Crear Profesor</a>';
 				}
-				if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges) )
+				if(isPrivilege("MODIFICAR PROFESOR",$privileges) or isPrivilege("ELIMINAR PROFESOR",$privileges) )
 				{
-					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="viewCourse()">Ver Curso</a>';
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="viewtrainer()">Ver Profesor</a>';
 				}
 		?>	
 				</div>

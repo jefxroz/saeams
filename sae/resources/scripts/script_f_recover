@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION f_recover(IN character varying, IN character varying,
 $BODY$ 
 DECLARE
 	p_mail ALIAS FOR $1;
-	p_actuallykey  ALIAS FOR $2;
+	p_password  ALIAS FOR $2;
 	v_state int;
 	v_countuser int;
 	BEGIN
@@ -40,7 +40,7 @@ DECLARE
 				END;
 						
 				UPDATE tbuser 
-				SET    actuallykey=p_actuallykey
+				SET    password=p_password
 				WHERE mail=p_mail
 				AND   state=1 or state=2;
 				p_result='OK';

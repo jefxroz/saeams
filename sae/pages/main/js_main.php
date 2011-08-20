@@ -70,7 +70,7 @@
 			 success: function(data){
 			     document.id_img_captcha.src="main/captcha.php?texto="+data.uno;
 			     document.getElementById("id_hid_captcha").value=data.dos;
-			     document.getElementById("id_captcha").value=data.uno;
+			    // document.getElementById("id_captcha").value=data.uno;
 			 }
 			});
 
@@ -78,14 +78,14 @@
 			//panelHeight:100
 		});
 
-		document.getElementById('id_mail').value="cuenta.oscio@gmail.com";
-		document.getElementById('id_password').value="12345";
-		document.getElementById("id_pass_comp").value="12345";
-		document.getElementById('id_name').value="Cuenta";
-		document.getElementById('id_surname').value="Oscio";
-		document.getElementById('id_address').value="Nueva direccion";
-		document.getElementById('id_school').value="1";
-		document.getElementById('id_birthdate').value="04/26/1986";
+		//document.getElementById('id_mail').value="cuenta.oscio@gmail.com";
+		//document.getElementById('id_password').value="12345";
+		//document.getElementById("id_pass_comp").value="12345";
+		//document.getElementById('id_name').value="Cuenta";
+		//document.getElementById('id_surname').value="Oscio";
+		//document.getElementById('id_address').value="Nueva direccion";
+		//document.getElementById('id_school').value="1";
+		//document.getElementById('id_birthdate').value="04/26/1986";
 		
 		$('div[name|="pg_registrer"]').each(function(index) {
 	           $(this).show(); 
@@ -115,7 +115,7 @@
 				 //alert(data.uno);
 			     document.id_img_captcharecov.src="main/captcha.php?texto="+data.uno;
 			     document.getElementById("id_hid_captcharecov").value=data.dos;
-			     document.getElementById("id_captcharecov").value=data.uno;
+			     //document.getElementById("id_captcharecov").value=data.uno;
 			 }
 			});
 
@@ -145,39 +145,34 @@
 				var result = eval('('+result+')');
 				
 				if (result.success){
-					$.messager.show({
-						title: 'Registro Exitoso',
-						msg: 'Registro Realizado sin Problemas!!!'
-					});
+					$.messager.alert('Registro Exitoso','Registro Realizado sin Problemas!!!','info');
 					cancel();		// close the dialog
 					
 				} else {
-					$.messager.show({
-						title: 'Error',
-						msg: result.msg
-					});
+					$.messager.alert('Error',result.msg,'error');
 				}
 			}
 		});
 	}
 	function recover()
 	{	
-		$('#fm_recover').form('submit',{
+		$('#fm_recover').form('submit',
+		{
 			url: '.././fw/view/User.php?service=2',
-			onSubmit: function(){
+			onSubmit: function()
+			{
 				return $(this).form('validate');
 			},
 			success: function(result){
 				var result = eval('('+result+')');
 				
-				if (result.success){
-					$.messager.show({
-						title: 'Envio de recuperacion exitoso',
-						msg: 'Se ha enviado un correo a la direccion proporcionada con sus nuevos datos para acceder!!!'
-					});
+				if (result.success)
+				{
+					$.messager.alert('Constrasenia cambiada','su nueva contrasena es:'+result.uno,'info');
 					cancel();		// close the dialog
 					
-				} else {
+				} else 
+				{
 					$.messager.show({
 						title: 'Error',
 						msg: result.msg
