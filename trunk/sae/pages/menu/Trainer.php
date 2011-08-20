@@ -14,7 +14,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<title>Informaci&oacute;n de cursos - SAE-SAP</title>
+<title>Informaci&oacute;n de profesors - SAE-SAP</title>
 <?php include("top_page.php"); ?>
 <script language="javascript">
 $(function(){
@@ -30,13 +30,13 @@ $(function(){
 	if(<?php if($service){ echo $service;} else {echo"-1";} ?>==4)
 	{
 		$.ajax({
-			 url: '../.././fw/view/Course.php',
+			 url: '../.././fw/view/trainer.php',
 			 dataType: 'json',
-			 data: {service:'3',idcourse:<?php if($id){echo $id;}else{echo "-1";}  ?> },
+			 data: {service:'3',idtrainer:<?php if($id){echo $id;}else{echo "-1";}  ?> },
 			 type: 'post',
 			 success: function(data){
 				 
-				 $('#namecourse').val(data.name);
+				 $('#nametrainer').val(data.name);
 				 $('#description').val(data.description);
 				 $('#cidinstitution').combobox('setValue',data.idinstitution);
 				 $('#duration').val(data.duration);
@@ -49,8 +49,8 @@ $(function(){
 
 function del()
 {
-	var url = '../.././fw/view/Course.php?service=5<?php if($id){echo '&idcourse='.$id;} else{echo "&idcourse=-1";}?>';
-	$('#fmcourse').form('submit',{
+	var url = '../.././fw/view/trainer.php?service=5<?php if($id){echo '&idtrainer='.$id;} else{echo "&idtrainer=-1";}?>';
+	$('#fmtrainer').form('submit',{
 		url: url,
 		onSubmit: function(){
 			return $(this).form('validate');
@@ -60,11 +60,17 @@ function del()
 			var result = eval('('+result+')');
 			
 			if (result.success){
-				$.messager.alert('Curso Eliminado','Se ha eliminado el curso!!!','info');
-				document.location.href='CourseManagement.php';
+				$.messager.show({
+					title: 'profesor Creado',
+					msg: 'Se ha creado el nuevo profesor sin problemas!!!'
+				});
+				document.location.href='trainerManagement.php';
 
 			} else {
-				$.messager.alert('Error',result.msg,'error');
+				$.messager.show({
+					title: 'Error',
+					msg: result.msg
+				});
 
 			}
 
@@ -74,8 +80,8 @@ function del()
 }
 
 function save(){
-	var url = '../.././fw/view/Course.php?service=<?php echo $service ?><?php if($id){echo '&idcourse='.$id;} else{echo "&idcourse=-1";}?>';
-	$('#fmcourse').form('submit',{
+	var url = '../.././fw/view/trainer.php?service=<?php echo $service ?><?php if($id){echo '&idtrainer='.$id;} else{echo "&idtrainer=-1";}?>';
+	$('#fmtrainer').form('submit',{
 		url: url,
 		onSubmit: function(){
 			return $(this).form('validate');
@@ -85,11 +91,17 @@ function save(){
 			var result = eval('('+result+')');
 			
 			if (result.success){
-				$.messager.alert('Curso Creado','Se ha creado el nuevo curso sin problemas!!!','info');
-				document.location.href='CourseManagement.php';
+				$.messager.show({
+					title: 'profesor Creado',
+					msg: 'Se ha creado el nuevo profesor sin problemas!!!'
+				});
+				document.location.href='trainerManagement.php';
 
 			} else {
-				$.messager.alert('Error',result.msg,'error');
+				$.messager.show({
+					title: 'Error',
+					msg: result.msg
+				});
 
 			}
 
@@ -123,24 +135,24 @@ function save(){
 
 		<table>
 			<tr>
-				<td><img src="../.././resources/images/lcourse_48.png" ></td>
-				<td><h2>Informaci&oacute;n de cursos</h2></td>
+				<td><img src="../.././resources/images/ltrainer_48.png" ></td>
+				<td><h2>Informaci&oacute;n de profesors</h2></td>
 			</tr>
 		</table>
 		<br/>
-		<form id="fmcourse" method="post" >
+		<form id="fmtrainer" method="post" >
 		<table>
 		<tr>
 			<td>
-				<label>Curso:</label>
+				<label>Nombres:</label>
 			</td>
 			<td> 			
-				<input name="namecourse" id="namecourse" class="easyui-validatebox" required="true" style="width:350px">
+				<input name="nametrainer" id="nametrainer" class="easyui-validatebox" required="true" style="width:350px">
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<label>Descripci&oacute;n:</label>
+				<label>Apellidos:</label>
 			</td>
 			<td>
 				<textarea name="description" id="description" class="easyui-validatebox" required="true" style="width:350px;height:100px" ></textarea>
@@ -148,33 +160,26 @@ function save(){
 		</tr>
 		<tr>
 			<td>
-				<label>Instituci&oacute;n:</label>
+				<label>Tipo de Profesor:</label>
 			</td>
 			<td>
-				<input  name="cidinstitution" id="cidinstitution" style="width:150px" required="true" url="../.././fw/view/Service.php?service=getinstitution"  valueField="id" textField="text"   panelheight="50px"></input>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label>Duraci&oacute;n:</label>
-			</td>
-			<td>
-				<input name="duration" id="duration" class="easyui-validatebox" required="true" style="width:150px">
+				<input  name="typetrainer" id="typetrainer" style="width:150px" required="true" url="../.././fw/view/Service.php?service=gettypetrainer"  valueField="id" textField="text"   panelheight="50px"></input>
 			</td>
 		</tr>
+		
 		<tr>
 			<td>
-			<?php if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges)){ ?>
+			<?php if(isPrivilege("MODIFICAR PROFESOR",$privileges) or isPrivilege("ELIMINAR PROFESOR",$privileges)){ ?>
 				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="save()">Guardar</a>
 			<?php } ?>
 			</td>
 			<td>
-				<a href="CourseManagement.php" class="easyui-linkbutton" iconCls="icon-cancel" >Cancelar</a>
+				<a href="trainerManagement.php" class="easyui-linkbutton" iconCls="icon-cancel" >Cancelar</a>
 			</td>
 			
 		</tr>
 		<tr>
-			<?php if($service==4 and isPrivilege("ELIMINAR CURSO",$privileges)){ ?>
+			<?php if($service==4 and isPrivilege("ELIMINAR PROFESOR",$privileges)){ ?>
 			<td>
 				<a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="del()">Eliminar</a>
 			</td>

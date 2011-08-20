@@ -14,13 +14,19 @@
 <?php
 				if(isPrivilege("MODIFICAR PERFIL",$privileges))
 				{			
-					echo '<li><a href="User.php" > <img src="../.././resources/images/setting1_24.png" /> Modificar Perfil</a></li>';
+					echo '<li><a href="EditProfile.php" > <img src="../.././resources/images/setting1_24.png" /> Modificar Perfil</a></li>';
 				}
 
 				if(isPrivilege("VER USUARIOS",$privileges))
 				{
 					echo '<li><a href="UserManagement.php" ><img src="../.././resources/images/User_24.png" /> Gestionar Usuarios</a></li>';
 				}
+				
+				if(isPrivilege("VER PROFESORES",$privileges))
+				{
+					echo '<li><a href="TrainerManagement.php" ><img src="../.././resources/images/User_24.png" /> Gestionar Profesores</a></li>';
+				}
+				
 				if(isPrivilege("VER CURSOS",$privileges))
 				{
 					echo '<li><a href="CourseManagement.php" ><img src="../.././resources/images/course_24.png" /> Gestionar Cursos</a></li>';

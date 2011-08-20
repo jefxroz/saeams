@@ -1,3 +1,4 @@
+
 --Datos en Rol
 
 insert into tbrol values(1,'ADMINISTRADOR');
@@ -15,6 +16,10 @@ insert into tbdeveloper values(1,'DDHERNAN');
 insert into tbpage values(1,'VALIDAR USUARIO','1.0',1);
 insert into tbpage values(2,'REGISTRAR DE USUARIO','1.0',1);
 insert into tbpage values(3,'RECUPERAR CONTRASEÑA','1.0',1);
+insert into tbpage values(4,'MODIFICAR PERFIL','1.0',1);
+insert into tbpage values(5,'CREAR CURSO','1.0',1);
+insert into tbpage values(6,'MODIFICAR CURSO','1.0',1);
+insert into tbpage values(6,'ELIMINAR CURSO','1.0',1);
 
 --Datos de Escolaridad
 

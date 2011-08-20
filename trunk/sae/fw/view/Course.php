@@ -12,13 +12,13 @@ if($service==1)
 }
 else if($service==2)
 {
-	$name = $_REQUEST['name'];
+	$name = $_REQUEST['namecourse'];
 	$valname=new ValidatorDefault('Nombre',$name,true);
 
 	$description = $_REQUEST['description'];
 	$valdescription=new ValidatorDefault('Descripcion',$description,false);
 
-	$institution = $_REQUEST['idinstitution'];
+	$institution = $_REQUEST['cidinstitution'];
 	$valinstitution=new ValidatorInteger('Institucion',$institution,true);
 
 	$duration = $_REQUEST['duration'];

@@ -104,6 +104,10 @@ else if($service==2)
 			$objcontroller=new ControlUser($valmail->getField(), null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 			$objcontroller->recover();
 		}
+		else
+		{
+			echo json_encode(array('uno'=>$valmail->getMessage(),'dos'=>$valcaptcha->getMessage()));
+		}
 }
 else if($service==3)
 {
@@ -119,7 +123,7 @@ else if($service==3)
 				//redirigir
 				session_start();
 				$_SESSION['usuario'] = serialize($objcontroller->getUser());
-				header("Location: http://localhost/Proyectos/sae/pages/menu/User.php");
+				header("Location: http://localhost/Proyectos/sae/pages/menu/EditProfile.php");
 				exit;
 			}
 			else
@@ -131,7 +135,10 @@ else if($service==3)
 		}
 		else
 		{
-			echo json_encode(array('uno'=>$valmail->getMessage(),'dos'=>$valpassword->getMessage()));
+			header("Location: http://localhost/Proyectos/sae/pages/index.php");
+			//echo json_encode(array('uno'=>$valmail->getMessage(),'dos'=>$valpassword->getMessage()));
+			
+				
 		}
 }
 if($service==4)
