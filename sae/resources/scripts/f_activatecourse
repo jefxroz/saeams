@@ -1,14 +1,9 @@
-CREATE OR REPLACE FUNCTION f_updatecourse(IN integer,IN character varying, IN character varying, IN integer, IN integer,IN character varying,IN integer, OUT p_result character varying, OUT p_idcourse integer)
+CREATE OR REPLACE FUNCTION f_activatecourse(IN integer, OUT p_result character varying, OUT p_idcourse integer)
   RETURNS SETOF record AS
 $BODY$ 
 DECLARE
 	p_idcourse ALIAS FOR $1;
-	p_name ALIAS FOR $2;
-	p_description ALIAS FOR $3;
-	p_idinstitution ALIAS FOR $4;
-	p_duration ALIAS FOR $5;
-	p_operation ALIAS FOR $6;
-	p_state ALIAS FOR $7;
+	
 	  	
   	v_countcourse int;
   	v_stateactive int;
@@ -21,8 +16,7 @@ DECLARE
 			SELECT count(idcourse)
 			INTO   v_countcourse
 			FROM   tbcourse c
-			WHERE  c.name=upper(p_name)
-			AND    NOT (c.idcourse=p_idcourse)
+			WHERE  c.idcourse=p_idcourse
 			LIMIT  1;
 		EXCEPTION WHEN NO_DATA_FOUND THEN
 			BEGIN
@@ -31,7 +25,7 @@ DECLARE
 			END;
 		END;
 
-		IF v_countcourse=0 THEN
+		IF v_countcourse>0 THEN
 			BEGIN
 
 				SELECT idstate
@@ -61,22 +55,12 @@ DECLARE
 			END;
 		
 			BEGIN
-				IF p_operation='ACTUALIZAR' THEN		
-					UPDATE tbcourse 
-					SET name=upper(p_name),
-						description=p_description,
-						duration=p_duration,
-						state=p_state
-					WHERE idcourse=p_idcourse;
-				RAISE NOTICE ' el curso para el  idcourse (%) con los parametros (%,%,%)',p_idcourse,p_name,p_description,p_duration;
 				
-				ELSEIF p_operation='ELIMINAR' THEN
 					UPDATE tbcourse 
-					SET state=v_stateinactive
+					SET state=v_stateactive
 					WHERE idcourse=p_idcourse
-					AND   state=v_stateactive;
-				RAISE NOTICE 'Eliminacion el curso para el  idcourse (%)',p_idcourse;
-				END IF;
+					AND   state=v_stateinactive;
+				RAISE NOTICE 'Activacion del curso (%)',p_idcourse;
 				
 				p_result='OK';
 				
@@ -94,13 +78,13 @@ DECLARE
 			EXCEPTION WHEN unique_violation THEN
 				BEGIN
 					p_result='Error no se puede realizar la accion solicitada';
-					RAISE LOG 'Violacion unique Error en la Actualizacon  de tbcourse con los parametros (%,%,%,%)',p_name,p_description,p_duration;
+					RAISE LOG 'Violacion unique Error en la activacion  de tbcourse con los parametros (%)',p_idcourse;
 					ROLLBACK;
 				END;
 			END;
 		ELSE
-			p_result='El curso con nombre: '||'"'||p_name||'"'||'  ya existe';
-			RAISE NOTICE 'El curso con nombre: % ya existe existe',p_name;
+			p_result='El curso con nombre: '||'"'||p_name||'"'||'  no existe';
+			RAISE NOTICE 'El curso con nombre: % no  existe',p_name;
 		END IF;
 	RETURN NEXT;
 	RETURN;

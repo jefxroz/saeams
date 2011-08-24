@@ -13,10 +13,11 @@ DECLARE
 
 			SELECT count(u.iduser)
 			INTO   v_countuser
-			FROM   tbuser u
+			FROM   tbuser u,tbstate s
 			WHERE  u.mail=p_mail
 			AND    u.password=p_password
-			AND    u.state=1
+			AND    u.state=s.idstate
+			AND    s.name='ACTIVO'
 			LIMIT  1;
 		EXCEPTION WHEN NO_DATA_FOUND THEN
 			BEGIN
@@ -27,11 +28,12 @@ DECLARE
 
 		IF v_countuser>0 THEN
 			BEGIN
-				FOR registro IN SELECT 1 num,iduser,name 
-						FROM tbuser
+				FOR registro IN SELECT 1 num,u.iduser,u.name 
+						FROM tbuser u,tbstate s
 						WHERE mail=p_mail
 						AND   password=p_password
-						AND   state=1
+						AND    u.state=s.idstate
+						AND    s.name='ACTIVO'
 						LIMIT 1 LOOP
 					BEGIN
 						p_num:=registro.num;
