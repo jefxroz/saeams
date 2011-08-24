@@ -168,15 +168,12 @@
 				
 				if (result.success)
 				{
-					$.messager.alert('Constrasenia cambiada','su nueva contrasena es:'+result.uno,'info');
+					$.messager.alert('Cambios Realizados','Termino Exitosamente','info');
 					cancel();		// close the dialog
 					
 				} else 
 				{
-					$.messager.show({
-						title: 'Error',
-						msg: result.msg
-					});
+					$.messager.alert('Error',result.msg,'error');
 				}
 			}
 		});

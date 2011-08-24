@@ -55,8 +55,39 @@
 				//$('#fmcourse').form('load',row);
 
 				//url = '../.././fw/view/Course.php?service=3&id='+row.idcourse;
-				document.location.href='Course.php?service=4&id='+row.idcourse;
+				if(row.state!='INACTIVO')
+				{
+					document.location.href='Course.php?service=4&id='+row.idcourse;
+				}
+				else
+				{
+					$.messager.alert('Advertencia','El curso ha sido inactivado','error');
+				}
 				
+			}
+			else 
+			{
+				$.messager.alert('Advertencia','No se ha seleccionado ningun curso','error');
+			}
+
+		}
+
+		function activateCourse(){			
+			var row = $('#dgcourse').datagrid('getSelected');
+
+			if (row){
+				//document.getElementById("namecourse").value='hola';
+				//$('#fmcourse').form('load',row);
+
+				//url = '../.././fw/view/Course.php?service=3&id='+row.idcourse;
+				if(row.state=='INACTIVO')
+				{
+					document.location.href='../.././fw/view/Course.php?service=6&id='+row.idcourse+'&state='+row.state;
+				}
+				else
+				{
+					$.messager.alert('Informacion','El curso ya esta activo','info');
+				}
 				
 			}
 			else 
@@ -110,9 +141,9 @@
 							<th  width="700" colspan=4>Informaci&oacute;n de los cursos</th>
 						</tr>
 						<tr>
-							<th field="name" width="600">Curso</th>
+							<th field="name" width="400">Curso</th>
 							<th field="duration" width="50">Duraci&oacute;n</th>
-							<th field="nameinstitution" width="120" >Nombre de Instituci&oacute;n</th>
+							<th field="state" width="120" >Estado</th>
 						</tr>
 					</thead>
 				</table>
@@ -127,6 +158,7 @@
 				if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges) )
 				{
 					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="viewCourse()">Ver Curso</a>';
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="activateCourse()">Activar</a>';
 				}
 		?>	
 				</div>
