@@ -100,7 +100,7 @@ class TbCourse {
   }
   
   
-  public function setIdInstitution(&$idInstitution) {
+  public function setIdInstitution(&$idinstitution) {
     $this->idinstitution = $idinstitution;
   }
   
@@ -113,8 +113,8 @@ class TbCourse {
     $this->nameinstitution = $nameinstitution;
   }
     
-  public function getObjects() {
-      return array('nameinstitution'=>$this->nameinstitution,'idinstitution'=>$this->idinstitution,'idcourse'=>$this->idcourse,'name'=>$this->name,'description'=>$this->description,'duration'=>$this->duration);
+  public function getObjects($state) {
+      return array('idcourse'=>$this->idcourse,'name'=>$this->name,'description'=>$this->description,'duration'=>$this->duration,'state'=>$state);
   }
   
 	public function get() 
@@ -123,14 +123,21 @@ class TbCourse {
   		return $parameters;
   	}
   	
+	public function getInsert() 
+  	{	
+  		//echo $this->name.$this->description.$this->duration;
+  		$parameters=array($this->name,$this->description,$this->duration);
+  		return $parameters;
+  	}
+  	
 	public function getUpdate() 
   	{	
-  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ACTUALIZAR');
+  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ACTUALIZAR',$this->state);
   		return $parameters;
   	}
 public function getDelete() 
   	{	
-  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ELIMINAR');
+  		$parameters=array($this->idcourse,$this->name,$this->description,$this->idinstitution,$this->duration,'ELIMINAR',$this->state);
   		return $parameters;
   	}
   

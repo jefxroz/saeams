@@ -9,10 +9,11 @@
 		private $objservice; 
 		private $objcourse;
 		
-		public function ControlCourse($name,$description,$idinstitution,$duration)
+		public function ControlCourse($name,$description,$idinstitution,$duration,$state)
 		{  
 			$this->objservice=new ServiceQuery();
-			$this->objcourse=new TbCourse(null,$name,$description,$duration,$idinstitution,null);		
+			$this->objcourse=new TbCourse(null,$name,$description,$duration,$idinstitution,null);
+			$this->objcourse->setState($state);	
 		
 		}
 		
@@ -30,7 +31,7 @@
 		{
 			if ($result=='OK')
 			{
-				echo json_encode(array('success'=>true));
+				echo json_encode(array('success'=>true,'uno'=>'nuevo'));
 			} 
 			else 
 			{
@@ -54,7 +55,6 @@
 		{
 			$result='OK';
 			$this->objcourse->setIdCourse($idcourse);
-			
 			$result=$this->objservice->updateCourse($this->objcourse);
 			
 			$this->getResult($result);
@@ -71,7 +71,34 @@
 			return $this->objservice->getidcourses($idcourse);
 		}
 		
+		public function activate($idcourse)
+		{
+			$result='OK';
+			$result=$this->objservice->activateCourse($idcourse);
+			return $result;
+		}
 		
+		public function getCoursesInstitutions($idcourse)
+		{
+			$this->objcourse->setIdCourse($idcourse);
+			return json_encode($this->objservice->getCoursesInstitutions($this->objcourse->getIdCourse()));
+		}
+		
+		public function insertCourseInstitution($idcourse,$idinstitution)
+		{
+			
+			$this->objcourse->setIdCourse($idcourse);
+			$this->objcourse->setIdInstitution($idinstitution);
+			$result=$this->objservice->insertCourseInstitution($this->objcourse->getIdCourse(),$this->objcourse->getIdInstitution());
+			return $this->getResult($result);
+		}
+		
+		public function delInstitution($idcourse,$idinstitution)
+		{
+			$result='OK';
+			$result=$this->objservice->delInstitution($idcourse,$idinstitution);
+			return $this->getResult($result);
+		}
 		
 	} 
 
