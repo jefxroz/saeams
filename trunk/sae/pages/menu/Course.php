@@ -21,10 +21,36 @@ $(function(){
 
 	//llenar combobox
 	
-	$('#cidinstitution').combobox({
+	
+	$('#cstate').combobox({
 		//panelHeight:100
 	});
 
+	$('#dginstitutions').datagrid({
+		iconCls:'icon-save',
+		pageSize:10,
+		nowrap: false,
+		striped: true,
+		collapsible:true,
+		sortName: 'code',
+		sortOrder: 'desc',
+		remoteSort: false,
+		idField:'code',
+		
+		frozenColumns:[[
+            {title:'Codigo',field:'code',width:80,sortable:true},
+		]],
+		url:'../.././fw/view/Course.php?service=7&id=<?php if($id){echo $id;}else{echo "-1";}  ?>',
+		pagination:false
+	});
+	var p = $('#dginstitutions').datagrid('getPager');
+	if (p){
+		$(p).pagination({
+			onBeforeRefresh:function(){
+
+			}
+		});
+	}
 	
 	
 	if(<?php if($service){ echo $service;} else {echo"-1";} ?>==4)
@@ -38,7 +64,9 @@ $(function(){
 				 
 				 $('#namecourse').val(data.name);
 				 $('#description').val(data.description);
-				 $('#cidinstitution').combobox('setValue',data.idinstitution);
+				 //$('#cidinstitution').combobox('setValue',data.idinstitution);
+				 $('#cstate').combobox('setValue',data.state);
+				 
 				 $('#duration').val(data.duration);
 				 
 				      
@@ -82,6 +110,7 @@ function save(){
 		},
 
 		success: function(result){
+			//alert(result);
 			var result = eval('('+result+')');
 			
 			if (result.success){
@@ -99,8 +128,74 @@ function save(){
 
 }
 
+function add(){
+	var url = '../.././fw/view/Course.php?service=8<?php if($id){echo '&idcourse='.$id;} else{echo "&idcourse=-1";}?>';
+	$('#fm').form('submit',{
+		url: url,
+		onSubmit: function(){
+			return $(this).form('validate');
+		},
+
+		success: function(result){
+			var result = eval('('+result+')');
+			
+			if (result.success){
+				$.messager.alert('Cambios Realizados','Se ha agregado la institucion!!!','info');
+				
+				$('#dlg').dialog('close');		// close the dialog
+				$('#dginstitutions').datagrid('reload');	// reload the user data
+				
+				
+
+			} else {
+				$.messager.alert('Error',result.msg,'error');
+
+			}
+
+		}
+
+	});
+
+	
+
+}
+
+function delInstitution(){
+	
+	
+	var row = $('#dginstitutions').datagrid('getSelected');
+
+	if (row){
+			$.ajax({
+				 url: '../.././fw/view/Course.php',
+				 dataType: 'json',
+				 data: {service:'9',id:row.code,idcourse:<?php if($id){echo $id;}else{echo "-1";}  ?> },
+				 type: 'post',
+				 success: function(data){
+					   	$('#dginstitutions').datagrid('reload');
+						$.messager.alert('Informacion','ya no pertenece a la institucion','info');
+						location.reload();	
+							
+				 }
+				});
+	}
+	else 
+	{
+		$.messager.alert('Advertencia','No se ha seleccionado ninguna institucion','error');
+	}
+}
 
 
+function addInstitution()
+{
+	$('#dlg').dialog('open').dialog('setTitle','New User');
+	$('#fm').form('clear');
+
+	$('#cidinstitution').combobox({
+		//panelHeight:100
+	});
+	
+}
 
 
 
@@ -146,6 +241,7 @@ function save(){
 				<textarea name="description" id="description" class="easyui-validatebox" required="true" style="width:350px;height:100px" ></textarea>
 			</td>
 		</tr>
+		<!--  
 		<tr>
 			<td>
 				<label>Instituci&oacute;n:</label>
@@ -154,6 +250,7 @@ function save(){
 				<input  name="cidinstitution" id="cidinstitution" style="width:150px" required="true" url="../.././fw/view/Service.php?service=getinstitution"  valueField="id" textField="text"   panelheight="50px"></input>
 			</td>
 		</tr>
+		-->
 		<tr>
 			<td>
 				<label>Duraci&oacute;n:</label>
@@ -162,6 +259,46 @@ function save(){
 				<input name="duration" id="duration" class="easyui-validatebox" required="true" style="width:150px">
 			</td>
 		</tr>
+		
+<?php if($service==4){ ?>
+		<tr>
+			<td>
+				<label>Estado:</label>
+			</td>
+			<td>
+				<input  name="cstate" id="cstate" style="width:150px" required="true" url="../.././fw/view/Service.php?service=getstate"  valueField="id" textField="text"   panelheight="50px"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Instituciones:</label>
+			</td>
+			<td>
+				<table id="dginstitutions"  class="easyui-datagrid" style="width:300px;height:200px" 
+				toolbar="#toolbar" 
+				fitColumns="true" singleSelect="true">
+					<thead>
+						
+						<tr>
+							<th field="name" width="400">Instituciones</th>
+							
+						</tr>
+					</thead>
+				</table>
+					<div id="toolbar">
+		
+		<?php
+				if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges) )
+				{
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="addInstitution()">Agregar</a>';
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="delInstitution()">Quitar</a>';
+				}
+		?>	
+				</div>
+			
+			<td>
+		<tr>
+<?php } ?>
 		<tr>
 			<td>
 			<?php if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges)){ ?>
@@ -182,6 +319,7 @@ function save(){
 			<?php } ?>
 		</tr>
 		</table>
+		
 		</form>
 	
 
@@ -189,9 +327,25 @@ function save(){
 				<br style="clear:both;" />
 			</div>
 		</div>
+		
+		
+		
 		<div id="footer">  
 				<?php include(".././includes/footer.php"); ?>
 		</div>
+	</div>
+	<div id="dlg" class="easyui-dialog" style="width:250px;height:150px;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons">
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>Instituciones:</label>
+				<input  name="cidinstitution" id="cidinstitution" style="width:150px" required="true" url="../.././fw/view/Service.php?service=getinstitution"  valueField="id" textField="text"   panelheight="50px"></input>
+			</div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="add()">Asignar</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancelar</a>
 	</div>
 	</body>
 </html>
