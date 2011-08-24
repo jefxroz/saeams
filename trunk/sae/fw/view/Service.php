@@ -37,5 +37,12 @@
 	{
 		echo $objservice->getInstitution();
 	}
+	else if($service=='getstate')
+	{
+	
+		echo $objservice->getStates();
+	}
+	
+	
 	
 ?>

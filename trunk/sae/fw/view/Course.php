@@ -18,15 +18,15 @@ else if($service==2)
 	$description = $_REQUEST['description'];
 	$valdescription=new ValidatorDefault('Descripcion',$description,false);
 
-	$institution = $_REQUEST['cidinstitution'];
-	$valinstitution=new ValidatorInteger('Institucion',$institution,true);
+	//$institution = $_REQUEST['cidinstitution'];
+	//$valinstitution=new ValidatorInteger('Institucion',$institution,true);
 
 	$duration = $_REQUEST['duration'];
 	$valduration=new ValidatorInteger('Duracion',$duration,true);
 	
-	if($valname->verify() and $valdescription->verify() and $valinstitution->verify() and $valduration->verify())
+	if($valname->verify() and $valdescription->verify()  and $valduration->verify())
 	{
-		$objcontroller=new ControlCourse($valname->getField(), $valdescription->getField(),$valinstitution->getField(),$valduration->getField());
+		$objcontroller=new ControlCourse($valname->getField(), $valdescription->getField(),null,$valduration->getField(),null);
 		$objcontroller->insertCourse();
 	}
 	else
@@ -56,9 +56,11 @@ else if($service==4)
 	$duration = $_REQUEST['duration'];
 	$valduration=new ValidatorInteger('Duracion',$duration,true);
 	
-	if($valname->verify() and $valdescription->verify() and $valinstitution->verify() and $valduration->verify())
+	$state = $_REQUEST['cstate'];
+	
+	if($valname->verify() and $valdescription->verify()  and $valduration->verify())
 	{
-		$objcontroller=new ControlCourse($valname->getField(), $valdescription->getField(),$valinstitution->getField(),$valduration->getField());
+		$objcontroller=new ControlCourse($valname->getField(), $valdescription->getField(),null,$valduration->getField(),$state);
 		$objcontroller->updateCourse($idcourse);
 	}
 	else
@@ -72,6 +74,44 @@ else if($service==5)
 	$result=$objcontroller->deleteCourse($idcourse);
 		
 }
-
+else if($service==6)
+{
+	if($state=='INACTIVO')
+	{
+		$objcontroller=new ControlCourse(null, null,null,null);
+		
+		$result=$objcontroller->activate($id);
+		header("Location: http://localhost/Proyectos/sae/pages/menu/CourseManagement.php");
+		
+		
+	}	
+	else
+	{
+		header("Location: http://localhost/Proyectos/sae/pages/menu/CourseManagement.php");
+			
+	}
+}
+else if($service==7)
+{
+	$objservice=new ControlCourse(null,null,null,null);
+	echo $objservice->getCoursesInstitutions($id);
+}
+else if($service==8)
+{
+	$idinstitution=$_REQUEST['cidinstitution'];
+	
+	$idcourse = $_REQUEST['idcourse'];
+	$controller=new ControlCourse(null,null,null,null);
+	$controller->insertCourseInstitution($idcourse,$idinstitution);
+	
+}
+else if($service==9)
+{
+		
+	$objcontroller=new ControlCourse(null, null,null,null);
+		
+	$objcontroller->delInstitution($idcourse,$id);
+		
+}
 
 ?>

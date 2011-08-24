@@ -63,16 +63,16 @@
 			$this->objuser->setPassw($password);
 			$passhid=md5($password);
 			$this->objuser->setPassword($passhid);
-			$result=$this->objservice->recover($this->objuser);
+			//$result=$this->objservice->recover($this->objuser);
 			//esta parte el envio de correo y la generacion de la clave del link
-			/*$linkhid=md5('getPassword('.$password.')');
+			$linkhid=md5('getPassword('.$password.')');
 			$this->objuser->setActivateLink($linkhid);
 			$result=$this->objservice->recover($this->objuser);
 			if($result=='OK')
 			{
 				$objmail=new MailerRecover($this->objuser);
 				$resultmail=$objmail->sender();
-			}*/
+			}
 			$this->getResult($result,$resultmail);
 		}
 		
