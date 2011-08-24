@@ -25,7 +25,7 @@ CREATE TABLE TbHistoryInstitucion (
   name                 varchar(100), 
   historydate          timestamp(6), 
   operation            varchar(100), 
-  state                int4, 
+  state                int4 NOT NULL, 
   PRIMARY KEY (idhistoryinstitution));
 CREATE TABLE TbHistoryCourse (
   idhistorycourse  SERIAL NOT NULL, 
@@ -150,17 +150,17 @@ CREATE TABLE TbUser (
   state         int4 NOT NULL, 
   idtypetrainer int4, 
   idtypeschool  int4, 
-  actuallylink  varchar(255), 
+  actuallykey   varchar(255), 
   PRIMARY KEY (iduser));
 CREATE TABLE TbTypeTrainer (
   Idtypetrainer  SERIAL NOT NULL, 
   name          varchar(100) NOT NULL, 
-  state         int4, 
+  state         int4 NOT NULL, 
   PRIMARY KEY (Idtypetrainer));
 CREATE TABLE TbPrivilege (
   idprivilege  SERIAL NOT NULL, 
   name        varchar(100) NOT NULL UNIQUE, 
-  state       int4, 
+  state       int4 NOT NULL, 
   PRIMARY KEY (idprivilege));
 CREATE TABLE TbRol (
   Idrol  SERIAL NOT NULL, 
@@ -224,6 +224,18 @@ CREATE TABLE TbHIstoryUserMail (
   operation         varchar(200), 
   idpage            int4, 
   PRIMARY KEY (idhistoryusermail));
+CREATE TABLE TbTable (
+  idtable  SERIAL NOT NULL, 
+  name    text NOT NULL UNIQUE, 
+  state   int4, 
+  PRIMARY KEY (idtable));
+CREATE TABLE TbState (
+  idstate  SERIAL NOT NULL, 
+  name    text NOT NULL UNIQUE, 
+  PRIMARY KEY (idstate));
+CREATE TABLE TbStateTable (
+  idstate int4 NOT NULL, 
+  idtable int4 NOT NULL);
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkUserHisotryShedule FOREIGN KEY (idusertrainer) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryInstitucion ADD CONSTRAINT fkInstitucionHistoryInstitution FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbDetailAssignation ADD CONSTRAINT fkUserDetailAssignation FOREIGN KEY (idassignation) REFERENCES TbAssignation (Idassignation) ON UPDATE Cascade ON DELETE Cascade;
@@ -246,7 +258,6 @@ ALTER TABLE TbShedule ADD CONSTRAINT fkClassRoomShedule FOREIGN KEY (idclassroom
 ALTER TABLE TbHistoryPage ADD CONSTRAINT fkPageHistoryPage FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkClassRoomHistoryShedule FOREIGN KEY (idclassroom) REFERENCES TbClassRoom (idclassroom);
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkPageHistoryShedule FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
-ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkPageHistoryAssignation FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
 ALTER TABLE TbHistoryUser ADD CONSTRAINT fkPageHistoryUser FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
 ALTER TABLE TbHistoryCourse ADD CONSTRAINT fkPageHIstoryCourse FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkSheduleHistoryShedule FOREIGN KEY (idshedule) REFERENCES TbShedule (Idshedule);
@@ -267,6 +278,18 @@ ALTER TABLE TbUser ADD CONSTRAINT fkTypeSchoolUser FOREIGN KEY (idtypeschool) RE
 ALTER TABLE TbHistoryPage ADD CONSTRAINT fkDeveloperHistoryPage FOREIGN KEY (iddeveloper) REFERENCES TbDeveloper (iddeveloper);
 ALTER TABLE TbHIstoryUserMail ADD CONSTRAINT fkUserHistoryUserMail FOREIGN KEY (Iduser) REFERENCES TbUser (iduser);
 ALTER TABLE TbHIstoryUserMail ADD CONSTRAINT fkPageHistoryUserMail FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
+ALTER TABLE TbStateTable ADD CONSTRAINT fkStateStateTable FOREIGN KEY (idtable) REFERENCES TbTable (idtable);
+ALTER TABLE TbStateTable ADD CONSTRAINT FKTbStateTab21030 FOREIGN KEY (idstate) REFERENCES TbState (idstate);
+ALTER TABLE TbInstitution ADD CONSTRAINT fkStateInstitution FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbCourse ADD CONSTRAINT fkStateCourse FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbPrivilege ADD CONSTRAINT fkStatePrivilege FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbUser ADD CONSTRAINT fkStateUser FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbTypeTrainer ADD CONSTRAINT fkStateTypeTrainer FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbPage ADD CONSTRAINT fkStatePage FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkPageHistoryAssignation FOREIGN KEY (idpage) REFERENCES TbPage (idpage);
+ALTER TABLE TbClassRoom ADD CONSTRAINT FKTbClassRoo495874 FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbAssignation ADD CONSTRAINT fkStateAssignacion FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbShedule ADD CONSTRAINT fkStateShedule FOREIGN KEY (state) REFERENCES TbState (idstate);
 CREATE INDEX tbHistoryDetailAssignation_date_key 
   ON TbHistoryDetailAssignation (startdate);
 CREATE INDEX tbHistoryDetailAssignation_dateupdate_key 
@@ -313,4 +336,3 @@ CREATE INDEX dbClassRom_name_key
   ON TbClassRoom (name);
 CREATE INDEX dbClassRom_state_key 
   ON TbClassRoom (state);
-

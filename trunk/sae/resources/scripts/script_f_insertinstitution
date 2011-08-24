@@ -1,0 +1,100 @@
+CREATE OR REPLACE FUNCTION f_insertcourseinstitution(IN integer, IN integer,OUT p_result character varying, OUT p_idcourse integer)
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_idcourse ALIAS FOR $1;
+	p_idinstitution ALIAS FOR $2;
+	v_countcourse int;
+  	v_state int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(idcourse)
+			INTO   v_countcourse
+			FROM   tbinstitutioncourse c
+			WHERE  c.idcourse=p_idcourse
+			AND    c.idinstitution=p_idinstitution
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos';
+				RAISE LOG 'No exiten datos ';
+			END;
+		END;
+
+		IF v_countcourse=0 THEN
+				
+			BEGIN
+				INSERT INTO tbinstitutioncourse(idcourse,idinstitution) VALUES(p_idcourse,p_idinstitution);
+				p_result='OK';
+				RAISE NOTICE 'Inserccion de curso con los parametros (%,%)',p_idcourse,p_idinstitution;
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Violacion unique Error en la inserccion de tbcourse con los parametros (%,%)',p_idcourse,p_idinstitution;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='La Institucion  '||'"'||p_name||'"'||'  ya ha sido asignada';
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+  
+  
+  CREATE OR REPLACE FUNCTION f_delinstitution(IN integer, IN integer,OUT p_result character varying, OUT p_idcourse integer)
+  RETURNS SETOF record AS
+$BODY$ 
+DECLARE
+	p_idcourse ALIAS FOR $1;
+	p_idinstitution ALIAS FOR $2;
+	v_countcourse int;
+  	v_state int;
+	BEGIN
+
+		BEGIN
+
+			SELECT count(idcourse)
+			INTO   v_countcourse
+			FROM   tbinstitutioncourse c
+			WHERE  c.idcourse=p_idcourse
+			AND    c.idinstitution=p_idinstitution
+			LIMIT  1;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				p_result='No existen datos';
+				RAISE LOG 'No exiten datos ';
+			END;
+		END;
+
+		IF v_countcourse>0 THEN
+				
+			BEGIN
+				DELETE FROM tbinstitutioncourse c
+				WHERE  c.idcourse=p_idcourse
+				AND    c.idinstitution=p_idinstitution;
+				p_result='OK';
+				RAISE NOTICE 'Eliminacion de la institucion con parametros (%,%)',p_idcourse,p_idinstitution;
+			EXCEPTION WHEN unique_violation THEN
+				BEGIN
+					p_result='Error no se puede realizar la accion solicitada';
+					RAISE LOG 'Error con parametros (%,%)',p_idcourse,p_idinstitution;
+					ROLLBACK;
+				END;
+			END;
+		ELSE
+			p_result='No existe la institucion para el curso';
+		END IF;
+	RETURN NEXT;
+	RETURN;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;

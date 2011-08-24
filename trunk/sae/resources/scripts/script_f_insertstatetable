@@ -1,0 +1,59 @@
+CREATE OR REPLACE FUNCTION f_insertstatetable(character varying, character varying)
+  RETURNS text AS
+$BODY$
+DECLARE
+	p_namestate ALIAS FOR $1;
+	p_nametable ALIAS FOR $2;
+	v_result text='OK';
+	v_idstate integer;
+	v_idtable integer;
+	
+	BEGIN
+
+		BEGIN
+
+			SELECT idstate
+			INTO   v_idstate
+			FROM   tbstate s
+			WHERE  s.name=p_namestate;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Estado % no encontrado', p_namestate;
+				RAISE LOG 'Estado % no encontrado', p_namestate;
+			END;
+		END;
+
+		BEGIN
+
+			SELECT idtable
+			INTO   v_idtable
+			FROM   tbtable p
+			WHERE  p.name=p_nametable;
+		EXCEPTION WHEN NO_DATA_FOUND THEN
+			BEGIN
+				v_result='Error ocurrido';
+				RAISE EXCEPTION 'Tabla % no encontrado', p_nametable;
+				RAISE LOG 'Tabla % no encontrado', p_nametable;
+			END;
+		END;
+		
+		
+		BEGIN
+			INSERT INTO tbstatetable(idstate,idtable) VALUES(v_idstate,v_idtable);
+			v_result='OK';
+			RAISE NOTICE 'Inserccion de estado y tabla (%,%)',v_idstate,v_idtable;
+			RAISE LOG 'Inserccion del estado  y tabla (%,%)',v_idstate,v_idtable;
+		EXCEPTION WHEN unique_violation THEN
+			BEGIN
+				v_result='Error no se puede realizar la inserccion de estado y tabla';
+				RAISE EXCEPTION 'Violacion unique Error en la inserccion de tbstatetable con los parametros (%,%)',p_namestate,p_nametable;
+				RAISE LOG 'Violacion unique Error en la inserccion de tbstatetablg con los parametros (%,%)',p_namestate,p_nametable;
+			END;
+		END;
+	RETURN v_result;
+	END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION f_insertstatetable(character varying, character varying) OWNER TO saeadmin;

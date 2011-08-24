@@ -1,20 +1,20 @@
-CREATE OR REPLACE FUNCTION f_insertcourse(IN character varying, IN character varying, IN integer, IN integer, OUT p_result character varying, OUT p_idcourse integer)
+CREATE OR REPLACE FUNCTION f_insertcourse(IN character varying, IN character varying, IN integer, OUT p_result character varying, OUT p_idcourse integer)
   RETURNS SETOF record AS
 $BODY$ 
 DECLARE
 	p_name ALIAS FOR $1;
 	p_description ALIAS FOR $2;
-	p_idinstitution ALIAS FOR $3;
-	p_duration ALIAS FOR $4;  	
+	p_duration ALIAS FOR $3;  	
   	v_countcourse int;
+  	v_state int;
 	BEGIN
 
 		BEGIN
 
 			SELECT count(idcourse)
 			INTO   v_countcourse
-			FROM   tbcourse u
-			WHERE  u.name=p_name
+			FROM   tbcourse c
+			WHERE  c.name=upper(p_name)
 			LIMIT  1;
 		EXCEPTION WHEN NO_DATA_FOUND THEN
 			BEGIN
@@ -24,10 +24,24 @@ DECLARE
 		END;
 
 		IF v_countcourse=0 THEN
+				
 			BEGIN
-				INSERT INTO tbcourse(idcourse,name,description,idinstitution,duration,state) VALUES(DEFAULT,upper(p_name),p_description,p_idinstitution,p_duration,1);
+
+				SELECT idstate
+				INTO   v_state
+				FROM   tbstate s
+				WHERE  s.name='ACTIVO'
+				LIMIT  1;
+			EXCEPTION WHEN NO_DATA_FOUND THEN
+				BEGIN
+					p_result='No existe el estado';
+					RAISE LOG 'No existe el estado ';
+				END;
+			END;
+			BEGIN
+				INSERT INTO tbcourse(idcourse,name,description,duration,state) VALUES(DEFAULT,upper(p_name),p_description,p_duration,v_state);
 				p_result='OK';
-				RAISE NOTICE 'Inserccion de curso con los parametros (%,%,%,%)',p_name,p_description,p_idinstitution,p_duration;
+				RAISE NOTICE 'Inserccion de curso con los parametros (%,%,%)',p_name,p_description,p_duration;
 				
 				IF p_result='OK' THEN
 				
@@ -43,12 +57,12 @@ DECLARE
 			EXCEPTION WHEN unique_violation THEN
 				BEGIN
 					p_result='Error no se puede realizar la accion solicitada';
-					RAISE LOG 'Violacion unique Error en la inserccion de tbcourse con los parametros (%,%,%,%)',p_name,p_description,p_idinstitution,p_duration;
+					RAISE LOG 'Violacion unique Error en la inserccion de tbcourse con los parametros (%,%,%)',p_name,p_description,p_duration;
 					ROLLBACK;
 				END;
 			END;
 		ELSE
-			p_result='El curso con nombre: '||'"'||p_name||'"'||'  ya esta en uso';
+			p_result='El curso con nombre: '||'"'||p_name||'"'||'  no puede ser elegido, porque ya ha sido utilizado';
 		END IF;
 	RETURN NEXT;
 	RETURN;
