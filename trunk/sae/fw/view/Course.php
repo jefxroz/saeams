@@ -110,7 +110,15 @@ else if($service==9)
 		
 	$objcontroller=new ControlCourse(null, null,null,null);
 		
-	$objcontroller->delInstitution($idcourse,$id);
+	$objcontroller->updateInstitutionCourse($idcourse,$id,'INACTIVO');
+		
+}
+else if($service==10)
+{
+		
+	$objcontroller=new ControlCourse(null, null,null,null);
+		
+	$objcontroller->updateInstitutionCourse($idcourse,$id,'ACTIVO');
 		
 }
 

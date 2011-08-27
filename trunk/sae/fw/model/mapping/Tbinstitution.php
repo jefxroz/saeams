@@ -42,9 +42,9 @@ class TbInstitution {
   {
   	return array('id'=>$this->idinstitution,'text'=>$this->name);
   }  
-  public function getList()
+  public function getList($state)
   {
-  	return array('code'=>$this->idinstitution,'name'=>$this->name);
+  	return array('code'=>$this->idinstitution,'name'=>$this->name,'state'=>$state);
   }
     
 }

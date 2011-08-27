@@ -93,10 +93,10 @@
 			return $this->getResult($result);
 		}
 		
-		public function delInstitution($idcourse,$idinstitution)
+		public function updateInstitutionCourse($idcourse,$idinstitution,$state)
 		{
 			$result='OK';
-			$result=$this->objservice->delInstitution($idcourse,$idinstitution);
+			$result=$this->objservice->updateInstitutionCourse($idcourse,$idinstitution,$state);
 			return $this->getResult($result);
 		}
 		

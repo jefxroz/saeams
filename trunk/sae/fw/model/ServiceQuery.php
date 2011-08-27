@@ -35,7 +35,7 @@
 		
 		public function getCourses()
 		{
-				$result=$this->objconn->ejecuteQuery("SELECT c.idcourse,c.name as curso,c.duration as duracion,s.name estado FROM tbcourse c,tbstate s WHERE c.state=s.idstate");
+				$result=$this->objconn->ejecuteQuery("SELECT c.idcourse,c.name as curso,c.duration as duracion,s.name estado FROM tbcourse c,tbstate s WHERE c.state=s.idstate order by c.idcourse asc");
 				while($row = $this->objconn->getResult($result))
 				{ 
 					$objcourse=new TbCourse($row[0],$row[1],null,$row[2],null,null); 
@@ -226,11 +226,11 @@
 		
 		public function getCoursesInstitutions($idcourse)
 		{
-				$result=$this->objconn->ejecuteQuery("  SELECT i.idinstitution,i.name FROM tbinstitutioncourse ic,tbinstitution i WHERE i.idinstitution=ic.idinstitution AND ic.idcourse=".$idcourse.";");
+				$result=$this->objconn->ejecuteQuery("  SELECT i.idinstitution,i.name,s.name FROM tbinstitutioncourse ic,tbinstitution i,tbstate s WHERE i.idinstitution=ic.idinstitution AND ic.idstate=s.idstate AND ic.idcourse=".$idcourse." order by s.name desc;");
 				while($row = $this->objconn->getResult($result))
 				{ 
 					$objinstitutions=new TbInstitution($row[0],$row[1]); 
-					$institutions[]=$objinstitutions->getList();
+					$institutions[]=$objinstitutions->getList($row[2]);
 				}
 			
 			return $institutions;
@@ -246,12 +246,12 @@
 			}
 		}
 		
-		public function delInstitution($idcourse,$idinstitution)
+		public function updateInstitutionCourse($idcourse,$idinstitution,$state)
 		{
-			if($this->objconn->prepared("DEL_COURSE","SELECT * from f_delinstitution($1,$2);"))
+			if($this->objconn->prepared("DEL_COURSE","SELECT * from f_updateinstitutioncourse($1,$2,$3);"))
 			{	
 				
-				$result=$this->objconn->ejecuteStatement("DEL_COURSE",array($idcourse,$idinstitution));
+				$result=$this->objconn->ejecuteStatement("DEL_COURSE",array($idcourse,$idinstitution,$state));
 				
 				$row = $this->objconn->getRow($result,0);
 				//$objcourse->setIdCourse($row[1]);
