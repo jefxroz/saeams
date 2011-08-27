@@ -65,7 +65,7 @@ CREATE TABLE TbAssignation (
   PRIMARY KEY (Idassignation));
 CREATE TABLE TbHistoryShedule (
   idhistoryshedule  SERIAL NOT NULL, 
-  idcourse         int4, 
+  idcourse         int4 NOT NULL, 
   idusertrainer    int4, 
   idclassroom      int4 NOT NULL, 
   starttime        time(6), 
@@ -79,6 +79,7 @@ CREATE TABLE TbHistoryShedule (
   idpage           int4 NOT NULL, 
   idshedule        int4 NOT NULL, 
   iduserdeveloper  int4 NOT NULL, 
+  idinstitution    int4 NOT NULL, 
   PRIMARY KEY (idhistoryshedule));
 CREATE TABLE TbHistoryUser (
   idhistoryuser  SERIAL NOT NULL, 
@@ -106,25 +107,25 @@ CREATE TABLE TbHistoryUser (
   comment       varchar(750), 
   PRIMARY KEY (idhistoryuser));
 CREATE TABLE TbShedule (
-  Idshedule    SERIAL NOT NULL, 
-  idcourse    int4 NOT NULL, 
-  iduser      int4 NOT NULL, 
-  starttime   time(6) NOT NULL, 
-  endtime     time(6) NOT NULL, 
-  startdate   timestamp(6) NOT NULL, 
-  enddate     timestamp(6) NOT NULL, 
-  state       int4 NOT NULL, 
-  price       numeric(11, 5), 
-  idclassroom int4 NOT NULL, 
-  quota       int4, 
+  Idshedule      SERIAL NOT NULL, 
+  idcourse      int4 NOT NULL, 
+  iduser        int4 NOT NULL, 
+  starttime     time(6) NOT NULL, 
+  endtime       time(6) NOT NULL, 
+  startdate     timestamp(6) NOT NULL, 
+  enddate       timestamp(6) NOT NULL, 
+  state         int4 NOT NULL, 
+  price         numeric(11, 5), 
+  idclassroom   int4 NOT NULL, 
+  quota         int4, 
+  idinstitution int4 NOT NULL, 
   PRIMARY KEY (Idshedule));
 CREATE TABLE TbCourse (
-  idcourse       SERIAL NOT NULL, 
-  name          varchar(100) NOT NULL UNIQUE, 
-  description   varchar(500), 
-  idinstitution int4, 
-  duration      int4 NOT NULL, 
-  state         int4 NOT NULL, 
+  idcourse     SERIAL NOT NULL, 
+  name        varchar(100) NOT NULL UNIQUE, 
+  description varchar(500), 
+  duration    int4 NOT NULL, 
+  state       int4 NOT NULL, 
   PRIMARY KEY (idcourse));
 CREATE TABLE TbInstitution (
   idinstitution  SERIAL NOT NULL, 
@@ -236,14 +237,18 @@ CREATE TABLE TbState (
 CREATE TABLE TbStateTable (
   idstate int4 NOT NULL, 
   idtable int4 NOT NULL);
+CREATE TABLE TbInstitutionCourse (
+  idcourse      int4 NOT NULL, 
+  idinstitution int4 NOT NULL, 
+  idstate       int4 NOT NULL, 
+  PRIMARY KEY (idcourse, 
+  idinstitution));
 ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkUserHisotryShedule FOREIGN KEY (idusertrainer) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryInstitucion ADD CONSTRAINT fkInstitucionHistoryInstitution FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbDetailAssignation ADD CONSTRAINT fkUserDetailAssignation FOREIGN KEY (idassignation) REFERENCES TbAssignation (Idassignation) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryUser ADD CONSTRAINT fkUserHistoryUser FOREIGN KEY (iduser) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
-ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkCourseHistoryShedule FOREIGN KEY (idcourse) REFERENCES TbCourse (idcourse) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbUser ADD CONSTRAINT fkTypeTrainerUser FOREIGN KEY (idtypetrainer) REFERENCES TbTypeTrainer (Idtypetrainer) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkAssignationHistoryAssignation FOREIGN KEY (idassignation) REFERENCES TbAssignation (Idassignation) ON UPDATE Cascade ON DELETE Cascade;
-ALTER TABLE TbCourse ADD CONSTRAINT fkInstitutionCourse FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbHistoryDetailAssignation ADD CONSTRAINT fkUserHistoryDetailAssignation FOREIGN KEY (iduser) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbShedule ADD CONSTRAINT fkCourseShedule FOREIGN KEY (idcourse) REFERENCES TbCourse (idcourse) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE TbShedule ADD CONSTRAINT fkUserShedule FOREIGN KEY (iduser) REFERENCES TbUser (iduser) ON UPDATE Cascade ON DELETE Cascade;
@@ -290,6 +295,12 @@ ALTER TABLE TbHistoryAssignation ADD CONSTRAINT fkPageHistoryAssignation FOREIGN
 ALTER TABLE TbClassRoom ADD CONSTRAINT FKTbClassRoo495874 FOREIGN KEY (state) REFERENCES TbState (idstate);
 ALTER TABLE TbAssignation ADD CONSTRAINT fkStateAssignacion FOREIGN KEY (state) REFERENCES TbState (idstate);
 ALTER TABLE TbShedule ADD CONSTRAINT fkStateShedule FOREIGN KEY (state) REFERENCES TbState (idstate);
+ALTER TABLE TbInstitutionCourse ADD CONSTRAINT FKTbInstitut243346 FOREIGN KEY (idcourse) REFERENCES TbCourse (idcourse);
+ALTER TABLE TbInstitutionCourse ADD CONSTRAINT FKTbInstitut343336 FOREIGN KEY (idinstitution) REFERENCES TbInstitution (idinstitution);
+ALTER TABLE TbHistoryShedule ADD CONSTRAINT FKTbHistoryS202653 FOREIGN KEY (idcourse, idinstitution) REFERENCES TbInstitutionCourse (idcourse, idinstitution);
+ALTER TABLE TbShedule ADD CONSTRAINT FKTbShedule156514 FOREIGN KEY (idcourse, idinstitution) REFERENCES TbInstitutionCourse (idcourse, idinstitution);
+ALTER TABLE TbInstitutionCourse ADD CONSTRAINT FKTbInstitut219310 FOREIGN KEY (idstate) REFERENCES TbState (idstate);
+ALTER TABLE TbHistoryShedule ADD CONSTRAINT fkCourseHistoryShedule FOREIGN KEY (idcourse) REFERENCES TbCourse (idcourse) ON UPDATE Cascade ON DELETE Cascade;
 CREATE INDEX tbHistoryDetailAssignation_date_key 
   ON TbHistoryDetailAssignation (startdate);
 CREATE INDEX tbHistoryDetailAssignation_dateupdate_key 

@@ -17,33 +17,33 @@ GRANT ALL PRIVILEGES ON DATABASE sae_dbassignations to saeadmin;
 
 grant select, update, insert, delete on tbhistoryprivilegerol to saeweb;
 grant select, update, insert, delete on tbassignation to saeweb;
-grant select, update, insert, delete on tbhistoryuser to saeweb;
-grant select, update, insert, delete on tbtypetrainer to saeweb;
 grant select, update, insert, delete on tbshedule to saeweb;
+grant select, update, insert, delete on tbhistoryuser to saeweb;
 grant select, update, insert, delete on tbinstitution to saeweb;
+grant select, update, insert, delete on tbtypetrainer to saeweb;
 grant select, update, insert, delete on tbpage to saeweb;
-grant select, update, insert, delete on tbhistoryuserrol to saeweb;
-grant select, update, insert, delete on tbhistoryshedule to saeweb;
+grant select, update, insert, delete on tbstatetable to saeweb;
 grant select, update, insert, delete on tbprivilegerol to saeweb;
 grant select, update, insert, delete on tbtypeschool to saeweb;
-grant select, update, insert, delete on tbhistoryusermail to saeweb;
-grant select, update, insert, delete on tbuserrol to saeweb;
-grant select, update, insert, delete on tbdeveloper to saeweb;
-grant select, update, insert, delete on tbstate to saeweb;
-grant select, update, insert, delete on tbstatetable to saeweb;
 grant select, update, insert, delete on tbclassroom to saeweb;
-grant select, update, insert, delete on tbhistorypage to saeweb;
-grant select, update, insert, delete on tbuser to saeweb;
 grant select, update, insert, delete on tbinstitutioncourse to saeweb;
-grant select, update, insert, delete on tbhistoryinstitucion to saeweb;
-grant select, update, insert, delete on tbdetailassignation to saeweb;
+grant select, update, insert, delete on tbhistoryuserrol to saeweb;
+grant select, update, insert, delete on tbhistorypage to saeweb;
+grant select, update, insert, delete on tbhistoryusermail to saeweb;
+grant select, update, insert, delete on tbdeveloper to saeweb;
 grant select, update, insert, delete on tbtable to saeweb;
-grant select, update, insert, delete on tbrol to saeweb;
-grant select, update, insert, delete on tbcourse to saeweb;
-grant select, update, insert, delete on tbprivilege to saeweb;
+grant select, update, insert, delete on tbstate to saeweb;
+grant select, update, insert, delete on tbhistoryinstitucion to saeweb;
 grant select, update, insert, delete on tbhistorydetailassignation to saeweb;
+grant select, update, insert, delete on tbuserrol to saeweb;
+grant select, update, insert, delete on tbprivilege to saeweb;
+grant select, update, insert, delete on tbuser to saeweb;
 grant select, update, insert, delete on tbhistoryassignation to saeweb;
+grant select, update, insert, delete on tbrol to saeweb;
+grant select, update, insert, delete on tbhistoryshedule to saeweb;
+grant select, update, insert, delete on tbcourse to saeweb;
 grant select, update, insert, delete on tbhistorycourse to saeweb;
+grant select, update, insert, delete on tbdetailassignation to saeweb;
 
 
 
@@ -52,6 +52,7 @@ grant select, update, insert, delete on tbhistorycourse to saeweb;
 --select 'grant usage on sequence '||relname||' to saeweb;'
 --from pg_class c,pg_user u where c.relkind='S' and c.relowner= u.usesysid and u.usename='saeadmin'
 --;
+
 
 grant usage on sequence tbhistorydetailassignation_idhistorydetailassignation_seq to saeweb;
 grant usage on sequence tbhistoryprivilegerol_idhistoryprivilege_seq to saeweb;
@@ -78,5 +79,4 @@ grant usage on sequence tbdeveloper_iddeveloper_seq to saeweb;
 grant usage on sequence tbhistoryusermail_idhistoryusermail_seq to saeweb;
 grant usage on sequence tbtable_idtable_seq to saeweb;
 grant usage on sequence tbstate_idstate_seq to saeweb;
-
 
