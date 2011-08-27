@@ -166,18 +166,27 @@ function delInstitution(){
 	var row = $('#dginstitutions').datagrid('getSelected');
 
 	if (row){
+		if(row.state!='INACTIVO')
+		{
+		
 			$.ajax({
 				 url: '../.././fw/view/Course.php',
 				 dataType: 'json',
 				 data: {service:'9',id:row.code,idcourse:<?php if($id){echo $id;}else{echo "-1";}  ?> },
 				 type: 'post',
 				 success: function(data){
+				
 					   	$('#dginstitutions').datagrid('reload');
 						$.messager.alert('Informacion','ya no pertenece a la institucion','info');
-						location.reload();	
+						
 							
 				 }
 				});
+		}
+		else
+		{
+			$.messager.alert('Advertencia','La Institucion esta inactiva para este curso en este momento','error');				
+		}
 	}
 	else 
 	{
@@ -185,6 +194,39 @@ function delInstitution(){
 	}
 }
 
+function actInstitution(){
+	
+	
+	var row = $('#dginstitutions').datagrid('getSelected');
+
+	if (row){
+		if(row.state=='INACTIVO')
+		{
+		
+			$.ajax({
+				 url: '../.././fw/view/Course.php',
+				 dataType: 'json',
+				 data: {service:'10',id:row.code,idcourse:<?php if($id){echo $id;}else{echo "-1";}  ?> },
+				 type: 'post',
+				 success: function(data){
+				
+					   	$('#dginstitutions').datagrid('reload');
+						$.messager.alert('Informacion','Se ha activado el curso para este momento','info');
+						
+							
+				 }
+				});
+		}
+		else
+		{
+			$.messager.alert('Advertencia','La Institucion esta activa para este curso en este momento','error');				
+		}
+	}
+	else 
+	{
+		$.messager.alert('Advertencia','No se ha seleccionado ninguna institucion','error');
+	}
+}
 
 function addInstitution()
 {
@@ -281,7 +323,7 @@ function addInstitution()
 						
 						<tr>
 							<th field="name" width="400">Instituciones</th>
-							
+							<th field="state" width="400">Estado</th>
 						</tr>
 					</thead>
 				</table>
@@ -291,7 +333,8 @@ function addInstitution()
 				if(isPrivilege("MODIFICAR CURSO",$privileges) or isPrivilege("ELIMINAR CURSO",$privileges) )
 				{
 					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="addInstitution()">Agregar</a>';
-					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="delInstitution()">Quitar</a>';
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="actInstitution()">Activar</a>';
+					echo '<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="delInstitution()">Inactivar</a>';
 				}
 		?>	
 				</div>

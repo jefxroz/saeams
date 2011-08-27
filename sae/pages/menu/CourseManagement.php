@@ -86,7 +86,7 @@
 				}
 				else
 				{
-					$.messager.alert('Informacion','El curso ya esta activo','info');
+					$.messager.alert('Advertencia','El curso no esta inactivo','error');
 				}
 				
 			}
