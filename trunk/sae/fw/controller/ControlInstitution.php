@@ -2,29 +2,29 @@
 
    	require_once("Control.php");
  	require_once("../model/ServiceQuery.php");
-	require_once("../model/mapping/TbCourse.php");
+	require_once("../model/mapping/TbInstitution.php");
 	
-	class ControlCourse extends Control
+	class ControlInstitution extends Control
 	{  
 		private $objservice; 
-		private $objcourse;
+		private $objinstitution;
 		
-		public function ControlCourse($name,$description,$idinstitution,$duration,$state)
+		public function ControlInstitution($name,$state)
 		{  
 			$this->objservice=new ServiceQuery();
-			$this->objcourse=new TbCourse(null,$name,$description,$duration,$idinstitution,null,null,null,null,null);
-			$this->objcourse->setState($state);	
+			$this->objinstitution=new TbInstitution(null,$name);
+			$this->objinstitution->setState($state);	
 		
 		}
 		
-		public function setCourse($objcourse)
+		public function setInstitution($objinstitution)
 		{
-			$this->objcourse=$objcourse;
+			$this->objinstitution=$objinstitution;
 		}
 		
-		public function getCourse()
+		public function getInstitution()
 		{
-			return $this->objcourse;
+			return $this->objinstitution;
 		}
 		  
 		private function getResult($result)
@@ -39,12 +39,12 @@
 			}
 		}
 		
-		public function getCourses()
+		public function getInstitutions()
 		{
-			return json_encode($this->objservice->getCourses());
+			return json_encode($this->objservice->getInstitutions());
 		}
 		
-		public function insertCourse()
+		/*public function insertCourse()
 		{
 			$result='OK';
 			$result=$this->objservice->insertCourse($this->objcourse);
@@ -84,33 +84,22 @@
 			return json_encode($this->objservice->getCoursesInstitutions($this->objcourse->getIdCourse()));
 		}
 		
-		public function insertCourseInstitution($idcourse,$idinstitution,$section,$cupo,$periodo,$anio)
+		public function insertCourseInstitution($idcourse,$idinstitution)
 		{
 			
 			$this->objcourse->setIdCourse($idcourse);
 			$this->objcourse->setIdInstitution($idinstitution);
-			$this->objcourse->setSection($section);
-			$this->objcourse->setCupo($cupo);
-			$this->objcourse->setPeriodo($periodo);
-			$this->objcourse->setAnio($anio);
-			$result=$this->objservice->insertCourseInstitution($this->objcourse->getIdCourse(),$this->objcourse->getIdInstitution(),$this->objcourse->getSection(),$this->objcourse->getCupo(),$this->objcourse->getPeriodo(),$this->objcourse->getAnio());
+			$result=$this->objservice->insertCourseInstitution($this->objcourse->getIdCourse(),$this->objcourse->getIdInstitution());
 			return $this->getResult($result);
 		}
 		
-		public function updateInstitutionCourse($idcourse,$idinstitutionh,$sectionh,$periodoh,$anioh,$idinstitution,$section,$periodo,$anio,$state,$cupo)
+		public function updateInstitutionCourse($idcourse,$idinstitution,$state)
 		{
 			$result='OK';
-			$result=$this->objservice->updateInstitutionCourse($idcourse,$idinstitutionh,$sectionh,$periodoh,$anioh,$idinstitution,$section,$periodo,$anio,$state,$cupo);
+			$result=$this->objservice->updateInstitutionCourse($idcourse,$idinstitution,$state);
 			return $this->getResult($result);
 		}
-		
-		public function activateInstitutionCourse($idcourse,$idinstitution,$section,$periodo,$anio,$state)
-		{
-			$result='OK';
-			$result=$this->objservice->activateInstitutionCourse($idcourse,$idinstitution,$section,$periodo,$anio,$state);
-			return $this->getResult($result);
-		}
-		
+		*/
 	} 
 
 ?>

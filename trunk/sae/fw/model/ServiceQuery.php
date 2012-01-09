@@ -4,6 +4,8 @@
 	require_once("mapping/TbPrivilege.php");
 	require_once("mapping/TbInstitution.php");
 	require_once("mapping/TbState.php");
+	require_once("mapping/TbInstitutionCourse.php");
+	require_once("mapping/TbSection.php");
 
 	class ServiceQuery
 	{  
@@ -35,21 +37,34 @@
 		
 		public function getCourses()
 		{
-				$result=$this->objconn->ejecuteQuery("SELECT c.idcourse,c.name as curso,c.duration as duracion,s.name estado FROM tbcourse c,tbstate s WHERE c.state=s.idstate order by c.idcourse asc");
+				$result=$this->objconn->ejecuteQuery("SELECT c.idcourse,c.name as curso,c.duration as duracion,s.description estado FROM tbcourse c,tbstatecourse s WHERE c.state=s.state order by c.idcourse asc");
 				while($row = $this->objconn->getResult($result))
 				{ 
-					$objcourse=new TbCourse($row[0],$row[1],null,$row[2],null,null); 
+					$objcourse=new TbCourse($row[0],$row[1],null,$row[2],null,null,null,null,null,null); 
 					$courses[]=$objcourse->getObjects($row[3]);
 				}
 			
 			return $courses;
 		}
 		
+		//agregado como ejemplo de institucionces
+		public function getInstitutions()
+		{
+				$result=$this->objconn->ejecuteQuery("SELECT i.idinstitution,i.name as institucion, s.description  estado  FROM tbinstitution i,tbstateinstitution s  WHERE i.state=s.state order by idinstitution asc;");
+				while($row = $this->objconn->getResult($result))
+				{
+					$objinstitution=new TbInstitution($row[0],$row[1]); 
+					$institutions[]=$objinstitution->getObjects1($row[2]);
+				}
+			
+			return $institutions;
+		}
+		
 		public function getidcourses($idcourse)
 		{	
 				$result=$this->objconn->ejecuteQuery("SELECT c.idcourse,c.name as curso, c.description as descripcion,c.duration as duracion,c.state estado FROM tbcourse c WHERE c.idcourse=".$idcourse.";");
 				$row = $this->objconn->getRow($result,0 );
-				$objcourse=new TbCourse($row[0],$row[1],$row[2],$row[3],null,null);
+				$objcourse=new TbCourse($row[0],$row[1],$row[2],$row[3],null,null,null,null,null,null);
 				return $objcourse->getObjects($row[4]);
 		}
 		
@@ -164,12 +179,12 @@
 			return $institutions;
 		}
 		
-		public function getStates()
+		public function getCourseStates()
 		{
-				$result=$this->objconn->ejecuteQuery("SELECT s.idstate,s.name FROM tbstatetable st,tbstate s,tbtable t WHERE st.idstate=s.idstate AND st.idtable=t.idtable AND t.name='TBCOURSE' AND NOT (s.name='INACTIVO');");
+				$result=$this->objconn->ejecuteQuery("SELECT s.state,s.description FROM tbstatecourse s;");
 				while($row = $this->objconn->getResult($result))
 				{ 
-					$objstate=new TbState($row['idstate'],$row['name']); 
+					$objstate=new TbState($row['state'],$row['description']); 
 					$states[]=$objstate->getObjects();
 				}
 			
@@ -226,37 +241,73 @@
 		
 		public function getCoursesInstitutions($idcourse)
 		{
-				$result=$this->objconn->ejecuteQuery("  SELECT i.idinstitution,i.name,s.name FROM tbinstitutioncourse ic,tbinstitution i,tbstate s WHERE i.idinstitution=ic.idinstitution AND ic.idstate=s.idstate AND ic.idcourse=".$idcourse." order by s.name desc;");
+				$result=$this->objconn->ejecuteQuery("SELECT i.idinstitution,i.name, ic.section, ic.cupo, ic.periodo, ic.anio, s.description FROM tbinstitutioncourse ic,tbinstitution i,tbstateinstitutioncourse s WHERE i.idinstitution=ic.idinstitution AND ic.state=s.state AND ic.idcourse=".$idcourse." order by ic.periodo, ic.anio, ic.section desc;");
 				while($row = $this->objconn->getResult($result))
 				{ 
-					$objinstitutions=new TbInstitution($row[0],$row[1]); 
-					$institutions[]=$objinstitutions->getList($row[2]);
+					$objinstitutioncourse=new TbInstitutionCourse($idcourse,$row[0],$row[1],$row[2],$row[3],$row[4],$row[5]); 
+					$institutioncourses[]=$objinstitutioncourse->getList($row[6]);
 				}
 			
-			return $institutions;
+			return $institutioncourses;
 		}
 		
-		public function insertCourseInstitution($idcourse,$idinstitution)
+		public function insertCourseInstitution($idcourse,$idinstitution,$section,$cupo,$periodo,$anio)
 		{
-			if($this->objconn->prepared("INSERT_COURSEINSTITUTION","SELECT * from f_insertcourseinstitution($1,$2);"))
+			if($this->objconn->prepared("INSERT_COURSEINSTITUTION","SELECT * from f_insertcourseinstitution($1,$2,$3,$4,$5,$6);"))
 			{	
-				$result=$this->objconn->ejecuteStatement("INSERT_COURSEINSTITUTION",array($idcourse,$idinstitution));
+				$result=$this->objconn->ejecuteStatement("INSERT_COURSEINSTITUTION",array($idcourse,$idinstitution,$section,$cupo,$periodo,$anio));
 				$row = $this->objconn->getRow($result,0);
 				return $row[0];
 			}
 		}
 		
-		public function updateInstitutionCourse($idcourse,$idinstitution,$state)
+		public function updateInstitutionCourse($idcourse,$idinstitutionh,$sectionh,$periodoh,$anioh,$idinstitution,$section,$periodo,$anio,$state,$cupo)
 		{
-			if($this->objconn->prepared("DEL_COURSE","SELECT * from f_updateinstitutioncourse($1,$2,$3);"))
+			if($this->objconn->prepared("UPDATE_COURSEINSTITUTION","SELECT * from f_updateinstitutioncourse($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);"))
 			{	
 				
-				$result=$this->objconn->ejecuteStatement("DEL_COURSE",array($idcourse,$idinstitution,$state));
-				
+				$result=$this->objconn->ejecuteStatement("UPDATE_COURSEINSTITUTION",array($idcourse,$idinstitutionh,$sectionh,$periodoh,$anioh,$idinstitution,$section,$periodo,$anio,$state,$cupo));
 				$row = $this->objconn->getRow($result,0);
 				//$objcourse->setIdCourse($row[1]);
 				return $row[0];
 			}
+		}
+		
+		public function activateInstitutionCourse($idcourse,$idinstitution,$section,$periodo,$anio,$state)
+		{
+			if($this->objconn->prepared("UPDATE_COURSEINSTITUTION","SELECT * from f_updateinstitutioncourse($1,$2,$3,$4,$5,$6);"))
+			{	
+				$result=$this->objconn->ejecuteStatement("UPDATE_COURSEINSTITUTION",array($idcourse,$idinstitution,$section,$periodo,$anio,$state));
+				$row = $this->objconn->getRow($result,0);
+				//$objcourse->setIdCourse($row[1]);
+				return $row[0];
+			}
+		}
+		
+		public function getInstitutionCourses($idinstitution,$periodo,$anio){
+			$query = 	"SELECT c.idcourse, c.name, s.section, u.name||' '||u.surname catedratico, to_char(s.startdate,'DD/mon/YYYY') || ' al ' || to_char(s.enddate,'DD/mon/YYYY') vigencia "; 
+			$query .=	"FROM tbuser u, tbcourse c, tbinstitutioncourse ic, tbschedule s ";
+			$query .=	"WHERE ic.idcourse = c.idcourse ";
+			$query .=	"AND ic.idcourse = s.idcourse ";
+			$query .=	"AND ic.section = s.section ";
+			$query .=	"AND ic.periodo = s.periodo ";
+			$query .=	"AND ic.anio = s.anio ";
+			$query .=	"AND s.iduser = u.iduser ";
+			$query .= 	"AND ic.state = 1 ";
+			$query .=	"AND ic.idinstitution = ".$idinstitution." ";
+			$query .=	"AND ic.periodo = ".$periodo." ";
+			$query .=	"AND ic.anio = ".$anio." ";
+			$query .=	"AND current_date < s.startdate ";
+			$query .= 	"ORDER BY 1,2;";
+			$result=$this->objconn->ejecuteQuery($query);
+				while($row = $this->objconn->getResult($result))
+				{ 
+					$objsection=new TbSection($row[0], $row[1], $row[2], $row[3], $row[4]); 
+					$sections[]=$objsection->getObjects();
+				}
+			
+			return $sections;
+			
 		}
 		
 	}
