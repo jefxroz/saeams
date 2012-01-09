@@ -46,6 +46,11 @@ class TbInstitution {
   {
   	return array('code'=>$this->idinstitution,'name'=>$this->name,'state'=>$state);
   }
+
+  public function getObjects1($state) {
+      return array('idinstitution'=>$this->idinstitution,'name'=>$this->name,'state'=>$state);
+  }
+  
     
 }
 

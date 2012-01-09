@@ -37,10 +37,10 @@
 	{
 		echo $objservice->getInstitution();
 	}
-	else if($service=='getstate')
+	else if($service=='getstatecourse')
 	{
 	
-		echo $objservice->getStates();
+		echo $objservice->getCourseStates();
 	}
 	
 	

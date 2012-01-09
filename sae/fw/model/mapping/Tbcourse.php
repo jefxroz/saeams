@@ -34,7 +34,15 @@ class TbCourse {
   
   private $nameinstitution;
   
-  public function TbCourse($idcourse,$name,$description,$duration,$idinstitution,$nameinstitution)
+  private $cupo;
+  
+  private $section;
+  
+  private $periodo;
+  
+  private $anio;
+  
+  public function TbCourse($idcourse,$name,$description,$duration,$idinstitution,$nameinstitution,$section,$cupo,$periodo,$anio)
   {
   	
   	$this->idcourse=$idcourse;
@@ -43,6 +51,9 @@ class TbCourse {
   	$this->duration=$duration;
   	$this->idinstitution=$idinstitution;
   	$this->nameinstitution=$nameinstitution;
+  	$this->section=$section;
+  	$this->periodo=$periodo;
+  	$this->anio=$anio;
   }
   
   public function &getIdCourse() {
@@ -108,6 +119,42 @@ class TbCourse {
     return $this->nameinstitution;
   }
   
+  
+  public function &getSection() {
+    return $this->section;
+  }
+  
+  
+  public function setSection(&$section) {
+    $this->section = $section;
+  }
+  
+  public function &getCupo() {
+    return $this->cupo;
+  }
+  
+  
+  public function setCupo(&$cupo) {
+    $this->cupo = $cupo;
+  }
+  
+  public function &getPeriodo() {
+    return $this->periodo;
+  }
+  
+  
+  public function setPeriodo(&$periodo) {
+    $this->periodo = $periodo;
+  }
+  
+  public function &getAnio() {
+    return $this->anio;
+  }
+  
+  
+  public function setAnio(&$anio) {
+    $this->anio = $anio;
+  }
   
   public function setNameInstitution(&$idInstitution) {
     $this->nameinstitution = $nameinstitution;

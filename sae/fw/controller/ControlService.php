@@ -71,10 +71,10 @@
 			$objservice=new ServiceQuery();
 			return json_encode($objservice->getInstitution());
 		}
-		public function getStates()
+		public function getCourseStates()
 		{
-			$objservice=new ServiceQuery();
-			return json_encode($objservice->getStates());
+			$objservice=new ServiceQuery(); 
+			return json_encode($objservice->getCourseStates());
 		}
 		
 		 

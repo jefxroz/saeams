@@ -70,7 +70,7 @@
 				<li><a href="Grade.php" ><img src="../.././resources/images/grade_24.png" /> Consultar Notas</a></li>
 			-->
 <?php
-			if(isPrivilege("VER INFORMACION",$privileges))
+			if(isPrivilege("VER INFORMACION", $privileges))
 			{
 				echo '<li><a href="Course.php" > <img src="../.././resources/images/lcourse_24.png" /> Informaci&oacute;n de cursos</a></li>';
 			}
@@ -80,7 +80,7 @@
 			}
 			if(isPrivilege("VER CONSULTAR NOTAS",$privileges))
 			{
-				echo '<li><a href="Grade.php" ><img src="../.././resources/images/grade_24.png" /> Consultar Notas</a></li>';'
+				echo '<li><a href="Grade.php" ><img src="../.././resources/images/grade_24.png" />Consultar Notas</a></li>';
 			}
 ?>
 
